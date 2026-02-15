@@ -1,0 +1,241 @@
+# Teknik Altyapı
+
+## 🏗️ Mimari Yaklaşım
+
+**Önerilen Mimari**: Monolithic (İlk Faz)
+
+Proje başlangıcında tek bir uygulama olarak başlayıp, ileride ihtiyaç olursa microservice'lere geçilebilir.
+
+---
+
+## 💻 Frontend
+
+### Framework Seçenekleri
+
+**Önerilen**: Next.js 14+ (App Router)
+- SSR ve SEO avantajı
+- API Routes ile backend entegrasyonu
+- Vercel kolay deploy
+- TypeScript desteği
+
+**Alternatifler**:
+- React + Vite (Daha hızlı development)
+- Nuxt.js (Vue tercih edilirse)
+
+### UI Framework
+
+**Önerilen**: Tailwind CSS + shadcn/ui
+- v0.app ve bolt.new ile uyumlu
+- Hızlı geliştirme
+- Modern görünüm
+
+**Ek Kütüphaneler**:
+- React Hook Form (form yönetimi)
+- Zod (validasyon)
+- TanStack Query (data fetching)
+- Zustand veya Redux Toolkit (state management)
+
+---
+
+## ⚙️ Backend
+
+### Framework
+
+**Önerilen**: Node.js + Express.js / Fastify
+- JavaScript/TypeScript ile full-stack
+- Hızlı geliştirme
+- Büyük ekosistem
+
+**Alternatifler**:
+- NestJS (daha yapısal, enterprise)
+- Bun + Hono (yeni teknoloji, çok hızlı)
+
+### API Tipi
+
+**Önerilen**: RESTful API
+- Basit ve anlaşılır
+- Standard HTTP methodları
+
+**İleride Eklenebilir**:
+- GraphQL (kompleks sorgular için)
+- WebSocket (real-time bildirimler)
+
+---
+
+## 🗄️ Veritabanı
+
+### Ana Veritabanı
+
+**Önerilen**: PostgreSQL
+- İlişkisel veri yapısı
+- ACID compliance
+- Güçlü sorgulama
+- JSON desteği (esneklik için)
+
+**Alternatif**:
+- MySQL (daha basit setup)
+- MongoDB (NoSQL - esneklik ama ilişki zorluğu)
+
+### ORM/Query Builder
+
+**Önerilen**: Prisma
+- TypeScript desteği
+- Migration yönetimi
+- Kolay syntax
+
+**Alternatif**:
+- Drizzle ORM (daha hafif)
+- TypeORM (daha mature)
+
+---
+
+## 🔐 Kimlik Doğrulama
+
+**Önerilen**: NextAuth.js / Auth.js
+- Next.js entegrasyonu
+- JWT token yönetimi
+- Rol bazlı yetkilendirme
+
+**Alternatif**:
+- JWT manuel implementasyon
+- Supabase Auth (hızlı setup)
+- Clerk (ücretli ama kolay)
+
+---
+
+## 🔔 Bildirim Servisleri
+
+### Email
+- **Resend** (modern, developer-friendly)
+- **SendGrid** (enterprise)
+- **Amazon SES** (ucuz, güvenilir)
+
+### SMS
+- **Twilio** (global)
+- **Netgsm** (Türkiye)
+- **İletimerkezi** (Türkiye)
+
+### Push Notification
+- **Firebase Cloud Messaging** (ücretsiz)
+- **OneSignal** (kolay entegrasyon)
+
+---
+
+## 📤 Dosya Yükleme
+
+**Otel Fotoğrafları İçin**:
+
+**Önerilen**: Cloudinary
+- Ücretsiz plan
+- Otomatik resize/optimizasyon
+- CDN
+
+**Alternatif**:
+- AWS S3 + CloudFront
+- Vercel Blob Storage
+- UploadThing
+
+---
+
+## 🎨 QR Kod
+
+**Kütüphane**: qrcode / qrcode.react
+- Rezervasyon kodu için QR oluşturma
+- PDF export için
+
+---
+
+## 📊 Dashboard ve Grafikler
+
+**Chart Kütüphanesi**:
+- Recharts (React friendly)
+- Chart.js (klasik)
+- Tremor (shadcn uyumlu)
+
+---
+
+## 🚀 Deployment
+
+### Frontend + Backend (Monolithic)
+
+**Önerilen**: Vercel
+- Next.js native desteği
+- Kolay deploy
+- Otomatik HTTPS
+- Serverless functions
+
+**Alternatif**:
+- Netlify
+- Railway
+- Render
+
+### Veritabanı Hosting
+
+**Önerilen**: Neon.tech (Postgres)
+- Serverless Postgres
+- Ücretsiz tier
+- Otomatik scaling
+
+**Alternatif**:
+- Supabase (Postgres + auth + storage)
+- Railway Postgres
+- DigitalOcean Managed Database
+
+---
+
+## 🛠️ DevOps
+
+### Version Control
+- Git + GitHub/GitLab
+
+### CI/CD
+- Vercel otomatik deploy
+- GitHub Actions (test için)
+
+### Monitoring
+- Sentry (hata takibi)
+- Vercel Analytics (performance)
+
+---
+
+## 📁 Proje Yapısı (Next.js)
+
+```
+otelpartner/
+├── app/                    # Next.js App Router
+│   ├── (auth)/            # Auth layout
+│   ├── (dashboard)/       # Dashboard layout
+│   ├── admin/             # Admin pages
+│   ├── hotel/             # Hotel pages
+│   ├── guide/             # Guide pages
+│   └── api/               # API routes
+├── components/            # React components
+│   ├── ui/               # shadcn components
+│   └── shared/           # Custom components
+├── lib/                   # Utilities
+│   ├── db/               # Database (Prisma)
+│   ├── auth/             # Auth helpers
+│   └── utils/            # Helper functions
+├── prisma/               # Database schema
+├── public/               # Static files
+└── docs/                 # Documentation
+```
+
+---
+
+## 🔄 Önerilen Tech Stack (Başlangıç)
+
+```
+Frontend:  Next.js 14 + TypeScript + Tailwind + shadcn/ui
+Backend:   Next.js API Routes / NestJS
+Database:  PostgreSQL + Prisma
+Auth:      NextAuth.js
+Storage:   Cloudinary
+Email:     Resend
+SMS:       Netgsm
+Deploy:    Vercel + Neon.tech
+```
+
+---
+
+**Not**: Stack seçimi projenin büyüklüğü ve ekip yetkinliklerine göre ayarlanabilir.
