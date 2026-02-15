@@ -15,8 +15,8 @@
 
 **Faz 5 – Katalog (rehber) tamamlandı**
 
-- **Yapılan:** GET `/api/catalog/hotels` (listed, filtre: region, city, starRating), GET `/api/catalog/hotels/[id]` (detay + odalar), `/dashboard/catalog` (liste, filtre formu), `/dashboard/catalog/[id]` (otel detay), middleware ile katalog sadece guide/admin, Dashboard’da rehber için “Otel kataloğu” linki.
-- **Sıradaki:** Faz 5’te müsaitlik gösterimi / tarih seçimi (opsiyonel) veya Faz 6 (Rezervasyon).
+- **Yapılan:** Katalog API’leri + sayfalar + **müsaitlik**: GET `/api/catalog/hotels/[id]/availability?date=`, otel detay sayfasında “Müsaitlik sorgula” (tarih seç, Sorgula, oda tipi × müsait adet tablosu).
+- **Sıradaki:** Faz 6 (Rezervasyon) veya diğer iyileştirmeler.
 
 ---
 
@@ -31,7 +31,7 @@
 - ~~Otel listeleme API + filtre~~ ✓
 - ~~Otel detay API~~ ✓
 - ~~Rehber katalog sayfası (liste + detay)~~ ✓
-- Müsaitlik / tarih (opsiyonel); v0 tasarım (opsiyonel)
+- ~~Müsaitlik sorgula (tarih, oda bazlı)~~ ✓
 
 Tam liste: `docs/PROJECT_PHASES.md` → Faz 3.
 

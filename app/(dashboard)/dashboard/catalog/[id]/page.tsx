@@ -3,6 +3,7 @@ import { authOptions } from "@/lib/auth";
 import { redirect, notFound } from "next/navigation";
 import { prisma } from "@/lib/db";
 import Link from "next/link";
+import { AvailabilityCheck } from "./AvailabilityCheck";
 
 export default async function CatalogHotelPage({
   params,
@@ -77,6 +78,7 @@ export default async function CatalogHotelPage({
           </table>
           {hotel.rooms.length === 0 && <p className="p-4 text-gray-500">Oda tipi tanımlanmamış.</p>}
         </div>
+        <AvailabilityCheck hotelId={hotel.id} />
       </div>
     </div>
   );

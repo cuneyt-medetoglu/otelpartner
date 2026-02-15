@@ -121,7 +121,7 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 ### Backend
 - [x] Otel listeleme API (filtreleme: bölge, şehir, yıldız)
 - [x] Otel detay API
-- [ ] Müsaitlik kontrol API
+- [x] Müsaitlik kontrol API (tarih bazlı, katalog detayda)
 
 ### Frontend
 - [ ] Tasarım: Otel katalog sayfası (v0.app / wireframe – opsiyonel)

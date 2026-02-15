@@ -8,6 +8,8 @@ Kronolojik geliştirme kaydı. Yeni satırlar en üste eklenir.
 
 ## 2026-02-15
 
+- Faz 5 müsaitlik: GET /api/catalog/hotels/[id]/availability?date=, otel detay sayfasında Müsaitlik sorgula (tarih + tablo).
+
 - Faz 5 (otel katalog): GET /api/catalog/hotels (listed, region, city, starRating), GET /api/catalog/hotels/[id], /dashboard/catalog (liste + filtre), /dashboard/catalog/[id] (detay), middleware katalog guide/admin, Dashboard rehber “Otel kataloğu” linki.
 
 - Faz 4 (görünürlük) ilk dilim: Hotel.listed, migration hotel_listed, GET/PATCH /api/admin/hotels, /dashboard/admin/visibility (Evet/Hayır), Admin’de “Otel görünürlük” linki. NOTES: DB/tünel hatalarında kullanıcıya sor.
