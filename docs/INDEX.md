@@ -2,7 +2,10 @@
 
 ## 📚 Doküman İndeksi
 
-Projenizin tüm dokümantasyonu aşağıda listelenmiştir:
+Projenin tüm dokümantasyonu aşağıda listelenmiştir. **Tüm dokümanların güncelliği ve tutarlılığı Project Manager (Cursor rule) sorumluluğundadır.**
+
+### 0. [PRD.md](./PRD.md) – Ürün Gereksinimleri
+Product Requirements Document: ürün vizyonu, kapsam, özellik özeti, iş kuralları, yönlendirme listesi sıralama. Tek referans dokümanı.
 
 ### 1. [README.md](./README.md)
 Projenin genel tanıtımı, ana fikir, hedef kullanıcılar ve gelir modeli.
@@ -24,7 +27,7 @@ Sistemde olması planlanan tüm özeliklerin detaylı listesi:
 - Deploy: Vercel + Neon.tech
 
 ### 4. [PROJECT_PHASES.md](./PROJECT_PHASES.md)
-12 fazlı geliştirme planı (3 aylık MVP süreci):
+12 fazlı geliştirme planı:
 - Faz 0-1: Planlama ve altyapı
 - Faz 2-4: Admin ve otel yönetimi
 - Faz 5-6: Katalog ve rezervasyon
@@ -54,6 +57,12 @@ Veritabanı şeması ve veri modeli:
 - Komisyon hesaplama
 - Görünürlük kontrolü
 - Admin dashboard
+
+---
+
+## 🤖 Project Manager
+
+Tüm dokümanlar (PRD dahil) **Project Manager** agentı (`.cursor/rules/project-manager.mdc`) sorumluluğundadır. Soru sorduğunuzda veya değişiklik istediğinizde bu agent dokümanları günceller; versiyon ve ilerleme takibini yapar.
 
 ---
 

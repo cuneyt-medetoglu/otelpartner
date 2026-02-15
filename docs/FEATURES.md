@@ -168,10 +168,11 @@
 - [ ] Rezervasyon listesi
 - [ ] Bildirim merkezi
 
-### Otel Katalog Sayfası
+### Otel Katalog ve Yönlendirme Listesi
 - [ ] Otel kartları (fotoğraf, isim, fiyat)
-- [ ] Filtreleme (fiyat, bölge, yıldız)
-- [ ] Sıralama
+- [ ] **Varsayılan sıralama**: Yakın oteller önce (mesafe / coğrafi yakınlık). Bu bir default config’tir; otel veya rehber listeyi farklı kriterlere göre de sıralayabilir.
+- [ ] **Sıralama seçenekleri** (kullanıcı tarafından seçilebilir): Mesafe (varsayılan), fiyat (artan/azalan), yıldız, tesis özellikleri, müsait oda sayısı vb. Sektörde yaygın kullanılan tüm kriterler listeye eklenebilir.
+- [ ] Filtreleme (fiyat, bölge, yıldız, müsaitlik)
 - [ ] Detay modal/sayfa
 - [ ] Müsait oda görüntüleme
 

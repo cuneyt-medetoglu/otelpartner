@@ -10,8 +10,9 @@
 5. **reservations** - Rezervasyonlar
 6. **hotel_photos** - Otel fotoğrafları
 7. **visibility_rules** - Görünürlük kuralları
-8. **notifications** - Bildirimler
-9. **commission_records** - Komisyon kayıtları
+8. **listing_sort_preferences** - Yönlendirme listesi sıralama tercihleri (varsayılan: yakın oteller)
+9. **notifications** - Bildirimler
+10. **commission_records** - Komisyon kayıtları
 
 ---
 
@@ -317,6 +318,37 @@ commission_records {
 
 ---
 
+## 📐 Yönlendirme Listesi Sıralama
+
+**Varsayılan (default config)**: Liste, coğrafi yakınlığa göre sıralanır (dolu otel veya rehberin konumuna en yakın oteller önce). Bunun için otellerde `latitude` ve `longitude` alanları kullanılır.
+
+**Kullanıcı tercihi**: Otel veya rehber listeyi farklı kriterlere göre sıralayabilir. Bu tercih kullanıcı/hotel/guide bazında saklanır.
+
+```typescript
+listing_sort_preferences {
+  id: UUID (PK)
+  entity_type: Enum ['hotel', 'guide']
+  entity_id: UUID // hotel.id veya guide.id
+  
+  default_sort: Enum [
+    'distance',      // Yakınlık (sistem varsayılanı)
+    'price_asc',
+    'price_desc',
+    'star_rating',
+    'availability',
+    'amenities'      // Tesis özellikleri vb.
+  ]
+  // İleride sektörde yaygın diğer kriterler eklenebilir
+  
+  created_at: DateTime
+  updated_at: DateTime
+}
+```
+
+Sıralama seçenekleri: mesafe (varsayılan), fiyat (artan/azalan), yıldız, müsait oda sayısı, tesis özellikleri ve ihtiyaç halinde diğer kriterler.
+
+---
+
 ## 📝 Activity Logs Tablosu
 
 Sistem aktivite logları.
@@ -352,9 +384,11 @@ hotels (1) -> (N) rooms
 hotels (1) -> (N) hotel_photos
 hotels (1) -> (N) reservations (as target)
 hotels (1) -> (N) visibility_rules
+hotels (1) -> (0..1) listing_sort_preferences
 
 guides (1) -> (N) reservations (as sender)
 guides (1) -> (N) visibility_rules
+guides (1) -> (0..1) listing_sort_preferences
 
 rooms (1) -> (N) room_availability
 rooms (1) -> (N) reservations

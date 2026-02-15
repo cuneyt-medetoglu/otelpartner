@@ -39,12 +39,16 @@ Müşteri → Otel (Dolu) → Sistem (Müsait Oteller) → Rezervasyon
 
 ## 📁 Doküman Yapısı
 
+- `PRD.md` - Product Requirements Document (tek referans; Project Manager sorumluluğunda)
 - `FEATURES.md` - Detaylı özellik listesi
 - `TECHNICAL_STACK.md` - Teknoloji seçimleri
 - `PROJECT_PHASES.md` - Geliştirme aşamaları
 - `ROLES_PERMISSIONS.md` - Kullanıcı rolleri ve yetkileri
 - `DATA_STRUCTURE.md` - Veri modeli
 - `FLOW_DIAGRAM.md` - Akış diyagramları
+- `INDEX.md` - Doküman indeksi
+
+Tüm dokümanların güncelliği ve versiyon takibi **Project Manager** (`.cursor/rules/project-manager.mdc`) sorumluluğundadır.
 
 ---
 

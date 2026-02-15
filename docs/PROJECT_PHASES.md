@@ -1,6 +1,6 @@
 # Proje Fazları
 
-## 🎯 Faz 0: Planlama ve Tasarım (1. Hafta)
+## 🎯 Faz 0: Planlama ve Tasarım
 
 ### Dokümentasyon
 - [x] Proje özeti
@@ -23,7 +23,7 @@
 
 ---
 
-## 🏗️ Faz 1: Temel Altyapı ve Kullanıcı Yönetimi (2. Hafta)
+## 🏗️ Faz 1: Temel Altyapı ve Kullanıcı Yönetimi
 
 ### Backend
 - [ ] Proje kurulumu (Next.js / NestJS)
@@ -46,7 +46,7 @@
 
 ---
 
-## 👤 Faz 2: Admin Paneli (3. Hafta)
+## 👤 Faz 2: Admin Paneli
 
 ### Backend
 - [ ] Admin API endpoints
@@ -68,7 +68,7 @@
 
 ---
 
-## 🏨 Faz 3: Otel Profili ve Oda Yönetimi (4. Hafta)
+## 🏨 Faz 3: Otel Profili ve Oda Yönetimi
 
 ### Backend
 - [ ] Otel profil API
@@ -92,7 +92,7 @@
 
 ---
 
-## 👁️ Faz 4: Görünürlük ve Yetkilendirme (5. Hafta)
+## 👁️ Faz 4: Görünürlük ve Yetkilendirme
 
 ### Backend
 - [ ] Configüratif yetkilendirme sistemi
@@ -113,7 +113,7 @@
 
 ---
 
-## 🔍 Faz 5: Otel Katalog ve Detay Sayfası (6. Hafta)
+## 🔍 Faz 5: Otel Katalog ve Detay Sayfası
 
 ### Backend
 - [ ] Otel listeleme API (filtreleme ile)
@@ -136,7 +136,7 @@
 
 ---
 
-## 🔄 Faz 6: Rezervasyon Sistemi (7-8. Hafta)
+## 🔄 Faz 6: Rezervasyon Sistemi
 
 ### Backend
 - [ ] Rezervasyon oluşturma API
@@ -163,7 +163,7 @@
 
 ---
 
-## 🔔 Faz 7: Bildirim Sistemi (9. Hafta)
+## 🔔 Faz 7: Bildirim Sistemi
 
 ### Backend
 - [ ] Email servis entegrasyonu (Resend)
@@ -185,7 +185,7 @@
 
 ---
 
-## 📊 Faz 8: Raporlama ve Komisyon (10. Hafta)
+## 📊 Faz 8: Raporlama ve Komisyon
 
 ### Backend
 - [ ] Rezervasyon raporlama API
@@ -209,7 +209,7 @@
 
 ---
 
-## 🎛️ Faz 9: Gelişmiş Admin Dashboard (11. Hafta)
+## 🎛️ Faz 9: Gelişmiş Admin Dashboard
 
 ### Backend
 - [ ] Dashboard istatistik API'leri
@@ -232,7 +232,7 @@
 
 ---
 
-## ✅ Faz 10: Test ve İyileştirme (12. Hafta)
+## ✅ Faz 10: Test ve İyileştirme
 
 ### Test
 - [ ] Unit testler
@@ -292,18 +292,4 @@
 
 ---
 
-## 📅 Zaman Çizelgesi Özeti
-
-| Faz | Süre | Kümülatif |
-|-----|------|-----------|
-| Faz 0-1 | 3 hafta | 3 hafta |
-| Faz 2-4 | 3 hafta | 6 hafta |
-| Faz 5-6 | 3 hafta | 9 hafta |
-| Faz 7-9 | 3 hafta | 12 hafta |
-| Faz 10-11 | 1 hafta | 13 hafta |
-
-**Tahmini MVP Süresi**: 3 ay (13 hafta)
-
----
-
-**Not**: Süre tahminleri tek full-time developer için verilmiştir. Ekip büyüklüğüne göre ayarlanabilir.
+**Not**: Faz sırası korunur; ilerleme proje durumuna göre takip edilir.
