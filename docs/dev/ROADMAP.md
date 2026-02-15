@@ -11,8 +11,8 @@
 |------|--------|
 | Faz | Faz 3 – Otel Profili ve Oda Yönetimi |
 | Şu anki görev | Faz 3: Otel profil sayfası, oda tipleri, doluluk |
-| Tamamlanan | Faz 1 (Auth, Login/Register, Dashboard), Faz 2 (Admin: bekleyen kayıtlar, tüm kullanıcılar, askıya alma, istatistikler; port 3010; AWS proje kurulumu roadmap’e eklendi) |
-| Sıradaki | Otel profil API + sayfa, oda tipi tanımlama, doluluk yönetimi |
+| Tamamlanan | Faz 1, Faz 2, Faz 3 otel profil (API + sayfa, Dashboard linki) |
+| Sıradaki | Doluluk/müsaitlik yönetimi |
 
 ---
 

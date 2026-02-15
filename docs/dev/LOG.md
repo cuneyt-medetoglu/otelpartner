@@ -8,6 +8,10 @@ Kronolojik geliştirme kaydı. Yeni satırlar en üste eklenir.
 
 ## 2026-02-15
 
+- Faz 3 oda tipleri: Room modeli (roomType, totalCount, basePrice), migration add_rooms, GET/POST `/api/hotel/rooms`, `/dashboard/otel/rooms` (liste + Ekle formu), Dashboard’da “Oda tipleri” linki. NOTES’a “Agent tercihi: adımlar kısa tutulsun” notu eklendi.
+
+- Faz 3 otel profili: GET/PATCH `/api/hotel/profile` (sadece otel rolü, kendi kaydı), `/dashboard/otel/profile` sayfası (form: ad, açıklama, adres, şehir, bölge, ülke, yıldız, telefon, web, olanaklar, enlem/boylam), middleware’de `/dashboard/otel` ve `/api/hotel` otel rolü koruması, Dashboard’da “Otel profilim” linki.
+
 - Durum özeti ve dokümantasyon güncellemesi: STATE, ROADMAP, PROJECT_PHASES (Faz 1 ve Faz 2 checkbox’ları tamamlananlara göre işaretlendi); sıradaki adım Faz 3 (Otel profili ve oda yönetimi) olarak netleştirildi. Port 3010 kullanımı notlarda.
 
 - Faz 2 genişletildi: GET /api/admin/users (rol/durum filtreli), PATCH kullanıcı için askıya al/aktifleştir (suspended/active); admin sayfasında istatistik kartları (bekleyen, aktif otel, aktif rehber, askıda), “Tüm kullanıcılar” bölümü (Listele + Askıya al / Aktifleştir). Faz 10’a “AWS EC2’de uygulama kurulumu” maddesi eklendi; NOTES’ta mevcut durum (sadece DB sunucuda, proje lokalde) notu güncellendi.

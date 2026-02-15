@@ -1,5 +1,11 @@
 # Geliştirme Notları
 
+## Agent / Geliştirme tercihleri
+
+- **Adım uzunluğu:** İşler kısa adımlarla ilerlesin (token limiti nedeniyle). Her seferinde çok fazla özellik eklenmesin; mantıklı bir blok tamamlanınca durulup sıradaki adım söylensin.
+
+---
+
 ## İlk admin giriş bilgileri (seed)
 
 `npm run db:seed` çalıştırdıktan sonra uygulamaya giriş yapmak için:

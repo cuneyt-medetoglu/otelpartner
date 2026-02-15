@@ -13,10 +13,10 @@
 
 ## Şu anki görev
 
-**Faz 3’e başlama öncesi – mevcut durum özeti**
+**Faz 3 – Oda tipleri tamamlandı, doluluk sırada**
 
-- **Geldiğimiz nokta:** Uygulama localhost:3010’da çalışıyor. Admin (admin@otelpartner.local) giriş yapabiliyor; Dashboard’da “Admin – Bekleyen kayıtlar” linki görünüyor. Admin panelinde: istatistik kartları (Bekleyen, Aktif otel, Aktif rehber, Askıda), Bekleyen kayıtlar listesi, Tüm kullanıcılar (rol/durum filtreli, Listele, Askıya al/Aktifleştir) bölümleri hazır. Faz 1 (Auth, Login/Register, Dashboard) ve Faz 2 (Admin paneli) tamamlandı.
-- **Sıradaki:** Faz 3 – Otel profili ve oda yönetimi (otel rolü ile giriş sonrası profil sayfası, oda tipleri, doluluk).
+- **Yapılan:** Otel profil + oda tipleri (Room model, migration, GET/POST `/api/hotel/rooms`, `/dashboard/otel/rooms`, Dashboard’da “Oda tipleri” linki).
+- **Sıradaki:** Doluluk/müsaitlik (tarih bazlı müsait adet veya bloke).
 
 ---
 
@@ -28,9 +28,9 @@
 
 ## Sıradaki görevler (Faz 3)
 
-- Otel profil API ve sayfası (profil bilgileri görüntüleme/güncelleme)
-- Oda tipi tanımlama (şema + API + UI)
-- Doluluk/müsaitlik yönetimi (basit takvim veya günlük bloke)
+- ~~Otel profil API ve sayfa~~ ✓
+- ~~Oda tipi tanımlama (şema + API + UI)~~ ✓
+- Doluluk/müsaitlik yönetimi
 
 Tam liste: `docs/PROJECT_PHASES.md` → Faz 3.
 

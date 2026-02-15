@@ -68,22 +68,22 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 ## 🏨 Faz 3: Otel Profili ve Oda Yönetimi
 
 ### Backend
-- [ ] Otel profil API
-- [ ] Oda tanımlama API
+- [x] Otel profil API (GET/PATCH)
+- [x] Oda tanımlama API (liste + ekleme)
 - [ ] Doluluk yönetimi API
 - [ ] Fotoğraf upload (Cloudinary)
 
 ### Frontend
-- [ ] Otel profil sayfası
+- [x] Otel profil sayfası
 - [ ] Otel fotoğraf galerisi
-- [ ] Oda tipi ve sayı girişi
+- [x] Oda tipi ve sayı girişi
 - [ ] Doluluk takvimi
 - [ ] Fiyat girişi
 
 ### Özellikler
-- [ ] Otel bilgileri güncelleme
+- [x] Otel bilgileri güncelleme
 - [ ] Fotoğraf yükleme
-- [ ] Oda tipi oluşturma
+- [x] Oda tipi oluşturma
 - [ ] Günlük doluluk girişi
 - [ ] Manuel oda bloke/açma
 

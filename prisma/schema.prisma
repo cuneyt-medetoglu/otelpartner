@@ -55,7 +55,22 @@ model Hotel {
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rooms  Room[]
+}
+
+model Room {
+  id          String   @id @default(cuid())
+  hotelId     String   @map("hotel_id")
+  roomType    String   @map("room_type")   // Tek kişilik, Çift kişilik, Suite, vb.
+  totalCount  Int      @map("total_count")
+  basePrice   Decimal? @map("base_price")  @db.Decimal(10, 2)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  hotel Hotel @relation(fields: [hotelId], references: [id], onDelete: Cascade)
+
+  @@map("rooms")
 }
 
 model Guide {
