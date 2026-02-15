@@ -20,6 +20,8 @@
 
 Bu sıra önce “ürün yüzü” (katalog + rezervasyon), sonra yönetim ekranları şeklindedir.
 
+**Brief’ler:** Her adım için v0’da kullanılacak tasarım brief’leri `docs/design/` altında numaralı dosyalarda (örn. `01-rezervasyon-akisi.md`). Detay: `docs/design/README.md`.
+
 ---
 
 ## 🎯 Faz 0: Planlama ve Tasarım
