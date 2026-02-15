@@ -31,12 +31,18 @@ export default async function DashboardPage() {
           <Link href="/dashboard/otel/availability" className="text-blue-600 hover:underline">
             Doluluk
           </Link>
+          <Link href="/dashboard/reservations" className="text-blue-600 hover:underline">
+            Rezervasyonlar
+          </Link>
         </p>
       )}
       {session.user.role === "guide" && (
-        <p className="mt-3">
+        <p className="mt-3 flex flex-wrap gap-4">
           <Link href="/dashboard/catalog" className="text-blue-600 hover:underline">
             Otel kataloğu
+          </Link>
+          <Link href="/dashboard/reservations" className="text-blue-600 hover:underline">
+            Rezervasyonlarım
           </Link>
         </p>
       )}

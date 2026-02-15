@@ -75,9 +75,7 @@ Tüm dokümanlar (PRD dahil) **Project Manager** agentı (`.cursor/rules/project
 
 ## 🎯 Proje Durumu
 
-**Faz**: Faz 1 – Temel Altyapı ve Kullanıcı Yönetimi  
-**Şu anki görev**: Authentication (NextAuth.js) ve Login/Register  
-**Güncel durum**: `docs/dev/STATE.md` ve `docs/dev/ROADMAP.md` (kurulum, AWS PostgreSQL, migration tamamlandı; uygulama çalışıyor)
+**Güncel durum**: `docs/dev/STATE.md` ve `docs/dev/ROADMAP.md` tek kaynaktır. Faz 1–5 tamamlandı; Faz 6 (Rezervasyon) başlatıldı – rezervasyon oluşturma ve listeleme (rehber/otel) yapıldı.
 
 ---
 

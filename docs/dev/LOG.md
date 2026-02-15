@@ -8,6 +8,10 @@ Kronolojik geliştirme kaydı. Yeni satırlar en üste eklenir.
 
 ## 2026-02-15
 
+- Faz 6 onay/red: PATCH `/api/reservations/[id]` (sadece otel, status: approved | rejected, opsiyonel rejectionReason); `/dashboard/reservations` sayfasında otel rolü için “İşlem” sütunu, pending satırlarda Onayla/Reddet butonları (ReservationActions client component). STATE, ROADMAP, PROJECT_PHASES güncellendi.
+
+- Faz 6 (rezervasyon) ilk dilim: Reservation modeli (reservationCode, guideId, hotelId, roomId, checkIn/Out, roomCount, guestCount, totalPrice, status), migration; GET/POST /api/reservations; katalog otel detayda Rezervasyon yap formu; /dashboard/reservations (rehber + otel listesi); Dashboard linkleri. Dokümanlar (STATE, ROADMAP, PROJECT_PHASES) güncellendi.
+
 - Faz 5 müsaitlik: GET /api/catalog/hotels/[id]/availability?date=, otel detay sayfasında Müsaitlik sorgula (tarih + tablo).
 
 - Faz 5 (otel katalog): GET /api/catalog/hotels (listed, region, city, starRating), GET /api/catalog/hotels/[id], /dashboard/catalog (liste + filtre), /dashboard/catalog/[id] (detay), middleware katalog guide/admin, Dashboard rehber “Otel kataloğu” linki.

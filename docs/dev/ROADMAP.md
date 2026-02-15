@@ -9,10 +9,10 @@
 
 | Alan | Değer |
 |------|--------|
-| Faz | Faz 5 – Otel Katalog |
-| Şu anki görev | Faz 5 katalog (rehber) tamamlandı |
-| Tamamlanan | Faz 1–4, Faz 5 katalog (API liste+detay, sayfalar, rehber linki) |
-| Sıradaki | Müsaitlik gösterimi (ops.) veya Faz 6 Rezervasyon |
+| Faz | Faz 6 – Rezervasyon |
+| Şu anki görev | Faz 6 onay/red tamamlandı |
+| Tamamlanan | Faz 1–5, Faz 6 rezervasyon oluşturma + listeleme + onay/red |
+| Sıradaki | Rezervasyon kodu/QR (ops.), detay sayfası, iptal |
 
 ---
 
@@ -25,8 +25,8 @@
 | 2 | Admin Paneli | Tamamlandı |
 | 3 | Otel Profili ve Oda Yönetimi | Tamamlandı |
 | 4 | Görünürlük ve Yetkilendirme | Tamamlandı (otel listed) |
-| 5 | Otel Katalog ve Detay Sayfası | **Başlatıldı** (katalog ✓) |
-| 6 | Rezervasyon Sistemi | Bekliyor |
+| 5 | Otel Katalog ve Detay Sayfası | Tamamlandı |
+| 6 | Rezervasyon Sistemi | **Başlatıldı** (oluştur + liste + onay/red ✓) |
 | 7 | Bildirim Sistemi | Bekliyor |
 | 8 | Raporlama ve Komisyon | Bekliyor |
 | 9 | Gelişmiş Admin Dashboard | Bekliyor |

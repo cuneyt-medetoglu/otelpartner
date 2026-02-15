@@ -143,27 +143,27 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 ## 🔄 Faz 6: Rezervasyon Sistemi
 
 ### Backend
-- [ ] Rezervasyon oluşturma API
-- [ ] Rezervasyon onay/red API
-- [ ] Rezervasyon durum güncelleme
-- [ ] Rezervasyon kodu oluşturma
+- [x] Rezervasyon oluşturma API (rehber)
+- [x] Rezervasyon onay/red API (otel)
+- [x] Rezervasyon durum güncelleme
+- [x] Rezervasyon kodu oluşturma (OP-xxx)
 - [ ] QR kod oluşturma
 
 ### Frontend
-- [ ] Tasarım: Rezervasyon akışı (v0.app / wireframe)
-- [ ] Rezervasyon oluşturma formu
-- [ ] Rezervasyon onay ekranı
-- [ ] Rezervasyon listesi
+- [ ] Tasarım: Rezervasyon akışı (v0.app / wireframe – opsiyonel)
+- [x] Rezervasyon oluşturma formu (katalog otel detayda)
+- [x] Rezervasyon onay ekranı (otel – listede Onayla/Reddet)
+- [x] Rezervasyon listesi (rehber + otel)
 - [ ] Rezervasyon detay sayfası
 - [ ] QR kod görüntüleme
 - [ ] Rezervasyon iptal
 
 ### Özellikler
-- [ ] Rezervasyon oluşturma
+- [x] Rezervasyon oluşturma
 - [ ] Hedef otele bildirim
-- [ ] Rezervasyon onaylama
-- [ ] QR/Rezervasyon kodu üretme
-- [ ] Rezervasyon statü yönetimi
+- [x] Rezervasyon onaylama
+- [x] Rezervasyon kodu üretme
+- [x] Rezervasyon statü yönetimi (onay/red)
 - [ ] İptal işlemi
 
 ---

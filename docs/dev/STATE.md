@@ -7,16 +7,16 @@
 
 ## Şu anki faz
 
-**Faz 5 – Otel Katalog ve Detay** (başlatıldı)
+**Faz 6 – Rezervasyon Sistemi** (başlatıldı)
 
 ---
 
 ## Şu anki görev
 
-**Faz 5 – Katalog (rehber) tamamlandı**
+**Faz 6 – Rezervasyon oluşturma, listeleme ve onay/red (tamamlandı)**
 
-- **Yapılan:** Katalog API’leri + sayfalar + **müsaitlik**: GET `/api/catalog/hotels/[id]/availability?date=`, otel detay sayfasında “Müsaitlik sorgula” (tarih seç, Sorgula, oda tipi × müsait adet tablosu).
-- **Sıradaki:** Faz 6 (Rezervasyon) veya diğer iyileştirmeler.
+- **Yapılan:** Reservation modeli; GET/POST `/api/reservations`; katalog otel detayda rehber için “Rezervasyon yap” formu; `/dashboard/reservations` (rehber + otel listesi); PATCH `/api/reservations/[id]` (sadece otel, status: approved | rejected, opsiyonel rejectionReason); rezervasyon listesinde otel için bekleyen satırlarda “Onayla” / “Reddet” butonları.
+- **Sıradaki:** Rezervasyon kodu/QR (opsiyonel), rezervasyon detay sayfası, iptal.
 
 ---
 
@@ -26,12 +26,12 @@
 
 ---
 
-## Sıradaki görevler (Faz 5)
+## Sıradaki görevler (Faz 6)
 
-- ~~Otel listeleme API + filtre~~ ✓
-- ~~Otel detay API~~ ✓
-- ~~Rehber katalog sayfası (liste + detay)~~ ✓
-- ~~Müsaitlik sorgula (tarih, oda bazlı)~~ ✓
+- ~~Rezervasyon model + API (oluştur, liste)~~ ✓
+- ~~Rezervasyon formu + liste sayfası~~ ✓
+- ~~Onay/red API + otel tarafında butonlar~~ ✓
+- Rezervasyon kodu / QR (opsiyonel)
 
 Tam liste: `docs/PROJECT_PHASES.md` → Faz 3.
 

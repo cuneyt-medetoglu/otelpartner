@@ -56,8 +56,9 @@ model Hotel {
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
 
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  rooms  Room[]
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rooms        Room[]
+  reservations Reservation[]
 }
 
 model Room {
@@ -69,8 +70,9 @@ model Room {
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
 
-  hotel        Hotel              @relation(fields: [hotelId], references: [id], onDelete: Cascade)
-  availability RoomAvailability[]
+  hotel         Hotel              @relation(fields: [hotelId], references: [id], onDelete: Cascade)
+  availability  RoomAvailability[]
+  reservations  Reservation[]
 }
 
 model RoomAvailability {
@@ -88,17 +90,48 @@ model RoomAvailability {
 }
 
 model Guide {
-  id           String   @id @default(cuid())
-  userId       String   @unique @map("user_id")
-  firstName    String   @map("first_name")
-  lastName     String   @map("last_name")
-  phone        String?
-  licenseNumber String? @map("license_number")
-  companyName  String?  @map("company_name")
-  city         String?
-  region       String?
-  createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt    DateTime @updatedAt @map("updated_at")
+  id            String        @id @default(cuid())
+  userId        String        @unique @map("user_id")
+  firstName     String        @map("first_name")
+  lastName      String        @map("last_name")
+  phone         String?
+  licenseNumber String?       @map("license_number")
+  companyName   String?       @map("company_name")
+  city          String?
+  region        String?
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reservations  Reservation[] @relation("GuideReservations")
+}
+
+model Reservation {
+  id             String           @id @default(cuid())
+  reservationCode String         @unique @map("reservation_code")
+  guideId        String           @map("guide_id")
+  hotelId        String           @map("hotel_id")
+  roomId         String           @map("room_id")
+  checkInDate    DateTime         @map("check_in_date") @db.Date
+  checkOutDate   DateTime         @map("check_out_date") @db.Date
+  roomCount      Int              @map("room_count")
+  guestCount     Int?             @map("guest_count")
+  totalPrice     Decimal?         @map("total_price") @db.Decimal(10, 2)
+  status         ReservationStatus @default(pending)
+  rejectionReason String?         @map("rejection_reason")
+  createdAt      DateTime         @default(now()) @map("created_at")
+  updatedAt      DateTime         @updatedAt @map("updated_at")
+
+  guide Guide @relation("GuideReservations", fields: [guideId], references: [id], onDelete: Cascade)
+  hotel Hotel @relation(fields: [hotelId], references: [id], onDelete: Cascade)
+  room  Room  @relation(fields: [roomId], references: [id], onDelete: Cascade)
+
+  @@map("reservations")
+}
+
+enum ReservationStatus {
+  pending
+  approved
+  rejected
+  cancelled
 }
