@@ -7,16 +7,16 @@
 
 ## Şu anki faz
 
-**Faz 4 – Görünürlük ve Yetkilendirme** (başlatıldı)
+**Faz 5 – Otel Katalog ve Detay** (başlatıldı)
 
 ---
 
 ## Şu anki görev
 
-**Faz 4 – Otel katalogda listeleme (ilk dilim tamamlandı)**
+**Faz 5 – Katalog (rehber) tamamlandı**
 
-- **Yapılan:** Hotel.listed alanı, migration, GET `/api/admin/hotels`, PATCH `/api/admin/hotels/[id]` (listed), `/dashboard/admin/visibility` sayfası (Evet/Hayır toggle), Admin panelde “Otel görünürlük” linki. NOTES’a “DB/tünel hatalarında kullanıcıya sor” notu eklendi.
-- **Sıradaki:** Faz 4’te bölgesel kısıtlama / rehber yetkisi (isteğe bağlı) veya Faz 5 (Otel katalog).
+- **Yapılan:** GET `/api/catalog/hotels` (listed, filtre: region, city, starRating), GET `/api/catalog/hotels/[id]` (detay + odalar), `/dashboard/catalog` (liste, filtre formu), `/dashboard/catalog/[id]` (otel detay), middleware ile katalog sadece guide/admin, Dashboard’da rehber için “Otel kataloğu” linki.
+- **Sıradaki:** Faz 5’te müsaitlik gösterimi / tarih seçimi (opsiyonel) veya Faz 6 (Rezervasyon).
 
 ---
 
@@ -26,10 +26,12 @@
 
 ---
 
-## Sıradaki görevler (Faz 4)
+## Sıradaki görevler (Faz 5)
 
-- ~~Otel görünürlük: katalogda listele (listed) + admin sayfa~~ ✓
-- Bölgesel kısıtlama / rehber yetkisi (opsiyonel)
+- ~~Otel listeleme API + filtre~~ ✓
+- ~~Otel detay API~~ ✓
+- ~~Rehber katalog sayfası (liste + detay)~~ ✓
+- Müsaitlik / tarih (opsiyonel); v0 tasarım (opsiyonel)
 
 Tam liste: `docs/PROJECT_PHASES.md` → Faz 3.
 

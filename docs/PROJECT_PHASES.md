@@ -119,18 +119,18 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 ## 🔍 Faz 5: Otel Katalog ve Detay Sayfası
 
 ### Backend
-- [ ] Otel listeleme API (filtreleme ile)
-- [ ] Otel detay API
+- [x] Otel listeleme API (filtreleme: bölge, şehir, yıldız)
+- [x] Otel detay API
 - [ ] Müsaitlik kontrol API
 
 ### Frontend
-- [ ] Tasarım: Otel katalog sayfası (v0.app / wireframe)
-- [ ] Otel katalog sayfası
-- [ ] Filtreleme (fiyat, bölge, yıldız, müsaitlik)
+- [ ] Tasarım: Otel katalog sayfası (v0.app / wireframe – opsiyonel)
+- [x] Otel katalog sayfası (rehber)
+- [x] Filtreleme (bölge, şehir, yıldız)
 - [ ] Sıralama
-- [ ] Otel detay modal/sayfası
+- [x] Otel detay sayfası
 - [ ] Fotoğraf galerisi
-- [ ] Oda tipi ve fiyat gösterimi
+- [x] Oda tipi ve fiyat gösterimi
 
 ### Özellikler
 - [ ] Müsait otelleri listeleme
