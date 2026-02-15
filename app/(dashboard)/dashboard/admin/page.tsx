@@ -29,6 +29,9 @@ export default async function AdminPage() {
           ← Dashboard
         </Link>
         <h1 className="text-xl font-semibold text-gray-900">Admin paneli</h1>
+        <Link href="/dashboard/admin/visibility" className="text-sm text-blue-600 hover:underline">
+          Otel görünürlük
+        </Link>
       </div>
 
       <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4">

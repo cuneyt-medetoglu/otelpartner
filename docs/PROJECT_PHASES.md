@@ -1,5 +1,11 @@
 # Proje Fazları
 
+## 📐 v0.app ile tasarım zamanı
+
+**Ne zaman:** **Faz 5 öncesi** veya **Faz 5 ile birlikte** v0.app ile sayfa tasarımlarına başlanacak. Önce otel katalog ve detay sayfası, ardından rezervasyon akışı; istenirse mevcut sayfalar (login, register, dashboard, admin, otel profil, oda tipleri, doluluk) da v0 ile yeniden tasarlanıp uygulamaya alınabilir. Bu tarih/faz dışında sabit bir “tasarım günü” yok; Faz 5 = tasarımlara başlama fazı olarak kabul edilir.
+
+---
+
 ## 🎯 Faz 0: Planlama ve Tasarım
 
 Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgili geliştirme fazlarına taşındı (aşağıda).
@@ -70,22 +76,22 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 ### Backend
 - [x] Otel profil API (GET/PATCH)
 - [x] Oda tanımlama API (liste + ekleme)
-- [ ] Doluluk yönetimi API
+- [x] Doluluk yönetimi API (günlük müsait adet)
 - [ ] Fotoğraf upload (Cloudinary)
 
 ### Frontend
 - [x] Otel profil sayfası
 - [ ] Otel fotoğraf galerisi
 - [x] Oda tipi ve sayı girişi
-- [ ] Doluluk takvimi
+- [x] Doluluk takvimi (oda + tarih + müsait adet formu)
 - [ ] Fiyat girişi
 
 ### Özellikler
 - [x] Otel bilgileri güncelleme
 - [ ] Fotoğraf yükleme
 - [x] Oda tipi oluşturma
-- [ ] Günlük doluluk girişi
-- [ ] Manuel oda bloke/açma
+- [x] Günlük doluluk girişi
+- [ ] Manuel oda bloke/açma (opsiyonel; müsait 0 = bloke)
 
 ---
 
@@ -93,18 +99,18 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 
 ### Backend
 - [ ] Configüratif yetkilendirme sistemi
-- [ ] Otel görünürlük kuralları
+- [x] Otel görünürlük kuralları (listed: katalogda göster/gizle)
 - [ ] Bölge/şehir filtreleme
 - [ ] Özel grup yönetimi
 
 ### Frontend
-- [ ] Admin görünürlük ayar sayfası
+- [x] Admin görünürlük ayar sayfası (Otel görünürlük – listed toggle)
 - [ ] Otel bazlı yetki düzenleme
 - [ ] Rehber bazlı yetki düzenleme
 - [ ] Görünürlük test ekranı
 
 ### Özellikler
-- [ ] Admin tarafından otel görünürlüğü ayarlama
+- [x] Admin tarafından otel görünürlüğü ayarlama (listed)
 - [ ] Bölgesel kısıtlamalar
 - [ ] Anlaşmalı otel grupları
 

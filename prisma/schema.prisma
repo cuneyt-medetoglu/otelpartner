@@ -52,6 +52,7 @@ model Hotel {
   amenities   Json?    // [wifi, pool, spa, ...]
   latitude    Decimal? @db.Decimal(10, 7)
   longitude   Decimal? @db.Decimal(10, 7)
+  listed      Boolean  @default(true)  // Katalogda listelensin mi (admin)
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
 
@@ -68,9 +69,22 @@ model Room {
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
 
-  hotel Hotel @relation(fields: [hotelId], references: [id], onDelete: Cascade)
+  hotel        Hotel              @relation(fields: [hotelId], references: [id], onDelete: Cascade)
+  availability RoomAvailability[]
+}
 
-  @@map("rooms")
+model RoomAvailability {
+  id              String   @id @default(cuid())
+  roomId          String   @map("room_id")
+  date            DateTime @db.Date
+  availableCount  Int      @map("available_count")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  room Room @relation(fields: [roomId], references: [id], onDelete: Cascade)
+
+  @@unique([roomId, date])
+  @@map("room_availability")
 }
 
 model Guide {

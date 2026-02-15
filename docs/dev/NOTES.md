@@ -4,6 +4,10 @@
 
 - **Adım uzunluğu:** İşler kısa adımlarla ilerlesin (token limiti nedeniyle). Her seferinde çok fazla özellik eklenmesin; mantıklı bir blok tamamlanınca durulup sıradaki adım söylensin.
 
+- **DB / tünel hataları:** Migration veya uygulama veritabanına ulaşamazsa (Can't reach database, Connection refused) agent kullanıcıya sormalı; sessizce devam etmemeli.
+
+- **v0.app tasarım:** Tüm sayfaların v0 ile tasarımı **Faz 5 öncesi veya Faz 5 ile** başlayacak (detay: `docs/PROJECT_PHASES.md` → “v0.app ile tasarım zamanı”).
+
 ---
 
 ## İlk admin giriş bilgileri (seed)

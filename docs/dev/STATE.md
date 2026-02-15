@@ -7,16 +7,16 @@
 
 ## Şu anki faz
 
-**Faz 3 – Otel Profili ve Oda Yönetimi** (sıradaki)
+**Faz 4 – Görünürlük ve Yetkilendirme** (başlatıldı)
 
 ---
 
 ## Şu anki görev
 
-**Faz 3 – Oda tipleri tamamlandı, doluluk sırada**
+**Faz 4 – Otel katalogda listeleme (ilk dilim tamamlandı)**
 
-- **Yapılan:** Otel profil + oda tipleri (Room model, migration, GET/POST `/api/hotel/rooms`, `/dashboard/otel/rooms`, Dashboard’da “Oda tipleri” linki).
-- **Sıradaki:** Doluluk/müsaitlik (tarih bazlı müsait adet veya bloke).
+- **Yapılan:** Hotel.listed alanı, migration, GET `/api/admin/hotels`, PATCH `/api/admin/hotels/[id]` (listed), `/dashboard/admin/visibility` sayfası (Evet/Hayır toggle), Admin panelde “Otel görünürlük” linki. NOTES’a “DB/tünel hatalarında kullanıcıya sor” notu eklendi.
+- **Sıradaki:** Faz 4’te bölgesel kısıtlama / rehber yetkisi (isteğe bağlı) veya Faz 5 (Otel katalog).
 
 ---
 
@@ -26,11 +26,10 @@
 
 ---
 
-## Sıradaki görevler (Faz 3)
+## Sıradaki görevler (Faz 4)
 
-- ~~Otel profil API ve sayfa~~ ✓
-- ~~Oda tipi tanımlama (şema + API + UI)~~ ✓
-- Doluluk/müsaitlik yönetimi
+- ~~Otel görünürlük: katalogda listele (listed) + admin sayfa~~ ✓
+- Bölgesel kısıtlama / rehber yetkisi (opsiyonel)
 
 Tam liste: `docs/PROJECT_PHASES.md` → Faz 3.
 

@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Hotel" ADD COLUMN "listed" BOOLEAN NOT NULL DEFAULT true;

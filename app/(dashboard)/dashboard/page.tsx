@@ -21,12 +21,15 @@ export default async function DashboardPage() {
         </p>
       )}
       {session.user.role === "hotel" && (
-        <p className="mt-3 flex gap-4">
+        <p className="mt-3 flex flex-wrap gap-4">
           <Link href="/dashboard/otel/profile" className="text-blue-600 hover:underline">
             Otel profilim
           </Link>
           <Link href="/dashboard/otel/rooms" className="text-blue-600 hover:underline">
             Oda tipleri
+          </Link>
+          <Link href="/dashboard/otel/availability" className="text-blue-600 hover:underline">
+            Doluluk
           </Link>
         </p>
       )}

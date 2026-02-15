@@ -8,6 +8,10 @@ Kronolojik geliştirme kaydı. Yeni satırlar en üste eklenir.
 
 ## 2026-02-15
 
+- Faz 4 (görünürlük) ilk dilim: Hotel.listed, migration hotel_listed, GET/PATCH /api/admin/hotels, /dashboard/admin/visibility (Evet/Hayır), Admin’de “Otel görünürlük” linki. NOTES: DB/tünel hatalarında kullanıcıya sor.
+
+- Faz 3 doluluk: RoomAvailability (roomId, date, availableCount), migration, GET/POST `/api/hotel/availability`, `/dashboard/otel/availability` (oda seç, tarih, müsait adet, Kaydet), Dashboard’da “Doluluk” linki.
+
 - Faz 3 oda tipleri: Room modeli (roomType, totalCount, basePrice), migration add_rooms, GET/POST `/api/hotel/rooms`, `/dashboard/otel/rooms` (liste + Ekle formu), Dashboard’da “Oda tipleri” linki. NOTES’a “Agent tercihi: adımlar kısa tutulsun” notu eklendi.
 
 - Faz 3 otel profili: GET/PATCH `/api/hotel/profile` (sadece otel rolü, kendi kaydı), `/dashboard/otel/profile` sayfası (form: ad, açıklama, adres, şehir, bölge, ülke, yıldız, telefon, web, olanaklar, enlem/boylam), middleware’de `/dashboard/otel` ve `/api/hotel` otel rolü koruması, Dashboard’da “Otel profilim” linki.

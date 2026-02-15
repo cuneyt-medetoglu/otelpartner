@@ -9,10 +9,10 @@
 
 | Alan | Değer |
 |------|--------|
-| Faz | Faz 3 – Otel Profili ve Oda Yönetimi |
-| Şu anki görev | Faz 3: Otel profil sayfası, oda tipleri, doluluk |
-| Tamamlanan | Faz 1, Faz 2, Faz 3 otel profil (API + sayfa, Dashboard linki) |
-| Sıradaki | Doluluk/müsaitlik yönetimi |
+| Faz | Faz 4 – Görünürlük |
+| Şu anki görev | Faz 4 otel listed tamamlandı; sırada Faz 4 genişletme veya Faz 5 |
+| Tamamlanan | Faz 1–3, Faz 4 otel görünürlük (listed, admin/visibility) |
+| Sıradaki | Bölgesel/rehber yetkisi (ops.) veya Faz 5 Katalog |
 
 ---
 
@@ -23,8 +23,8 @@
 | 0 | Planlama ve Tasarım | Tamamlandı |
 | 1 | Temel Altyapı ve Kullanıcı Yönetimi | Tamamlandı |
 | 2 | Admin Paneli | Tamamlandı |
-| 3 | Otel Profili ve Oda Yönetimi | **Sıradaki** |
-| 4 | Görünürlük ve Yetkilendirme | Bekliyor |
+| 3 | Otel Profili ve Oda Yönetimi | Tamamlandı |
+| 4 | Görünürlük ve Yetkilendirme | **Başlatıldı** (otel listed ✓) |
 | 5 | Otel Katalog ve Detay Sayfası | Bekliyor |
 | 6 | Rezervasyon Sistemi | Bekliyor |
 | 7 | Bildirim Sistemi | Bekliyor |
