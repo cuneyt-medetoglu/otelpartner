@@ -1,8 +1,24 @@
 # Proje Fazları
 
-## 📐 v0.app ile tasarım zamanı
+## 📐 v0.app ile tasarım
 
-**Ne zaman:** **Faz 5 öncesi** veya **Faz 5 ile birlikte** v0.app ile sayfa tasarımlarına başlanacak. Önce otel katalog ve detay sayfası, ardından rezervasyon akışı; istenirse mevcut sayfalar (login, register, dashboard, admin, otel profil, oda tipleri, doluluk) da v0 ile yeniden tasarlanıp uygulamaya alınabilir. Bu tarih/faz dışında sabit bir “tasarım günü” yok; Faz 5 = tasarımlara başlama fazı olarak kabul edilir.
+### Ne zaman
+- **Başlama:** Faz 6 ortası veya Faz 6 bittikten hemen sonra (rezervasyon akışı çalışır durumda olduktan sonra).
+- Tüm sayfalar **birbiri ile uyumlu** olacak şekilde tasarlanacak; v0 çıktıları tek bir tasarım dilinde (renk, tipografi, bileşenler) tutulmalı.
+
+### v0.app + GitHub
+- Proje GitHub’a bağlanacak; v0.app repo’yu görebilecek ve tasarımlar mevcut kodla uyumlu ilerleyecek.
+
+### Önerilen tasarım sırası (v0 ile hangi ekranlara ne sırayla bakılır)
+1. **Rezervasyon akışı** — Katalog detay → rezervasyon formu → rezervasyon listesi → otel tarafı onay/red.
+2. **Otel katalog** — Liste + filtre; **Otel detay** — Tekil otel sayfası.
+3. **Rezervasyon listesi** — Rehber ve otel görünümü.
+4. **Dashboard** — Giriş sonrası ana sayfa (rol bazlı).
+5. **Auth** — Login, Register.
+6. **Admin** — Bekleyen kayıtlar, kullanıcı listesi, görünürlük.
+7. **Otel paneli** — Profil, oda tipleri, doluluk.
+
+Bu sıra önce “ürün yüzü” (katalog + rezervasyon), sonra yönetim ekranları şeklindedir.
 
 ---
 
@@ -44,6 +60,8 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 - [x] Kullanıcı girişi
 - [ ] Şifre sıfırlama
 
+**Yapılmayan maddeler notu (Faz 1):** Veri modeli şemaları (ER/Mermaid): dokümantasyon önceliği düşük, ihtiyaç halinde yapılacak. Şifre sıfırlama: Faz 7 (bildirim) ile birlikte e-posta akışı planlandığı için bekletildi.
+
 **Not (Faz 1):** Geliştirme önce localhost’ta yapılacak; production’da uygulama AWS EC2’de çalışacak. Sizin yapmanız gerekenler (Node.js, PostgreSQL veya bulut DB, `.env` oluşturma, ilk migration): `docs/dev/NOTES.md`.
 
 ---
@@ -69,6 +87,8 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 - [x] Kullanıcı silme/askıya alma
 - [ ] Kullanıcı detay görüntüleme
 
+**Yapılmayan maddeler notu (Faz 2):** Tasarım (Admin dashboard): v0 tasarım diliminde yapılacak; öncelik rezervasyon/katalog ekranlarına verildi. Manuel kullanıcı ekleme ve kullanıcı detay görüntüleme: MVP sonrası veya ihtiyaç çıktıkça eklenecek.
+
 ---
 
 ## 🏨 Faz 3: Otel Profili ve Oda Yönetimi
@@ -93,6 +113,8 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 - [x] Günlük doluluk girişi
 - [ ] Manuel oda bloke/açma (opsiyonel; müsait 0 = bloke)
 
+**Yapılmayan maddeler notu (Faz 3):** Fotoğraf upload (Cloudinary) ve fotoğraf galerisi: altyapı/entegrasyon gerektirdiği için ertelendi; v0 tasarımında galeri placeholder ile planlanabilir. Fiyat girişi: Room.basePrice mevcut; ayrı “fiyat yönetimi” ekranı ileride. Manuel bloke/açma: müsait adet 0 ile zaten bloke sayılıyor; ayrı toggle opsiyonel.
+
 ---
 
 ## 👁️ Faz 4: Görünürlük ve Yetkilendirme
@@ -113,6 +135,8 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 - [x] Admin tarafından otel görünürlüğü ayarlama (listed)
 - [ ] Bölgesel kısıtlamalar
 - [ ] Anlaşmalı otel grupları
+
+**Yapılmayan maddeler notu (Faz 4):** Configüratif yetkilendirme, bölge/şehir filtreleme, özel grup, otel/rehber bazlı yetki, test ekranı: MVP kapsamında sadece “listed” ile yetinildi; gelişmiş yetkilendirme post-MVP veya ihtiyaç halinde.
 
 ---
 
@@ -137,6 +161,8 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 - [ ] Otel detaylarını görüntüleme
 - [ ] Fiyat karşılaştırma
 - [ ] Müsait oda sayısı gösterme
+
+**Yapılmayan maddeler notu (Faz 5):** Tasarım (katalog/detay): v0 tasarım diliminde önerilen sırada yapılacak. Sıralama: öncelik düşük. Fotoğraf galerisi: Faz 3 fotoğraf upload’a bağlı. Özellik checkbox’ları (müsait oteller listeleme vb.): işlev olarak katalog ve müsaitlik API’si var; metin özet/detay sayfa copy’si güncellenebilir.
 
 ---
 
@@ -165,6 +191,8 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 - [x] Rezervasyon kodu üretme
 - [x] Rezervasyon statü yönetimi (onay/red)
 - [ ] İptal işlemi
+
+**Yapılmayan maddeler notu (Faz 6):** Tasarım (rezervasyon akışı): v0 tasarım diliminde 1. sırada. Rezervasyon detay sayfası ve iptal: sıradaki geliştirme adımları. QR kod: opsiyonel; detay sayfası sonrası. Hedef otele bildirim: Faz 7 (bildirim sistemi) ile yapılacak.
 
 ---
 
