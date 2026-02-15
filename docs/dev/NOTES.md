@@ -1,9 +1,22 @@
 # Geliştirme Notları
 
+## İlk admin giriş bilgileri (seed)
+
+`npm run db:seed` çalıştırdıktan sonra uygulamaya giriş yapmak için:
+
+| Alan    | Değer                     |
+|---------|---------------------------|
+| Email   | `admin@otelpartner.local` |
+| Şifre   | `Admin123!`               |
+
+Bu bilgiler `.env` içinde yorum satırı olarak da duruyor (bakmak için). Farklı bir admin isterseniz `.env`’e `ADMIN_EMAIL` ve `ADMIN_PASSWORD` tanımlayıp seed’i tekrar çalıştırabilirsiniz.
+
+---
+
 ## Deployment
 
 - **Hedef production:** Uygulama AWS üzerinde bir **EC2** instance’da çalışacak.
-- **Geliştirme:** Önce **localhost** üzerinde geliştirme yapılacak; EC2’ye geçiş daha sonra (Faz 10 / deployment aşamasında veya ihtiyaç oldukça) yapılacak.
+- **Şu an:** AWS’te sadece **PostgreSQL** kurulu (EC2 üzerinde); proje **lokalde** çalışıyor, DB’ye SSH tünel ile bağlanılıyor. İleride (Faz 10) aynı makineye veya ayrı bir EC2’ye **proje kurulumu** eklenecek: Node.js, proje kodu, PM2/Nginx, .env, build. Detaylar: `docs/PROJECT_PHASES.md` → Faz 10 Deployment.
 - Detaylar: `docs/TECHNICAL_STACK.md` → Deployment bölümü.
 
 ---
@@ -21,7 +34,7 @@ Aşağıdaki adımlar sizin ortamınızda yapılacak (API anahtarı, hesap, loka
 3. **`.env` dosyası**  
    Proje ilk çalıştırmadan önce `.env` oluşturulacak (`.env.example`’dan kopyalanacak). İçinde en azından:
    - `DATABASE_URL` (PostgreSQL connection string)
-   - NextAuth için `NEXTAUTH_SECRET`, `NEXTAUTH_URL` (localhost:3000)
+   - NextAuth için `NEXTAUTH_SECRET`, `NEXTAUTH_URL` (localhost:3010)
    - (İleride) Cloudinary, Resend vb. için gerekli anahtarlar  
    Bu dosyayı **siz** oluşturup doldurmalısınız; repo’ya commit edilmez (`.gitignore`’da).
 
@@ -39,7 +52,7 @@ Aşağıdaki adımlar sizin ortamınızda yapılacak (API anahtarı, hesap, loka
 2. **PostgreSQL** kurulu olsun ve servisi çalışsın (localhost:5432).
 3. Proje kökünde **`.env`** oluşturun: aşağıdaki “.env nasıl doldurulur?” bölümüne bakın.
 4. **İlk migration:** aşağıdaki “Prisma ve migration nedir?” bölümüne bakın; sonra `npx prisma migrate dev --name init` çalıştırın.
-5. **Uygulamayı çalıştırın:** `npm run dev` → tarayıcıda http://localhost:3000.
+5. **Uygulamayı çalıştırın:** `npm run dev` → tarayıcıda http://localhost:3010.
 
 ---
 
@@ -171,7 +184,7 @@ NEXTAUTH_SECRET="a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6"
 
 Geliştirme için olduğu gibi bırakabilirsiniz:
 ```env
-NEXTAUTH_URL="http://localhost:3000"
+NEXTAUTH_URL="http://localhost:3010"
 ```
 
 ---

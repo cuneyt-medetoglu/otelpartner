@@ -7,16 +7,16 @@
 
 ## Şu anki faz
 
-**Faz 1 – Temel Altyapı ve Kullanıcı Yönetimi**
+**Faz 3 – Otel Profili ve Oda Yönetimi** (sıradaki)
 
 ---
 
 ## Şu anki görev
 
-**Faz 1 test ve (isteğe bağlı) şifre sıfırlama / Faz 2’ye geçiş**
+**Faz 3’e başlama öncesi – mevcut durum özeti**
 
-- NextAuth (Credentials), middleware, Login/Register, Dashboard tamamlandı. Ana sayfada Giriş/Kayıt ol linkleri var; `/dashboard` korumalı.
-- Sıradaki: `.env`’de `NEXTAUTH_SECRET` doldurulması; giriş testi (ilk admin veya pending kullanıcıyı DB’de `active` yapma); ardından Faz 2 (Admin paneli – bekleyen kayıtları onaylama).
+- **Geldiğimiz nokta:** Uygulama localhost:3010’da çalışıyor. Admin (admin@otelpartner.local) giriş yapabiliyor; Dashboard’da “Admin – Bekleyen kayıtlar” linki görünüyor. Admin panelinde: istatistik kartları (Bekleyen, Aktif otel, Aktif rehber, Askıda), Bekleyen kayıtlar listesi, Tüm kullanıcılar (rol/durum filtreli, Listele, Askıya al/Aktifleştir) bölümleri hazır. Faz 1 (Auth, Login/Register, Dashboard) ve Faz 2 (Admin paneli) tamamlandı.
+- **Sıradaki:** Faz 3 – Otel profili ve oda yönetimi (otel rolü ile giriş sonrası profil sayfası, oda tipleri, doluluk).
 
 ---
 
@@ -26,15 +26,13 @@
 
 ---
 
-## Sıradaki görevler (Faz 1 içinde)
+## Sıradaki görevler (Faz 3)
 
-1. ~~Proje kurulumu, Veritabanı şeması, migration~~ ✓
-2. ~~Authentication (NextAuth.js) ve rol bazlı middleware~~ ✓
-3. ~~Layout (Auth, Dashboard)~~ ✓
-4. ~~Login / Register sayfaları ve form validasyonu (Zod)~~ ✓
-5. Otel ve Rehber kayıt akışı (register API ile yapılıyor; onay için Faz 2 gerekli), şifre sıfırlama (isteğe bağlı)
+- Otel profil API ve sayfası (profil bilgileri görüntüleme/güncelleme)
+- Oda tipi tanımlama (şema + API + UI)
+- Doluluk/müsaitlik yönetimi (basit takvim veya günlük bloke)
 
-Tam liste: `docs/PROJECT_PHASES.md` → Faz 1.
+Tam liste: `docs/PROJECT_PHASES.md` → Faz 3.
 
 ---
 

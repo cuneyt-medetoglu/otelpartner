@@ -2,14 +2,18 @@
   "name": "otelpartner",
   "version": "0.1.0",
   "private": true,
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3010",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",
     "ssh:server": "ssh -i otelpartner.pem ubuntu@13.53.136.68",
-    "ssh:tunnel": "ssh -i otelpartner.pem -L 5433:localhost:5432 ubuntu@13.53.136.68"
+    "ssh:tunnel": "ssh -i otelpartner.pem -L 5433:localhost:5432 ubuntu@13.53.136.68",
+    "db:seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "next": "^14.2.0",
@@ -35,6 +39,7 @@
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.0",
     "prisma": "^5.22.0",
+    "tsx": "^4.19.0",
     "tailwindcss-animate": "^1.0.7",
     "autoprefixer": "^10.4.0"
   }

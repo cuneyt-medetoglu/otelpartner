@@ -15,6 +15,8 @@ export async function middleware(req: NextRequest) {
 
   if (path.startsWith("/api/auth")) return NextResponse.next();
   if (path.startsWith("/dashboard") && !token) return NextResponse.redirect(new URL("/login", req.url));
+  if (path.startsWith("/dashboard/admin") && token?.role !== "admin") return NextResponse.redirect(new URL("/dashboard", req.url));
+  if (path.startsWith("/api/admin") && token?.role !== "admin") return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
   return NextResponse.next();
 }

@@ -13,6 +13,13 @@ export default async function DashboardPage() {
       <p className="mt-2 text-gray-600">
         Hoş geldiniz, {session.user.email}. Rol: <strong>{session.user.role}</strong>
       </p>
+      {session.user.role === "admin" && (
+        <p className="mt-3">
+          <Link href="/dashboard/admin" className="text-blue-600 hover:underline">
+            Admin – Bekleyen kayıtlar →
+          </Link>
+        </p>
+      )}
       <p className="mt-4 text-sm text-gray-500">
         Hesaptan çıkmak için:{" "}
         <Link href="/api/auth/signout" className="text-blue-600 hover:underline">

@@ -9,10 +9,10 @@
 
 | Alan | Değer |
 |------|--------|
-| Faz | Faz 1 – Temel Altyapı ve Kullanıcı Yönetimi |
-| Şu anki görev | Faz 1 test + Faz 2’ye geçiş (Admin paneli) |
-| Tamamlanan | Proje kurulumu, DB, tünel, migration, NextAuth, middleware, Login/Register, Dashboard |
-| Sıradaki | NEXTAUTH_SECRET + giriş testi → Faz 2: Admin paneli (bekleyen kayıt onayı) |
+| Faz | Faz 3 – Otel Profili ve Oda Yönetimi |
+| Şu anki görev | Faz 3: Otel profil sayfası, oda tipleri, doluluk |
+| Tamamlanan | Faz 1 (Auth, Login/Register, Dashboard), Faz 2 (Admin: bekleyen kayıtlar, tüm kullanıcılar, askıya alma, istatistikler; port 3010; AWS proje kurulumu roadmap’e eklendi) |
+| Sıradaki | Otel profil API + sayfa, oda tipi tanımlama, doluluk yönetimi |
 
 ---
 
@@ -20,10 +20,10 @@
 
 | Faz | Ad | Durum |
 |-----|-----|--------|
-| 0 | Planlama ve Tasarım | Tamamlandı (dokümanlar + GitHub repo; tasarım maddeleri ilgili fazlara taşındı) |
-| 1 | Temel Altyapı ve Kullanıcı Yönetimi | **Şu an** |
-| 2 | Admin Paneli | Bekliyor |
-| 3 | Otel Profili ve Oda Yönetimi | Bekliyor |
+| 0 | Planlama ve Tasarım | Tamamlandı |
+| 1 | Temel Altyapı ve Kullanıcı Yönetimi | Tamamlandı |
+| 2 | Admin Paneli | Tamamlandı |
+| 3 | Otel Profili ve Oda Yönetimi | **Sıradaki** |
 | 4 | Görünürlük ve Yetkilendirme | Bekliyor |
 | 5 | Otel Katalog ve Detay Sayfası | Bekliyor |
 | 6 | Rezervasyon Sistemi | Bekliyor |

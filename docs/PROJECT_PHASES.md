@@ -23,19 +23,19 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 - [x] PostgreSQL + Prisma setup (veritabanı AWS EC2’de; lokalde SSH tünel ile bağlantı)
 - [x] Veritabanı şeması (User, Hotel, Guide, Admin) ve ilk migration
 - [ ] Veri modeli şemaları (ER diyagramı, Mermaid – opsiyonel)
-- [ ] Authentication sistemi (NextAuth.js)
-- [ ] Rol bazlı middleware
+- [x] Authentication sistemi (NextAuth.js)
+- [x] Rol bazlı middleware
 
 ### Frontend
 - [x] Next.js + Tailwind + shadcn/ui kurulumu
-- [ ] Layout yapısı (Auth, Dashboard)
-- [ ] Login/Register sayfaları
-- [ ] Form validasyonu (Zod)
+- [x] Layout yapısı (Auth, Dashboard)
+- [x] Login/Register sayfaları
+- [x] Form validasyonu (Zod)
 
 ### Özellikler
-- [ ] Otel kayıt
-- [ ] Rehber kayıt
-- [ ] Kullanıcı girişi
+- [x] Otel kayıt
+- [x] Rehber kayıt
+- [x] Kullanıcı girişi
 - [ ] Şifre sıfırlama
 
 **Not (Faz 1):** Geliştirme önce localhost’ta yapılacak; production’da uygulama AWS EC2’de çalışacak. Sizin yapmanız gerekenler (Node.js, PostgreSQL veya bulut DB, `.env` oluşturma, ilk migration): `docs/dev/NOTES.md`.
@@ -45,22 +45,22 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 ## 👤 Faz 2: Admin Paneli
 
 ### Backend
-- [ ] Admin API endpoints
-- [ ] Kullanıcı onay sistemi
-- [ ] Kullanıcı yetkilendirme configürasyonu
+- [x] Admin API endpoints (users list, stats, PATCH status)
+- [x] Kullanıcı onay sistemi
+- [x] Kullanıcı yetkilendirme configürasyonu (middleware, role check)
 
 ### Frontend
-- [ ] Tasarım: Admin dashboard (v0.app / wireframe)
-- [ ] Admin dashboard
-- [ ] Bekleyen kayıtlar listesi
-- [ ] Kullanıcı onay/red işlemi
-- [ ] Kullanıcı listesi ve yönetimi
-- [ ] Basit istatistikler
+- [ ] Tasarım: Admin dashboard (v0.app / wireframe – opsiyonel)
+- [x] Admin dashboard
+- [x] Bekleyen kayıtlar listesi
+- [x] Kullanıcı onay/red işlemi
+- [x] Kullanıcı listesi ve yönetimi (filtre, askıya al/aktifleştir)
+- [x] Basit istatistikler
 
 ### Özellikler
-- [ ] Otel/Rehber onaylama
+- [x] Otel/Rehber onaylama
 - [ ] Manuel kullanıcı ekleme
-- [ ] Kullanıcı silme/askıya alma
+- [x] Kullanıcı silme/askıya alma
 - [ ] Kullanıcı detay görüntüleme
 
 ---
@@ -248,8 +248,9 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 - [ ] UX iyileştirmeleri
 
 ### Deployment
+- [ ] **AWS EC2’de uygulama kurulumu** (şu an sunucuda sadece PostgreSQL var; proje lokalde çalışıyor. İleride: Node.js, proje kodu, PM2/Nginx, .env, build)
 - [ ] Production deployment
-- [ ] Database migration
+- [ ] Database migration (production DB)
 - [ ] SSL sertifikası
 - [ ] Domain ayarları
 - [ ] Monitoring setup (Sentry)
