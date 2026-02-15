@@ -10,9 +10,9 @@
 | Alan | Değer |
 |------|--------|
 | Faz | Faz 1 – Temel Altyapı ve Kullanıcı Yönetimi |
-| Şu anki görev | Authentication (NextAuth.js) ve Login/Register |
-| Tamamlanan | Proje kurulumu, AWS EC2 PostgreSQL, tünel, migration, npm run dev çalışıyor |
-| Sıradaki | NextAuth.js → Layout (Auth/Dashboard) → Login/Register → Otel/Rehber kayıt |
+| Şu anki görev | Faz 1 test + Faz 2’ye geçiş (Admin paneli) |
+| Tamamlanan | Proje kurulumu, DB, tünel, migration, NextAuth, middleware, Login/Register, Dashboard |
+| Sıradaki | NEXTAUTH_SECRET + giriş testi → Faz 2: Admin paneli (bekleyen kayıt onayı) |
 
 ---
 

@@ -8,6 +8,8 @@ Kronolojik geliştirme kaydı. Yeni satırlar en üste eklenir.
 
 ## 2026-02-15
 
+- Faz 1 Auth tamamlandı: NextAuth.js (Credentials, JWT, session’da role), middleware (public: /, /login, /register; /dashboard korumalı), SessionProvider, Auth layout, Login ve Register sayfaları (Zod, register API ile User+Hotel/Guide oluşturma), Dashboard layout ve sayfa (/dashboard). Ana sayfaya Giriş/Kayıt ol linkleri eklendi. Sıradaki: NEXTAUTH_SECRET doldurulması, giriş testi, Faz 2 Admin paneli.
+
 - Geliştirme takip yapısı oluşturuldu: `docs/dev/` (README, STATE, ROADMAP, LOG).
 - Project Manager kuralına dev takip sorumluluğu eklendi.
 - Başlangıç durumu: Faz 1, ilk görev "Proje kurulumu" olarak işlendi.

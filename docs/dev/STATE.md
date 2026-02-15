@@ -13,10 +13,10 @@
 
 ## Şu anki görev
 
-**Authentication (NextAuth.js) ve Login/Register**
+**Faz 1 test ve (isteğe bağlı) şifre sıfırlama / Faz 2’ye geçiş**
 
-- Proje kurulumu, AWS EC2’de PostgreSQL, SSH tünel, ilk migration tamamlandı; `npm run dev` çalışıyor (localhost:3000).
-- Sıradaki: NextAuth.js kurulumu, rol bazlı middleware, Layout (Auth / Dashboard), Login ve Register sayfaları, form validasyonu (Zod).
+- NextAuth (Credentials), middleware, Login/Register, Dashboard tamamlandı. Ana sayfada Giriş/Kayıt ol linkleri var; `/dashboard` korumalı.
+- Sıradaki: `.env`’de `NEXTAUTH_SECRET` doldurulması; giriş testi (ilk admin veya pending kullanıcıyı DB’de `active` yapma); ardından Faz 2 (Admin paneli – bekleyen kayıtları onaylama).
 
 ---
 
@@ -29,10 +29,10 @@
 ## Sıradaki görevler (Faz 1 içinde)
 
 1. ~~Proje kurulumu, Veritabanı şeması, migration~~ ✓
-2. **Authentication (NextAuth.js) ve rol bazlı middleware**
-3. Layout (Auth, Dashboard)
-4. Login / Register sayfaları ve form validasyonu (Zod)
-5. Otel ve Rehber kayıt akışı, şifre sıfırlama
+2. ~~Authentication (NextAuth.js) ve rol bazlı middleware~~ ✓
+3. ~~Layout (Auth, Dashboard)~~ ✓
+4. ~~Login / Register sayfaları ve form validasyonu (Zod)~~ ✓
+5. Otel ve Rehber kayıt akışı (register API ile yapılıyor; onay için Faz 2 gerekli), şifre sıfırlama (isteğe bağlı)
 
 Tam liste: `docs/PROJECT_PHASES.md` → Faz 1.
 
