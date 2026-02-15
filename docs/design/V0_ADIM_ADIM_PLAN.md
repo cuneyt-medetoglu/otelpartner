@@ -84,9 +84,65 @@ Login page for OtelPartner. Public, standalone (no dashboard sidebar).
 
 ---
 
+## Adım 2 – Register sayfası
+
+### Ne yapacaksın (3 adım)
+
+1. **Kopyala** → Aşağıdaki **"Adım 2 – Kopyalanacak metin"** kutusundaki metnin **tamamını** kopyala.
+2. **v0’a yapıştır** → [v0.dev](https://v0.dev) aç (yeni sohbet veya aynı sohbet), metni yapıştır, Enter.
+3. **Kodu projeye al** → v0’dan "Copy code" ile kodu kopyala. `app/(auth)/register/page.tsx` dosyasının **içeriğini** bu kodla değiştir. v0 sadece UI verir; kayıt API’sini (POST /api/auth/register) ve rol/alan mantığını sonra tekrar bağlarız.
+
+### Adım 2 – Kopyalanacak metin
+
+**Bu kutunun tamamını v0 sohbet kutusuna yapıştır.**
+
+```
+IMPORTANT: This may be a new v0 thread. You have no visual reference of the Login page – apply the design specs below exactly so Register looks like the same product (same design language, no drift).
+
+OtelPartner is a B2B platform: hotels and tour guides use it to refer guests and manage reservations. Roles: Admin, Hotel, Guide. This is the Register page; must look like the same app as Login. Tone: professional, modern, travel/hospitality. All text in Turkish.
+
+Design language (match Login exactly – these are the only styles to use):
+- Card: white bg, rounded-xl, shadow-lg, border border-gray-100, padding p-8. Centered in layout (layout is separate; we only need the card content).
+- Top of card: circular icon decoration, w-16 h-16, rounded-full, bg-gradient-to-br from-blue-500 to-cyan-500, shadow-md, with a simple icon inside (e.g. user-plus or document-text). Same as Login’s “house” icon style.
+- Typography: headline text-3xl font-bold text-gray-900; subtext text-base text-gray-600; labels text-sm font-semibold text-gray-700 mb-2.
+- Inputs: rounded-lg border border-gray-300 px-4 py-3, focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all.
+- Primary button: w-full rounded-lg bg-gradient-to-r from-blue-600 to-cyan-600, hover:from-blue-700 hover:to-cyan-700, px-4 py-3 font-semibold text-white, shadow-md hover:shadow-lg, disabled:opacity-50.
+- Link: font-semibold text-blue-600 hover:text-cyan-600 (e.g. "Giriş yapın"). Error block: rounded-lg bg-red-50 border border-red-200 p-4 text-red-700. Success: text-green-600.
+- This component is only the card; header and footer come from the shared auth layout.
+
+---
+
+Register page – centered card content only (no header/footer in this component).
+
+- Headline: "Kayıt ol". Subtext: "Admin onayından sonra giriş yapabilirsiniz."
+- Form fields (Turkish labels):
+  1. Hesap türü: two options side by side – "Otel" and "Rehber" (radio or toggle). Default: Otel.
+  2. Email (type email), placeholder ornek@email.com.
+  3. Şifre (type password), label "Şifre (en az 6 karakter)", placeholder dots.
+  4. If "Otel" selected: one extra field "Otel adı" (text).
+  5. If "Rehber" selected: two extra fields "Ad" and "Soyad" (text).
+- Primary button: "Kayıt ol" (loading state: "Gönderiliyor...").
+- Below form: "Zaten hesabınız var mı? Giriş yapın" linking to /login.
+- Success message area: green text. Error message area: red background/border, red text (e.g. "Kayıt başarısız" or "Bağlantı hatası").
+- Next.js, React, Tailwind CSS. Single client component. UI only – no API calls; we will wire submit handler later.
+```
+
+### Adım 2 – Nasıl test edilir?
+
+1. `npm run dev` → `http://localhost:3000/register`
+2. Görünüm: Login ile aynı layout (gradient arka plan, header, footer), ortada Register kartı; Hesap türü (Otel/Rehber), Email, Şifre; Otel seçilince "Otel adı", Rehber seçilince "Ad" ve "Soyad" görünmeli.
+3. "Giriş yapın" linki → `/login` sayfasına gitmeli.
+4. (v0 kodu yapıştırdıktan sonra) Formu doldurup "Kayıt ol" tıklayınca henüz API çağrısı olmayabilir; kodu aldıktan sonra mevcut `/api/auth/register` ve state mantığını tekrar bağlarız – o zaman gerçek kayıt testi yapılır.
+
+### Sonuç (isteğe bağlı)
+
+- **Projeye yapıştırdım:** —
+- **Not:** —
+
+---
+
 ## Sonraki adımlar (uyumlu prompt için notlar)
 
-- **Adım 2 – Register:** "Same product context and modern design direction as above. Register page: same header/footer as Login, same card style (gradient bg, shadow-lg), form fields for registration, link to Login."
 - **Adım 3 – Dashboard:** "Same system and modern design. Dashboard layout: sidebar + main area; role-based; same color, shadows, typography. This is the shell for Catalog, Reservations, etc."
 - **Sonraki sayfalar:** Her seferinde "OtelPartner B2B platform, same modern design as Login (gradients, depth, strong typography, Turkish)" ile başla; sayfa özel içeriği ekle.
 
