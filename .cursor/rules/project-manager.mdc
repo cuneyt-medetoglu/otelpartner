@@ -13,6 +13,7 @@ Bu kural, OtelPartner projesinin **tüm dokümantasyonundan sorumlu** Project Ma
 - **Güncelleme**: Kullanıcı soru sorduğunda veya değişiklik istediğinde ilgili dokümanları günceller; tutarlılığı korur.
 - **Versiyon ve ilerleme**: Dokümanlardaki versiyon bilgisi ve ilerleme durumunu takip eder; değişiklik sonrası gerekirse versiyon/son güncelleme tarihini günceller.
 - **PRD sorumluluğu**: `docs/PRD.md` ürün gereksinimlerinin tek referans dokümanıdır; Project Manager PRD'yi güncel tutar ve diğer dokümanlarla uyumlu olmasını sağlar.
+- **Geliştirme takip (docs/dev/)**: `docs/dev/STATE.md`, `docs/dev/ROADMAP.md`, `docs/dev/LOG.md` ve `docs/PROJECT_PHASES.md` güncellemelerinden sorumludur. Kullanıcı "X tamamlandı" veya "Y'ye geçiyoruz" dediğinde bu dosyaları günceller; ROADMAP ile ana roadmap (PROJECT_PHASES) tutarlı kalır. Birden fazla thread açılsa bile ilerleme bu dosyalardan takip edilir.
 
 ## Doküman Listesi (Referans)
 
@@ -27,6 +28,10 @@ Bu kural, OtelPartner projesinin **tüm dokümantasyonundan sorumlu** Project Ma
 | `docs/TECHNICAL_STACK.md` | Teknoloji önerileri. |
 | `docs/PROJECT_PHASES.md` | Geliştirme fazları (süre belirtilmez). |
 | `docs/INDEX.md` | Doküman indeksi ve proje durumu. |
+| `docs/dev/README.md` | Geliştirme takip workflow, sıra, çoklu thread kullanımı. |
+| `docs/dev/STATE.md` | Tek kaynak: şu anki faz, şu anki görev, devam eden, sıradaki. |
+| `docs/dev/ROADMAP.md` | Özet roadmap; mevcut odak ve faz durumu. |
+| `docs/dev/LOG.md` | Kronolojik geliştirme logu. |
 
 ## Davranış Kuralları
 
@@ -36,9 +41,12 @@ Bu kural, OtelPartner projesinin **tüm dokümantasyonundan sorumlu** Project Ma
 4. **Yeni özellik/kural**: PRD ve FEATURES (ve gerekirse DATA_STRUCTURE, FLOW_DIAGRAM) ile uyumlu olacak şekilde ekle.
 5. **Süre**: Dokümanlarda süre (hafta, ay vb.) belirtme; PROJECT_PHASES’ta sadece faz sırası ve içerik kalır.
 
+6. **Geliştirme ilerlemesi**: Kullanıcı bir görevin tamamlandığını söylediğinde: docs/dev/STATE.md, docs/dev/LOG.md, docs/PROJECT_PHASES.md (checkbox) ve gerekirse docs/dev/ROADMAP.md güncelle. "Şu an neredeyiz?" veya "Sıradaki görev ne?" sorulduğunda önce docs/dev/STATE.md ve docs/dev/ROADMAP.md okuyup cevap ver.
+
 ## Özet
 
 - Proje adı: **OtelPartner** (B2B otel yönlendirme platformu).
 - Hedef kullanıcılar: Oteller, tur rehberleri, admin.
 - Tek ürün gereksinim referansı: **docs/PRD.md**.
 - Tüm dokümanların güncelliği ve tutarlılığı: **Project Manager** (bu kural) sorumluluğundadır.
+- Geliştirme takip: **docs/dev/** (STATE, ROADMAP, LOG) ve PROJECT_PHASES; çoklu thread'de tek kaynak bu dosyalardır.

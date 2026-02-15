@@ -46,7 +46,13 @@ Veritabanı şeması ve veri modeli:
 - Rezervasyon statüleri ve akışı
 - İlişkiler ve indeksler
 
-### 7. [FLOW_DIAGRAM.md](./FLOW_DIAGRAM.md)
+### 7. [dev/](./dev/) – Geliştirme takip
+- **[dev/README.md](./dev/README.md)**: Hangi sırayla başlanır, hangi dokümandan takip edilir, çoklu thread kullanımı.
+- **[dev/STATE.md](./dev/STATE.md)**: Tek kaynak; şu anki faz, şu anki görev, sıradaki.
+- **[dev/ROADMAP.md](./dev/ROADMAP.md)**: Özet roadmap.
+- **[dev/LOG.md](./dev/LOG.md)**: Kronolojik geliştirme logu.
+
+### 8. [FLOW_DIAGRAM.md](./FLOW_DIAGRAM.md)
 9 farklı iş akışı diyagramı (Mermaid):
 - Genel sistem akışı
 - Kullanıcı kayıt ve onay
@@ -68,9 +74,9 @@ Tüm dokümanlar (PRD dahil) **Project Manager** agentı (`.cursor/rules/project
 
 ## 🎯 Proje Durumu
 
-**Faz**: Planlama (Faz 0)  
-**Durum**: Dokümentasyon tamamlandı ✅  
-**Sonraki Adım**: Tasarım (v0.app / bolt.new)
+**Faz**: Faz 1 – Temel Altyapı ve Kullanıcı Yönetimi  
+**Şu anki görev**: Proje kurulumu (Next.js, Tailwind, shadcn/ui, Prisma)  
+**Güncel durum**: `docs/dev/STATE.md` ve `docs/dev/ROADMAP.md`
 
 ---
 
