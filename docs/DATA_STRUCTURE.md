@@ -1,5 +1,7 @@
 # Veri Yapısı
 
+**Veri modeli şemaları:** Bu dokümandaki tabloların görsel gösterimi (ER diyagramı). Faz 1’de Prisma şeması ile birlikte Mermaid veya benzeri ile ER diyagramı oluşturulacak; bu sayfa ile uyumlu tutulacak.
+
 ## 📊 Veritabanı Tabloları (Genel Bakış)
 
 ### Core Tables (Çekirdek Tablolar)

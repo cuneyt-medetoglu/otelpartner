@@ -19,7 +19,7 @@
 
 | Faz | Ad | Durum |
 |-----|-----|--------|
-| 0 | Planlama ve Tasarım | Kısmen tamamlandı (dokümanlar hazır) |
+| 0 | Planlama ve Tasarım | Tamamlandı (dokümanlar + GitHub repo; tasarım maddeleri ilgili fazlara taşındı) |
 | 1 | Temel Altyapı ve Kullanıcı Yönetimi | **Şu an** |
 | 2 | Admin Paneli | Bekliyor |
 | 3 | Otel Profili ve Oda Yönetimi | Bekliyor |

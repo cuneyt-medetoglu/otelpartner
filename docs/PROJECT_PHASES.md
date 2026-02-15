@@ -2,24 +2,16 @@
 
 ## 🎯 Faz 0: Planlama ve Tasarım
 
+Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgili geliştirme fazlarına taşındı (aşağıda).
+
 ### Dokümentasyon
 - [x] Proje özeti
 - [x] Özellikler listesi
 - [x] Teknik stack belirleme
 - [x] Akış diyagramları
-- [ ] Veri modeli şemaları
+- [x] GitHub repo oluşturma
 
-### Tasarım
-- [ ] Wireframe'ler (Figma / v0.app)
-- [ ] Otel katalog sayfası tasarımı
-- [ ] Dashboard tasarımı (Otel/Rehber/Admin)
-- [ ] Rezervasyon akış tasarımı
-- [ ] Mobil responsive kontrol
-
-### Hazırlık
-- [ ] GitHub repo oluşturma
-- [ ] Development ortamı kurulumu
-- [ ] Temel proje yapısı
+**Not:** Veri modeli şemaları = DATA_STRUCTURE.md'deki tabloların görsel gösterimi (ER diyagramı, örn. Mermaid). Faz 1'de veritabanı şeması ile birlikte yapılacak.
 
 ---
 
@@ -27,8 +19,10 @@
 
 ### Backend
 - [ ] Proje kurulumu (Next.js / NestJS)
+- [ ] Development ortamı kurulumu ve temel proje yapısı
 - [ ] PostgreSQL + Prisma setup
 - [ ] Veritabanı şeması (User, Hotel, Guide, Admin)
+- [ ] Veri modeli şemaları (ER diyagramı, Mermaid – DATA_STRUCTURE.md ile uyumlu)
 - [ ] Authentication sistemi (NextAuth.js)
 - [ ] Rol bazlı middleware
 
@@ -54,6 +48,7 @@
 - [ ] Kullanıcı yetkilendirme configürasyonu
 
 ### Frontend
+- [ ] Tasarım: Admin dashboard (v0.app / wireframe)
 - [ ] Admin dashboard
 - [ ] Bekleyen kayıtlar listesi
 - [ ] Kullanıcı onay/red işlemi
@@ -121,7 +116,8 @@
 - [ ] Müsaitlik kontrol API
 
 ### Frontend
-- [ ] Otel katalog sayfası (v0.app tasarım)
+- [ ] Tasarım: Otel katalog sayfası (v0.app / wireframe)
+- [ ] Otel katalog sayfası
 - [ ] Filtreleme (fiyat, bölge, yıldız, müsaitlik)
 - [ ] Sıralama
 - [ ] Otel detay modal/sayfası
@@ -146,6 +142,7 @@
 - [ ] QR kod oluşturma
 
 ### Frontend
+- [ ] Tasarım: Rezervasyon akışı (v0.app / wireframe)
 - [ ] Rezervasyon oluşturma formu
 - [ ] Rezervasyon onay ekranı
 - [ ] Rezervasyon listesi
@@ -244,7 +241,7 @@
 ### İyileştirme
 - [ ] Performance optimizasyonu
 - [ ] SEO optimizasyonu
-- [ ] Mobil responsive kontrol
+- [ ] Mobil responsive kontrol (tüm sayfalar)
 - [ ] Bug fix
 - [ ] UX iyileştirmeleri
 

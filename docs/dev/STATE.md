@@ -41,5 +41,6 @@ Tam liste: `docs/PROJECT_PHASES.md` → Faz 1.
 
 ## Notlar
 
-- Faz 0 dokümantasyonu büyük ölçüde tamamlandı; tasarım (v0.app / bolt.new) ve hazırlık (repo, ortam) isteğe bağlı olarak Faz 1 ile paralel yapılabilir.
+- Faz 0 tamamlandı (dokümantasyon + GitHub repo). Tasarım maddeleri ilgili fazlara taşındı: Admin dashboard tasarımı → Faz 2, Otel katalog tasarımı → Faz 5, Rezervasyon akış tasarımı → Faz 6; mobil responsive → Faz 10.
+- Veri modeli şemaları = DATA_STRUCTURE.md ile uyumlu ER diyagramı (Mermaid); Faz 1’de veritabanı şeması ile birlikte yapılacak.
 - Bu dosya her "görev tamamlandı" veya "şu göreve geçiyoruz" bildiriminde Project Manager tarafından güncellenir.
