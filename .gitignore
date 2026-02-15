@@ -19,5 +19,12 @@ Thumbs.db
 # Build / log
 dist/
 build/
+.next/
 *.log
 npm-debug.log*
+
+# Prisma
+prisma/migrations/**/migration_lock.toml
+
+#pem
+otelpartner.pem

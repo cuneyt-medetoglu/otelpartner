@@ -24,7 +24,7 @@ Sistemde olması planlanan tüm özeliklerin detaylı listesi:
 - Frontend: Next.js 14 + TypeScript + Tailwind + shadcn/ui
 - Backend: Next.js API Routes / NestJS
 - Database: PostgreSQL + Prisma
-- Deploy: Vercel + Neon.tech
+- Deploy: AWS EC2 (production)
 
 ### 4. [PROJECT_PHASES.md](./PROJECT_PHASES.md)
 12 fazlı geliştirme planı:
@@ -51,6 +51,7 @@ Veritabanı şeması ve veri modeli:
 - **[dev/STATE.md](./dev/STATE.md)**: Tek kaynak; şu anki faz, şu anki görev, sıradaki.
 - **[dev/ROADMAP.md](./dev/ROADMAP.md)**: Özet roadmap.
 - **[dev/LOG.md](./dev/LOG.md)**: Kronolojik geliştirme logu.
+- **[dev/NOTES.md](./dev/NOTES.md)**: Sizin yapacaklarınız (Node, DB, .env, migration), deployment (AWS EC2 / localhost).
 
 ### 8. [FLOW_DIAGRAM.md](./FLOW_DIAGRAM.md)
 9 farklı iş akışı diyagramı (Mermaid):
@@ -75,8 +76,8 @@ Tüm dokümanlar (PRD dahil) **Project Manager** agentı (`.cursor/rules/project
 ## 🎯 Proje Durumu
 
 **Faz**: Faz 1 – Temel Altyapı ve Kullanıcı Yönetimi  
-**Şu anki görev**: Proje kurulumu (Next.js, Tailwind, shadcn/ui, Prisma)  
-**Güncel durum**: `docs/dev/STATE.md` ve `docs/dev/ROADMAP.md`
+**Şu anki görev**: Authentication (NextAuth.js) ve Login/Register  
+**Güncel durum**: `docs/dev/STATE.md` ve `docs/dev/ROADMAP.md` (kurulum, AWS PostgreSQL, migration tamamlandı; uygulama çalışıyor)
 
 ---
 

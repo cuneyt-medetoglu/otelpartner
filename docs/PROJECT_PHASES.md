@@ -18,16 +18,16 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 ## 🏗️ Faz 1: Temel Altyapı ve Kullanıcı Yönetimi
 
 ### Backend
-- [ ] Proje kurulumu (Next.js / NestJS)
-- [ ] Development ortamı kurulumu ve temel proje yapısı
-- [ ] PostgreSQL + Prisma setup
-- [ ] Veritabanı şeması (User, Hotel, Guide, Admin)
-- [ ] Veri modeli şemaları (ER diyagramı, Mermaid – DATA_STRUCTURE.md ile uyumlu)
+- [x] Proje kurulumu (Next.js / NestJS)
+- [x] Development ortamı kurulumu ve temel proje yapısı
+- [x] PostgreSQL + Prisma setup (veritabanı AWS EC2’de; lokalde SSH tünel ile bağlantı)
+- [x] Veritabanı şeması (User, Hotel, Guide, Admin) ve ilk migration
+- [ ] Veri modeli şemaları (ER diyagramı, Mermaid – opsiyonel)
 - [ ] Authentication sistemi (NextAuth.js)
 - [ ] Rol bazlı middleware
 
 ### Frontend
-- [ ] Next.js + Tailwind + shadcn/ui kurulumu
+- [x] Next.js + Tailwind + shadcn/ui kurulumu
 - [ ] Layout yapısı (Auth, Dashboard)
 - [ ] Login/Register sayfaları
 - [ ] Form validasyonu (Zod)
@@ -37,6 +37,8 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 - [ ] Rehber kayıt
 - [ ] Kullanıcı girişi
 - [ ] Şifre sıfırlama
+
+**Not (Faz 1):** Geliştirme önce localhost’ta yapılacak; production’da uygulama AWS EC2’de çalışacak. Sizin yapmanız gerekenler (Node.js, PostgreSQL veya bulut DB, `.env` oluşturma, ilk migration): `docs/dev/NOTES.md`.
 
 ---
 

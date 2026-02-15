@@ -1,0 +1,75 @@
+// OtelPartner - DATA_STRUCTURE.md ile uyumlu
+// Faz 1: User, Hotel, Guide. Diğer modeller ileride eklenecek.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  admin
+  hotel
+  guide
+}
+
+enum UserStatus {
+  pending
+  active
+  suspended
+  rejected
+}
+
+model User {
+  id            String     @id @default(cuid())
+  email         String     @unique
+  password      String
+  role          Role
+  status        UserStatus @default(pending)
+  emailVerified Boolean    @default(false) @map("email_verified")
+  createdAt     DateTime   @default(now()) @map("created_at")
+  updatedAt     DateTime   @updatedAt @map("updated_at")
+
+  hotel  Hotel?
+  guide  Guide?
+}
+
+model Hotel {
+  id          String   @id @default(cuid())
+  userId      String   @unique @map("user_id")
+  name        String
+  description String?
+  address     String?
+  city        String?
+  region      String?
+  country     String   @default("Türkiye")
+  starRating  Int?     @map("star_rating")
+  phone       String?
+  website     String?
+  amenities   Json?    // [wifi, pool, spa, ...]
+  latitude    Decimal? @db.Decimal(10, 7)
+  longitude   Decimal? @db.Decimal(10, 7)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Guide {
+  id           String   @id @default(cuid())
+  userId       String   @unique @map("user_id")
+  firstName    String   @map("first_name")
+  lastName     String   @map("last_name")
+  phone        String?
+  licenseNumber String? @map("license_number")
+  companyName  String?  @map("company_name")
+  city         String?
+  region       String?
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

@@ -156,22 +156,30 @@ Proje başlangıcında tek bir uygulama olarak başlayıp, ileride ihtiyaç olur
 
 ## 🚀 Deployment
 
-### Frontend + Backend (Monolithic)
+**Not:** Geliştirme önce **localhost** üzerinde yapılacak. Production’da uygulama **AWS EC2** üzerinde çalışacak (Faz 10 / deployment aşamasında detaylandırılacak).
 
-**Önerilen**: Vercel
-- Next.js native desteği
-- Kolay deploy
-- Otomatik HTTPS
-- Serverless functions
+### Production (Hedef): AWS EC2
 
-**Alternatif**:
-- Netlify
-- Railway
-- Render
+- Uygulama bir EC2 instance’da çalışacak (Node.js / Next.js).
+- Veritabanı: EC2’de PostgreSQL veya AWS RDS / dış servis (Neon, Supabase vb.) kullanılabilir.
+- Nginx reverse proxy, PM2 veya benzeri process manager, SSL (Let’s Encrypt) ileride eklenecek.
+
+### Geliştirme: Localhost
+
+- `npm run dev` ile localhost’ta çalıştırma.
+- Geliştirme için lokal PostgreSQL `DATABASE_URL` ile kullanılır (localhost:5432).
+
+### Alternatif (Production)
+
+**Vercel** (Next.js için uygun):
+- Kolay deploy, otomatik HTTPS.
+- EC2 tercih edildiği için şu an hedef değil; ileride istenirse değerlendirilebilir.
+
+**Diğer**: Netlify, Railway, Render.
 
 ### Veritabanı Hosting
 
-**Önerilen**: Neon.tech (Postgres)
+**Geliştirme**: Lokal PostgreSQL. **Production**: AWS RDS veya yönetilen Postgres.
 - Serverless Postgres
 - Ücretsiz tier
 - Otomatik scaling
@@ -233,7 +241,7 @@ Auth:      NextAuth.js
 Storage:   Cloudinary
 Email:     Resend
 SMS:       Netgsm
-Deploy:    Vercel + Neon.tech
+Deploy:    AWS EC2 (production); Vercel alternatif.
 ```
 
 ---

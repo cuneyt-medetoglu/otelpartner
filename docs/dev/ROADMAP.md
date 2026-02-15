@@ -10,8 +10,9 @@
 | Alan | Değer |
 |------|--------|
 | Faz | Faz 1 – Temel Altyapı ve Kullanıcı Yönetimi |
-| Şu anki görev | Proje kurulumu (Next.js, Tailwind, shadcn/ui, Prisma) |
-| Sıradaki | Veritabanı şeması → Auth → Layout → Login/Register |
+| Şu anki görev | Authentication (NextAuth.js) ve Login/Register |
+| Tamamlanan | Proje kurulumu, AWS EC2 PostgreSQL, tünel, migration, npm run dev çalışıyor |
+| Sıradaki | NextAuth.js → Layout (Auth/Dashboard) → Login/Register → Otel/Rehber kayıt |
 
 ---
 
