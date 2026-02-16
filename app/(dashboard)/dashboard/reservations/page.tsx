@@ -53,54 +53,82 @@ export default async function ReservationsPage() {
   }
   const reservations = list;
 
+  function getStatusBadge(status: string) {
+    const statusMap: Record<string, { bg: string; text: string; label: string }> = {
+      pending: { bg: "bg-amber-100", text: "text-amber-800", label: "Bekliyor" },
+      approved: { bg: "bg-green-100", text: "text-green-800", label: "Onaylandı" },
+      rejected: { bg: "bg-red-100", text: "text-red-800", label: "Reddedildi" },
+    };
+    const info = statusMap[status] ?? { bg: "bg-gray-100", text: "text-gray-800", label: status };
+    return (
+      <span className={`inline-block rounded-md px-2 py-0.5 text-xs font-medium ${info.bg} ${info.text}`}>
+        {info.label}
+      </span>
+    );
+  }
+
   return (
-    <div>
-      <div className="mb-4 flex items-center gap-4">
-        <Link href="/dashboard" className="text-sm text-blue-600 hover:underline">
-          ← Dashboard
+    <div className="max-w-7xl space-y-6">
+      <div className="flex flex-col gap-2">
+        <Link
+          href="/dashboard"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 transition-colors hover:text-cyan-600"
+        >
+          <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          Dashboard
         </Link>
-        <h1 className="text-xl font-semibold text-gray-900">Rezervasyonlarım</h1>
+        <h1 className="text-3xl font-bold text-gray-900">
+          {session.user.role === "guide" ? "Rezervasyonlarım" : "Rezervasyonlar"}
+        </h1>
       </div>
-      <div className="overflow-hidden rounded-lg border bg-white">
-        <table className="min-w-full text-sm">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-3 py-2 text-left font-medium text-gray-500">Kod</th>
-              {session.user.role === "guide" ? (
-                <th className="px-3 py-2 text-left font-medium text-gray-500">Otel</th>
-              ) : (
-                <th className="px-3 py-2 text-left font-medium text-gray-500">Rehber</th>
-              )}
-              <th className="px-3 py-2 text-left font-medium text-gray-500">Oda</th>
-              <th className="px-3 py-2 text-left font-medium text-gray-500">Giriş</th>
-              <th className="px-3 py-2 text-left font-medium text-gray-500">Çıkış</th>
-              <th className="px-3 py-2 text-left font-medium text-gray-500">Adet</th>
-              <th className="px-3 py-2 text-left font-medium text-gray-500">Durum</th>
-              {session.user.role === "hotel" && (
-                <th className="px-3 py-2 text-right font-medium text-gray-500">İşlem</th>
-              )}
-            </tr>
-          </thead>
-          <tbody>
-            {reservations.map((r) => (
-              <tr key={r.id} className="border-t">
-                <td className="px-3 py-2 font-mono text-xs">{r.reservationCode}</td>
-                <td className="px-3 py-2">{r.hotelName ?? r.guideName ?? "—"}</td>
-                <td className="px-3 py-2">{r.roomType}</td>
-                <td className="px-3 py-2">{r.checkInDate}</td>
-                <td className="px-3 py-2">{r.checkOutDate}</td>
-                <td className="px-3 py-2">{r.roomCount}</td>
-                <td className="px-3 py-2">{r.status}</td>
-                {session.user.role === "hotel" && (
-                  <td className="px-3 py-2 text-right">
-                    <ReservationActions reservationId={r.id} status={r.status} />
-                  </td>
-                )}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        {reservations.length === 0 && <p className="p-4 text-gray-500">Rezervasyon yok.</p>}
+
+      <div className="rounded-xl border border-gray-100 bg-white p-8 shadow-lg">
+        {reservations.length === 0 ? (
+          <p className="text-center text-gray-500">Rezervasyon yok.</p>
+        ) : (
+          <div className="overflow-hidden rounded-lg">
+            <table className="min-w-full text-sm">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-4 py-3 text-left font-semibold text-gray-700">Kod</th>
+                  {session.user.role === "guide" ? (
+                    <th className="px-4 py-3 text-left font-semibold text-gray-700">Otel</th>
+                  ) : (
+                    <th className="px-4 py-3 text-left font-semibold text-gray-700">Rehber</th>
+                  )}
+                  <th className="px-4 py-3 text-left font-semibold text-gray-700">Oda</th>
+                  <th className="px-4 py-3 text-left font-semibold text-gray-700">Giriş</th>
+                  <th className="px-4 py-3 text-left font-semibold text-gray-700">Çıkış</th>
+                  <th className="px-4 py-3 text-left font-semibold text-gray-700">Adet</th>
+                  <th className="px-4 py-3 text-left font-semibold text-gray-700">Durum</th>
+                  {session.user.role === "hotel" && (
+                    <th className="px-4 py-3 text-right font-semibold text-gray-700">İşlem</th>
+                  )}
+                </tr>
+              </thead>
+              <tbody>
+                {reservations.map((r) => (
+                  <tr key={r.id} className="border-t border-gray-100">
+                    <td className="px-4 py-3 font-mono text-xs text-gray-600">{r.reservationCode}</td>
+                    <td className="px-4 py-3 text-gray-600">{r.hotelName ?? r.guideName ?? "—"}</td>
+                    <td className="px-4 py-3 text-gray-600">{r.roomType}</td>
+                    <td className="px-4 py-3 text-gray-600">{r.checkInDate}</td>
+                    <td className="px-4 py-3 text-gray-600">{r.checkOutDate}</td>
+                    <td className="px-4 py-3 text-gray-600">{r.roomCount}</td>
+                    <td className="px-4 py-3">{getStatusBadge(r.status)}</td>
+                    {session.user.role === "hotel" && (
+                      <td className="px-4 py-3 text-right">
+                        <ReservationActions reservationId={r.id} status={r.status} />
+                      </td>
+                    )}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );

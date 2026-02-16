@@ -29,12 +29,12 @@ export function ReservationActions({ reservationId, status }: { reservationId: s
   }
 
   return (
-    <div className="flex gap-2">
+    <div className="flex justify-end gap-2">
       <button
         type="button"
         onClick={() => update("approved")}
         disabled={!!loading}
-        className="rounded bg-green-600 px-2 py-1 text-xs font-medium text-white hover:bg-green-700 disabled:opacity-50"
+        className="rounded-lg bg-green-600 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-green-700 disabled:opacity-50"
       >
         {loading === "approve" ? "..." : "Onayla"}
       </button>
@@ -42,7 +42,7 @@ export function ReservationActions({ reservationId, status }: { reservationId: s
         type="button"
         onClick={() => update("rejected")}
         disabled={!!loading}
-        className="rounded bg-red-600 px-2 py-1 text-xs font-medium text-white hover:bg-red-700 disabled:opacity-50"
+        className="rounded-lg bg-red-600 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-red-700 disabled:opacity-50"
       >
         {loading === "reject" ? "..." : "Reddet"}
       </button>

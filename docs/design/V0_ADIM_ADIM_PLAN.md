@@ -13,8 +13,9 @@ Sırayla her adımı yapıyoruz. **Tüm prompt’larda aşağıdaki “Sistem ö
 | **Adım 3 – Dashboard** | Tamamlandı | Layout: spacer + fixed sidebar, gradient arka plan. Sidebar: logo, rol bazlı menü, email, Çıkış yap. Ana sayfa: hoş geldin kartı, rol bazlı hızlı erişim kartları. Responsive: mobilde hamburger + overlay drawer; içerik drawer altına girmiyor. Ana sayfadaki çıkış kartı kaldırıldı (çıkış sadece sidebar’da). |
 | **Adım 4 – Katalog** | Tamamlandı | Filtreler kartı (Bölge, Şehir, Yıldız, Uygula), otel kartları grid (rounded-xl, shadow-lg, yıldız badge, ok ikonu), boş durum kartı. Prisma + searchParams korundu. |
 | **Adım 5 – Otel detay** | Tamamlandı | Geri link (ok + Katalog), otel adı (text-3xl), bilgi kartı (yıldız badge, açıklama, adres grid, olanaklar), oda tipleri tablosu, Müsaitlik sorgula (kart + gradient buton), Rezervasyon yap (mavi-50 kart, gradient buton). BookForm + AvailabilityCheck stilleri güncellendi. |
+| **Adım 6 – Rezervasyonlar** | Tamamlandı | Geri link (ok + Dashboard), başlık rol bazlı (Rezervasyonlarım / Rezervasyonlar), beyaz kart içinde tablo, durum badge’leri (Bekliyor/Onaylandı/Reddedildi), otel için Onayla/Reddet (rounded-lg). ReservationActions stilleri güncellendi. |
 
-**Dosyalar:** `app/(auth)/layout.tsx`, `app/(auth)/login/page.tsx`, `app/(auth)/register/page.tsx`, `app/(dashboard)/layout.tsx`, `app/(dashboard)/DashboardSidebar.tsx`, `app/(dashboard)/dashboard/page.tsx`, `app/(dashboard)/dashboard/catalog/page.tsx`, `app/(dashboard)/dashboard/catalog/CatalogFilters.tsx`, `app/(dashboard)/dashboard/catalog/[id]/page.tsx`, `app/(dashboard)/dashboard/catalog/[id]/AvailabilityCheck.tsx`, `app/(dashboard)/dashboard/catalog/[id]/BookForm.tsx`.
+**Dosyalar:** `app/(auth)/layout.tsx`, `app/(auth)/login/page.tsx`, `app/(auth)/register/page.tsx`, `app/(dashboard)/layout.tsx`, `app/(dashboard)/DashboardSidebar.tsx`, `app/(dashboard)/dashboard/page.tsx`, `app/(dashboard)/dashboard/catalog/page.tsx`, `app/(dashboard)/dashboard/catalog/CatalogFilters.tsx`, `app/(dashboard)/dashboard/catalog/[id]/page.tsx`, `app/(dashboard)/dashboard/catalog/[id]/AvailabilityCheck.tsx`, `app/(dashboard)/dashboard/catalog/[id]/BookForm.tsx`, `app/(dashboard)/dashboard/reservations/page.tsx`, `app/(dashboard)/dashboard/reservations/ReservationActions.tsx`.
 
 ---
 
@@ -359,10 +360,67 @@ Next.js App Router, React, Tailwind. Prefer one page component that receives hot
 
 ### Adım 6 – Rezervasyonlar
 
-- **Hedef:** Rezervasyon listesi (rehber: kendi rezervasyonları; otel: gelen rezervasyonlar). Onay/red butonları (otel), durum gösterimi.
-- **Dosya(lar):** `app/(dashboard)/dashboard/reservations/page.tsx`, `ReservationActions.tsx`.
-- **Not:** Rol bazlı farklı sütunlar/aksiyonlar. Mevcut API’ler korunacak.
-- **Prompt:** Bu adım sırasında eklenecek.
+- **Hedef:** Rezervasyon listesi sayfası: rehber kendi rezervasyonlarını (otel adı), otel gelen rezervasyonları (rehber adı) görür. Otel için bekleyen satırlarda Onayla/Reddet. Durum sütunu (pending, approved, rejected vb.).
+- **Dosya(lar):** `app/(dashboard)/dashboard/reservations/page.tsx`, `app/(dashboard)/dashboard/reservations/ReservationActions.tsx`.
+- **Not:** Veri Prisma ile rol bazlı çekiliyor; PATCH /api/reservations/[id] (Onayla/Reddet) mevcut. v0 çıktısı ile sayfa ve buton stilleri güncellenecek, mantık korunacak.
+
+#### Ne yapacaksın (3 adım)
+
+1. **Kopyala** → Aşağıdaki **"Adım 6 – Kopyalanacak metin"** kutusundaki metnin **tamamını** kopyala.
+2. **v0’a yapıştır** → [v0.dev](https://v0.dev) (yeni sohbet), metni yapıştır, Enter.
+3. **Kodu projeye al** → v0’dan gelen kodu paylaş; ben `page.tsx` ve gerekirse `ReservationActions.tsx` ile birleştirip veri çekme ve API mantığını koruyarak uygularım.
+
+#### Adım 6 – Kopyalanacak metin
+
+**Bu kutunun tamamını v0 sohbet kutusuna yapıştır.**
+
+```
+IMPORTANT: New v0 thread. Apply the design specs below exactly so this page matches Dashboard/Catalog (same product, same design language).
+
+OtelPartner: B2B platform for hotels and tour guides. This is the Reservations list page. Two roles use it: (1) Guide sees their own reservations (columns: code, hotel name, room, dates, count, status). (2) Hotel sees incoming reservations (columns: code, guide name, room, dates, count, status, and an "Actions" column with Approve/Reject buttons for pending only). Page lives inside the dashboard; only output the main content area. All text in Turkish.
+
+Design language (same as Dashboard and Catalog):
+- White cards: rounded-xl, shadow-lg, border border-gray-100, padding p-6 or p-8.
+- Headlines: text-2xl or 3xl font-bold. Back link with arrow icon, blue-600 hover:text-cyan-600.
+- Tables: rounded-lg overflow-hidden, thead bg-gray-50, th/td with px-4 py-3, font-semibold for headers, text-gray-600 for cells.
+- Status: show as small badge – e.g. pending = yellow/amber, approved = green, rejected = red (rounded-md px-2 py-0.5 text-xs font-medium).
+- Primary button (e.g. Approve): green gradient or solid green-600. Danger button (Reject): red-600. Same rounded-lg, padding.
+
+---
+
+Reservations list page – main content only.
+
+1. Top: Back link "← Dashboard" to /dashboard (arrow icon, font-semibold text-blue-600 hover:text-cyan-600). Headline "Rezervasyonlar" or "Rezervasyonlarım" (text-3xl font-bold).
+
+2. One white card (rounded-xl shadow-lg border-gray-100) containing the table. Table columns (we will pass data by role):
+   - Kod (reservation code, monospace or font-mono text-xs)
+   - For guide: "Otel" (hotel name). For hotel: "Rehber" (guide name).
+   - Oda (room type)
+   - Giriş (check-in date)
+   - Çıkış (check-out date)
+   - Adet (room count)
+   - Durum (status: pending, approved, rejected – show as colored badge)
+   - For hotel only: "İşlem" (Actions) – for pending rows show two buttons "Onayla" (approve, green) and "Reddet" (reject, red). For non-pending show "—" or nothing.
+
+3. Use mock data: 2–3 rows. One row status "pending", one "approved", one "rejected" so badges and action column are visible. We will wire real data and the action buttons to PATCH API.
+
+4. Empty state: if no reservations, show inside the card a friendly message "Rezervasyon yok." (text-gray-500, centered or padded).
+
+5. Action buttons (for hotel, pending only): "Onayla" green (e.g. bg-green-600 hover:bg-green-700), "Reddet" red (bg-red-600 hover:bg-red-700). Small rounded-lg px-3 py-1.5 text-sm. Disabled state when loading. We will wire onClick to PATCH; for v0 static buttons are fine.
+
+Next.js App Router, React, Tailwind. Page can be server component that receives a list; the Actions column can be a small client component that receives reservationId and status and renders the two buttons. Use Link from next/link for the back link.
+```
+
+#### Adım 6 – Nasıl test edilir?
+
+1. Rehber ile giriş → Rezervasyonlar: kendi rezervasyonları (Kod, Otel, Oda, Giriş, Çıkış, Adet, Durum). Otel ile giriş → gelen rezervasyonlar (Rehber sütunu), pending satırlarda Onayla/Reddet.
+2. Onayla tıklayınca ilgili rezervasyon approved olmalı; Reddet tıklayınca rejected. Sayfa yenilenecek (router.refresh).
+3. Liste boşsa "Rezervasyon yok." görünmeli.
+
+#### Sonuç (isteğe bağlı)
+
+- **Projeye uygulandı:** —
+- **Not:** —
 
 ---
 
