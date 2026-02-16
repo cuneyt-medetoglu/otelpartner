@@ -11,8 +11,9 @@ Sırayla her adımı yapıyoruz. **Tüm prompt’larda aşağıdaki “Sistem ö
 | **Adım 1 – Login** | Tamamlandı | Modern tasarım (gradient arka plan, kart, ikon). Auth layout: header + footer (OtelPartner ©, Gizlilik, İletişim). NextAuth bağlı. |
 | **Adım 2 – Register** | Tamamlandı | Aynı tasarım dili; Hesap türü (Otel/Rehber), koşullu alanlar. POST /api/auth/register bağlı. |
 | **Adım 3 – Dashboard** | Tamamlandı | Layout: spacer + fixed sidebar, gradient arka plan. Sidebar: logo, rol bazlı menü, email, Çıkış yap. Ana sayfa: hoş geldin kartı, rol bazlı hızlı erişim kartları. Responsive: mobilde hamburger + overlay drawer; içerik drawer altına girmiyor. Ana sayfadaki çıkış kartı kaldırıldı (çıkış sadece sidebar’da). |
+| **Adım 4 – Katalog** | Tamamlandı | Filtreler kartı (Bölge, Şehir, Yıldız, Uygula), otel kartları grid (rounded-xl, shadow-lg, yıldız badge, ok ikonu), boş durum kartı. Prisma + searchParams korundu. |
 
-**Dosyalar:** `app/(auth)/layout.tsx`, `app/(auth)/login/page.tsx`, `app/(auth)/register/page.tsx`, `app/(dashboard)/layout.tsx`, `app/(dashboard)/DashboardSidebar.tsx`, `app/(dashboard)/dashboard/page.tsx`.
+**Dosyalar:** `app/(auth)/layout.tsx`, `app/(auth)/login/page.tsx`, `app/(auth)/register/page.tsx`, `app/(dashboard)/layout.tsx`, `app/(dashboard)/DashboardSidebar.tsx`, `app/(dashboard)/dashboard/page.tsx`, `app/(dashboard)/dashboard/catalog/page.tsx`, `app/(dashboard)/dashboard/catalog/CatalogFilters.tsx`.
 
 ---
 
@@ -228,10 +229,66 @@ Aşağıdaki adımlar aynı yöntemle ilerleyecek: v0’a sistem özeti + tasar�
 
 ### Adım 4 – Katalog (otel listesi)
 
-- **Hedef:** Rehber için otel listesi sayfası. Filtreler (bölge, şehir, yıldız vb.), liste/grid, modern kartlar.
+- **Hedef:** Rehber için otel listesi sayfası. Filtreler (bölge, şehir, yıldız), grid, modern kartlar.
 - **Dosya(lar):** `app/(dashboard)/dashboard/catalog/page.tsx`; gerekirse `CatalogFilters.tsx` stilleri.
-- **Not:** Dashboard layout zaten var; sadece bu sayfanın içeriği v0 ile yenilenecek. Mevcut API (GET /api/catalog/hotels) ve filtre mantığı korunacak.
-- **Prompt:** Bu adım sırasında eklenecek.
+- **Not:** Dashboard layout zaten var; sadece bu sayfanın içeriği v0 ile yenilenecek. Veri Prisma + searchParams ile geliyor; mantık korunacak, sadece UI yenilenecek.
+
+#### Ne yapacaksın (3 adım)
+
+1. **Kopyala** → Aşağıdaki **"Adım 4 – Kopyalanacak metin"** kutusundaki metnin **tamamını** kopyala.
+2. **v0’a yapıştır** → [v0.dev](https://v0.dev) (yeni sohbet), metni yapıştır, Enter.
+3. **Kodu projeye al** → v0’dan gelen kodu `catalog/page.tsx` ve (ayrı component verirse) `CatalogFilters.tsx` için uygula. Veri çekme (prisma, searchParams) ve filtre mantığı projede kalacak; v0 sadece UI/stil. Kodu paylaşırsan ben entegre edebilirim.
+
+#### Adım 4 – Kopyalanacak metin
+
+**Bu kutunun tamamını v0 sohbet kutusuna yapıştır.**
+
+```
+IMPORTANT: New v0 thread. Apply the design specs below exactly so this page matches Login/Register/Dashboard (same product, same design language).
+
+OtelPartner: B2B platform for hotels and tour guides. This is the Catalog page – list of hotels for guides. Page lives inside the dashboard (sidebar already exists); only output the main content area. All text in Turkish.
+
+Design language (same as Dashboard):
+- Background: page sits in dashboard main area (gradient bg from layout). Use white cards: rounded-xl, shadow-lg, border border-gray-100.
+- Primary actions/links: text-blue-600 hover:text-cyan-600 font-semibold; or gradient buttons (from-blue-600 to-cyan-600).
+- Typography: bold headlines (text-2xl), body text-gray-600, labels font-semibold text-gray-700.
+- Inputs/selects: rounded-lg border border-gray-300 px-4 py-2, focus:ring-2 focus:ring-blue-500/20.
+
+---
+
+Catalog page – hotel list (main content only, no sidebar).
+
+1. Top: Back link "← Dashboard" to /dashboard. Then headline "Otel kataloğu" (text-2xl or 3xl font-bold).
+
+2. Filters section (card or bar): Form with GET method, action points to same page (we use query params). Fields:
+   - "Bölge" (region) – text input, placeholder "Bölge"
+   - "Şehir" (city) – text input, placeholder "Şehir"
+   - "Yıldız" – select: options "Tüm yıldızlar" (value ""), then "1 yıldız", "2 yıldız" … "5 yıldız"
+   - Submit button: "Uygula" – use gradient style (blue-600 to cyan-600) or solid blue. Form can be in a white rounded-xl card.
+
+3. Hotel grid: Responsive grid (e.g. grid-cols-1 md:grid-cols-2 lg:grid-cols-3), gap-6. Each hotel is a card (Link to detail page):
+   - Card: white bg, rounded-xl, shadow-lg, border-gray-100, padding p-6, hover:shadow-xl hover:border-blue-200.
+   - Inside: Hotel name as heading (font-bold text-lg). Then one line: city, region (e.g. "İstanbul, Marmara"). Then if star rating: "X yıldız" (small badge or text). Optional: short description (line-clamp-2, text-gray-500). Arrow or "Detay →" to indicate link.
+   - Cards are links (Link component) to /dashboard/catalog/[id] – use placeholder [id] or pass as prop; we will wire real data.
+
+4. Empty state: When no hotels, show a friendly message in a card or centered: "Filtreye uyan otel bulunamadı." (gray-500 or gray-600).
+
+5. Data: For v0 you can use 2–3 mock hotels (name, city, region, starRating, short description) so the layout and card design are clear. We will replace with real data from the server.
+
+Next.js App Router, React, Tailwind. Prefer one page component; if you split filters into a separate component that's fine. Use Link from next/link.
+```
+
+#### Adım 4 – Nasıl test edilir?
+
+1. Rehber veya admin ile giriş yap → Dashboard → "Otel kataloğu" (sidebar veya hızlı erişim).
+2. Katalog sayfası: "← Dashboard", "Otel kataloğu" başlığı, filtre alanları (Bölge, Şehir, Yıldız, Uygula), otel kartları grid’i. Kartlara tıklayınca otel detay sayfasına gitmeli.
+3. Filtre uygulayınca aynı sayfa query params ile yenilenmeli (mevcut mantık korunacak).
+4. Hiç otel yoksa "Filtreye uyan otel bulunamadı." görünmeli.
+
+#### Sonuç (isteğe bağlı)
+
+- **Projeye uygulandı:** —
+- **Not:** —
 
 ---
 
