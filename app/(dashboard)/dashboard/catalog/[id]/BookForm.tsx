@@ -48,16 +48,20 @@ export function BookForm({ hotelId, rooms }: { hotelId: string; rooms: Room[] })
   if (rooms.length === 0) return null;
 
   return (
-    <div className="mt-6 rounded border bg-blue-50 p-4">
-      <h2 className="font-medium text-gray-900">Rezervasyon yap</h2>
-      <form onSubmit={submit} className="mt-3 space-y-3">
-        {error && <p className="text-sm text-red-600">{error}</p>}
+    <div className="mt-8 rounded-xl border border-blue-200 bg-blue-50 p-8 shadow-lg">
+      <h2 className="text-lg font-bold text-gray-900">Rezervasyon yap</h2>
+      <form onSubmit={submit} className="mt-4 space-y-4">
+        {error && (
+          <div className="rounded-lg border border-red-300 bg-red-50 p-3">
+            <p className="text-sm font-semibold text-red-700">{error}</p>
+          </div>
+        )}
         <div>
-          <label className="block text-sm font-medium text-gray-700">Oda tipi</label>
+          <label className="block text-sm font-semibold text-gray-700">Oda tipi</label>
           <select
             value={roomId}
             onChange={(e) => setRoomId(e.target.value)}
-            className="mt-1 w-full max-w-xs rounded border px-2 py-1.5 text-sm"
+            className="mt-2 w-full max-w-xs rounded-lg border border-gray-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
           >
             {rooms.map((r) => (
               <option key={r.id} value={r.id}>{r.roomType} (max {r.totalCount})</option>
@@ -66,52 +70,52 @@ export function BookForm({ hotelId, rooms }: { hotelId: string; rooms: Room[] })
         </div>
         <div className="flex flex-wrap gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Giriş</label>
+            <label className="block text-sm font-semibold text-gray-700">Giriş</label>
             <input
               type="date"
               value={checkInDate}
               onChange={(e) => setCheckInDate(e.target.value)}
               required
-              className="mt-1 rounded border px-2 py-1.5 text-sm"
+              className="mt-2 rounded-lg border border-gray-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Çıkış</label>
+            <label className="block text-sm font-semibold text-gray-700">Çıkış</label>
             <input
               type="date"
               value={checkOutDate}
               onChange={(e) => setCheckOutDate(e.target.value)}
               required
-              className="mt-1 rounded border px-2 py-1.5 text-sm"
+              className="mt-2 rounded-lg border border-gray-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
             />
           </div>
         </div>
         <div className="flex flex-wrap gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Oda sayısı</label>
+            <label className="block text-sm font-semibold text-gray-700">Oda sayısı</label>
             <input
               type="number"
               min={1}
               value={roomCount}
               onChange={(e) => setRoomCount(parseInt(e.target.value, 10) || 1)}
-              className="mt-1 w-20 rounded border px-2 py-1.5 text-sm"
+              className="mt-2 w-24 rounded-lg border border-gray-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Misafir sayısı (ops.)</label>
+            <label className="block text-sm font-semibold text-gray-700">Misafir sayısı (ops.)</label>
             <input
               type="number"
               min={1}
               value={guestCount}
               onChange={(e) => setGuestCount(e.target.value)}
-              className="mt-1 w-20 rounded border px-2 py-1.5 text-sm"
+              className="mt-2 w-24 rounded-lg border border-gray-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20"
             />
           </div>
         </div>
         <button
           type="submit"
           disabled={loading}
-          className="rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
+          className="rounded-lg bg-gradient-to-r from-blue-600 to-cyan-600 px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:from-blue-700 hover:to-cyan-700 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {loading ? "Gönderiliyor..." : "Rezervasyon isteği gönder"}
         </button>

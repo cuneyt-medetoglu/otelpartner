@@ -12,8 +12,9 @@ Sırayla her adımı yapıyoruz. **Tüm prompt’larda aşağıdaki “Sistem ö
 | **Adım 2 – Register** | Tamamlandı | Aynı tasarım dili; Hesap türü (Otel/Rehber), koşullu alanlar. POST /api/auth/register bağlı. |
 | **Adım 3 – Dashboard** | Tamamlandı | Layout: spacer + fixed sidebar, gradient arka plan. Sidebar: logo, rol bazlı menü, email, Çıkış yap. Ana sayfa: hoş geldin kartı, rol bazlı hızlı erişim kartları. Responsive: mobilde hamburger + overlay drawer; içerik drawer altına girmiyor. Ana sayfadaki çıkış kartı kaldırıldı (çıkış sadece sidebar’da). |
 | **Adım 4 – Katalog** | Tamamlandı | Filtreler kartı (Bölge, Şehir, Yıldız, Uygula), otel kartları grid (rounded-xl, shadow-lg, yıldız badge, ok ikonu), boş durum kartı. Prisma + searchParams korundu. |
+| **Adım 5 – Otel detay** | Tamamlandı | Geri link (ok + Katalog), otel adı (text-3xl), bilgi kartı (yıldız badge, açıklama, adres grid, olanaklar), oda tipleri tablosu, Müsaitlik sorgula (kart + gradient buton), Rezervasyon yap (mavi-50 kart, gradient buton). BookForm + AvailabilityCheck stilleri güncellendi. |
 
-**Dosyalar:** `app/(auth)/layout.tsx`, `app/(auth)/login/page.tsx`, `app/(auth)/register/page.tsx`, `app/(dashboard)/layout.tsx`, `app/(dashboard)/DashboardSidebar.tsx`, `app/(dashboard)/dashboard/page.tsx`, `app/(dashboard)/dashboard/catalog/page.tsx`, `app/(dashboard)/dashboard/catalog/CatalogFilters.tsx`.
+**Dosyalar:** `app/(auth)/layout.tsx`, `app/(auth)/login/page.tsx`, `app/(auth)/register/page.tsx`, `app/(dashboard)/layout.tsx`, `app/(dashboard)/DashboardSidebar.tsx`, `app/(dashboard)/dashboard/page.tsx`, `app/(dashboard)/dashboard/catalog/page.tsx`, `app/(dashboard)/dashboard/catalog/CatalogFilters.tsx`, `app/(dashboard)/dashboard/catalog/[id]/page.tsx`, `app/(dashboard)/dashboard/catalog/[id]/AvailabilityCheck.tsx`, `app/(dashboard)/dashboard/catalog/[id]/BookForm.tsx`.
 
 ---
 
@@ -294,10 +295,65 @@ Next.js App Router, React, Tailwind. Prefer one page component; if you split fil
 
 ### Adım 5 – Otel detay (katalog)
 
-- **Hedef:** Tek otel sayfası: bilgiler, oda tipleri, müsaitlik sorgula, rezervasyon formu.
-- **Dosya(lar):** `app/(dashboard)/dashboard/catalog/[id]/page.tsx`, `BookForm.tsx`, `AvailabilityCheck.tsx` (stil uyumu).
-- **Not:** Rehber bu sayfadan rezervasyon isteği oluşturur. Mevcut API’ler korunacak.
-- **Prompt:** Bu adım sırasında eklenecek.
+- **Hedef:** Tek otel sayfası: bilgiler, oda tipleri tablosu, müsaitlik sorgula, rezervasyon formu (rehber için).
+- **Dosya(lar):** `app/(dashboard)/dashboard/catalog/[id]/page.tsx`; isteğe bağlı `AvailabilityCheck.tsx`, `BookForm.tsx` stilleri.
+- **Not:** Veri Prisma ile geliyor (hotel, rooms); BookForm ve AvailabilityCheck mevcut API’lere bağlı. v0 çıktısı ile sayfa layout’u ve stiller güncellenecek, mantık korunacak.
+
+#### Ne yapacaksın (3 adım)
+
+1. **Kopyala** → Aşağıdaki **"Adım 5 – Kopyalanacak metin"** kutusundaki metnin **tamamını** kopyala.
+2. **v0’a yapıştır** → [v0.dev](https://v0.dev) (yeni sohbet), metni yapıştır, Enter.
+3. **Kodu projeye al** → v0’dan gelen kodu paylaş; ben `page.tsx` ile birleştirip hotel/rooms verisi ve mevcut BookForm/AvailabilityCheck bileşenlerini koruyarak uygularım. v0 ayrı component stilleri verirse `AvailabilityCheck.tsx` ve `BookForm.tsx` de güncellenir.
+
+#### Adım 5 – Kopyalanacak metin
+
+**Bu kutunun tamamını v0 sohbet kutusuna yapıştır.**
+
+```
+IMPORTANT: New v0 thread. Apply the design specs below exactly so this page matches Login/Register/Dashboard/Catalog list (same product, same design language).
+
+OtelPartner: B2B platform for hotels and tour guides. This is the Hotel detail page – single hotel view for guides (and admin). Page lives inside the dashboard; only output the main content area. All text in Turkish.
+
+Design language (same as Dashboard and Catalog):
+- White cards: rounded-xl, shadow-lg, border border-gray-100, padding p-6 or p-8.
+- Headlines: text-2xl or 3xl font-bold. Section titles: text-lg font-bold text-gray-900.
+- Labels: text-sm font-semibold text-gray-700. Body: text-gray-600.
+- Primary button: rounded-lg bg-gradient-to-r from-blue-600 to-cyan-600, hover darker, shadow-md.
+- Inputs/selects: rounded-lg border border-gray-300 px-4 py-2, focus:ring-2 focus:ring-blue-500/20.
+- Links: text-blue-600 hover:text-cyan-600 font-semibold. Back link with arrow icon.
+- Tables: rounded-lg overflow-hidden, header bg-gray-50 or gray-100, cells px-4 py-3.
+
+---
+
+Hotel detail page – main content only (no sidebar). Use mock data: one hotel (e.g. "Örnek Otel"), 4 yıldız, short description, address, city, region, phone, website link, amenities list. Two room types (e.g. Double 10 adet 1500 ₺, Suite 5 adet 3000 ₺).
+
+1. Top: Back link "← Katalog" to /dashboard/catalog (with arrow icon, blue/cyan hover). Then headline: hotel name (text-3xl font-bold).
+
+2. Main info card (one white card):
+   - Star rating: e.g. "4 yıldız" (small badge or text).
+   - Description paragraph.
+   - Grid (2 cols on sm): Adres, Şehir, Bölge, Telefon, Web sitesi (external link). Labels bold, values gray-600.
+   - "Olanaklar" (Amenities): comma-separated list.
+
+3. Section "Oda tipleri" (Room types): same card or new card. Table: columns Tip, Adet, Fiyat (₺). Rounded table, header bg-gray-50. If no rooms: "Oda tipi tanımlanmamış." (gray-500).
+
+4. Section "Müsaitlik sorgula" (Availability check): same design system. Title, then date input + button "Sorgula" (gradient). Below: table with columns Oda tipi, Toplam, [Tarih] müsait. We will wire this to real API; for v0 use static example row.
+
+5. Section "Rezervasyon yap" (Booking form) – only for guide role; we will conditionally render. For v0 show the form: Title "Rezervasyon yap". Fields: Oda tipi (select), Giriş (date), Çıkış (date), Oda sayısı (number), Misafir sayısı (ops.) (number). Button "Rezervasyon isteği gönder" (gradient). Error message area (red bg/border). Use light blue-50 background for this block to differentiate. We will wire to existing BookForm component.
+
+Next.js App Router, React, Tailwind. Prefer one page component that receives hotel and rooms as props; sections can be separate divs or sub-components. Use Link from next/link.
+```
+
+#### Adım 5 – Nasıl test edilir?
+
+1. Rehber veya admin ile giriş → Katalog → bir otel kartına tıkla.
+2. Otel detay: "← Katalog", otel adı, bilgi kartı (yıldız, açıklama, adres, şehir, bölge, telefon, web, olanaklar), oda tipleri tablosu, müsaitlik sorgula (tarih + Sorgula + tablo), rehber ise rezervasyon formu.
+3. "Katalog" linki → katalog listesine dönmeli. Rezervasyon formu gönderimi mevcut API ile çalışmaya devam etmeli.
+
+#### Sonuç (isteğe bağlı)
+
+- **Projeye uygulandı:** —
+- **Not:** —
 
 ---
 
