@@ -14,8 +14,10 @@ Sırayla her adımı yapıyoruz. **Tüm prompt’larda aşağıdaki “Sistem ö
 | **Adım 4 – Katalog** | Tamamlandı | Filtreler kartı (Bölge, Şehir, Yıldız, Uygula), otel kartları grid (rounded-xl, shadow-lg, yıldız badge, ok ikonu), boş durum kartı. Prisma + searchParams korundu. |
 | **Adım 5 – Otel detay** | Tamamlandı | Geri link (ok + Katalog), otel adı (text-3xl), bilgi kartı (yıldız badge, açıklama, adres grid, olanaklar), oda tipleri tablosu, Müsaitlik sorgula (kart + gradient buton), Rezervasyon yap (mavi-50 kart, gradient buton). BookForm + AvailabilityCheck stilleri güncellendi. |
 | **Adım 6 – Rezervasyonlar** | Tamamlandı | Geri link (ok + Dashboard), başlık rol bazlı (Rezervasyonlarım / Rezervasyonlar), beyaz kart içinde tablo, durum badge’leri (Bekliyor/Onaylandı/Reddedildi), otel için Onayla/Reddet (rounded-lg). ReservationActions stilleri güncellendi. |
+| **Adım 7 – Otel paneli** | Tamamlandı | Profil / Oda tipleri / Doluluk: geri link (ok), rounded-xl kartlar, gradient butonlar, tablolar. HotelProfileForm, RoomList, AvailabilityForm stilleri güncellendi. |
+| **Adım 8 – Admin** | Tamamlandı | Admin: istatistik kartları, Bekleyen kayıtlar + Tüm kullanıcılar kartları, Onayla/Reddet ve Askıya al/Aktifleştir. Görünürlük sayfası: Evet/Hayır toggle. |
 
-**Dosyalar:** `app/(auth)/layout.tsx`, `app/(auth)/login/page.tsx`, `app/(auth)/register/page.tsx`, `app/(dashboard)/layout.tsx`, `app/(dashboard)/DashboardSidebar.tsx`, `app/(dashboard)/dashboard/page.tsx`, `app/(dashboard)/dashboard/catalog/page.tsx`, `app/(dashboard)/dashboard/catalog/CatalogFilters.tsx`, `app/(dashboard)/dashboard/catalog/[id]/page.tsx`, `app/(dashboard)/dashboard/catalog/[id]/AvailabilityCheck.tsx`, `app/(dashboard)/dashboard/catalog/[id]/BookForm.tsx`, `app/(dashboard)/dashboard/reservations/page.tsx`, `app/(dashboard)/dashboard/reservations/ReservationActions.tsx`.
+**Dosyalar:** `app/(auth)/layout.tsx`, `app/(auth)/login/page.tsx`, `app/(auth)/register/page.tsx`, `app/(dashboard)/layout.tsx`, `app/(dashboard)/DashboardSidebar.tsx`, `app/(dashboard)/dashboard/page.tsx`, `app/(dashboard)/dashboard/catalog/page.tsx`, `app/(dashboard)/dashboard/catalog/CatalogFilters.tsx`, `app/(dashboard)/dashboard/catalog/[id]/page.tsx`, `app/(dashboard)/dashboard/catalog/[id]/AvailabilityCheck.tsx`, `app/(dashboard)/dashboard/catalog/[id]/BookForm.tsx`, `app/(dashboard)/dashboard/reservations/page.tsx`, `app/(dashboard)/dashboard/reservations/ReservationActions.tsx`, `app/(dashboard)/dashboard/otel/profile/page.tsx`, `HotelProfileForm.tsx`, `otel/rooms/page.tsx`, `RoomList.tsx`, `otel/availability/page.tsx`, `AvailabilityForm.tsx`, `app/(dashboard)/dashboard/admin/page.tsx`, `admin/AllUsersSection.tsx`, `admin/PendingUserActions.tsx`, `admin/visibility/page.tsx`, `admin/visibility/HotelListedToggle.tsx`.
 
 ---
 
@@ -501,7 +503,70 @@ Output: Provide the three page components and their form/table sub-components so
 
 - **Hedef:** Admin paneli: kullanıcı listesi (onay/askıya al), otel görünürlük (Evet/Hayır). İstatistik kartları.
 - **Dosya(lar):** `app/(dashboard)/dashboard/admin/page.tsx`, `admin/visibility/page.tsx`; `AllUsersSection`, `PendingUserActions`, `HotelListedToggle` stilleri.
-- **Prompt:** Bu adım sırasında eklenecek.
+- **Not:** Veri Prisma ile çekiliyor; PATCH /api/admin/users/[id], PATCH /api/admin/hotels/[id], GET /api/admin/users mevcut. v0 çıktısı veya manuel stil güncellemesi ile layout/kart/tablo stilleri Dashboard/Katalog ile aynı dilde yapılacak.
+
+#### Ne yapacaksın (3 adım)
+
+1. **Kopyala** → Aşağıdaki **"Adım 8 – Kopyalanacak metin"** kutusundaki metnin **tamamını** kopyala.
+2. **v0'a yapıştır** → [v0.dev](https://v0.dev) (yeni sohbet), metni yapıştır, Enter.
+3. **Kodu projeye al** → v0'dan gelen kodu paylaş; ben `page.tsx`, `AllUsersSection`, `PendingUserActions`, visibility sayfası ve `HotelListedToggle` ile birleştirip veri çekme ve API mantığını koruyarak uygularım.
+
+#### Adım 8 – Kopyalanacak metin
+
+**Bu kutunun tamamını v0 sohbet kutusuna yapıştır.**
+
+```
+IMPORTANT: New v0 thread. Apply the design specs below exactly so these pages match Dashboard/Catalog/Reservations (same product, same design language).
+
+OtelPartner: B2B platform. This is the Admin panel (role: admin only). Two pages: (1) Admin main – stats cards + pending users table (Approve/Reject) + "All users" section with filters and Suspend/Activate; (2) Hotel visibility – table of hotels with "Listed in catalog" toggle (Evet/Hayır). All text in Turkish.
+
+Design language (same as rest of app):
+- Back link: arrow icon + text (e.g. "← Dashboard"), font-semibold text-blue-600 hover:text-cyan-600.
+- Headline: text-3xl font-bold text-gray-900.
+- White cards: rounded-xl, shadow-lg, border border-gray-100, p-6 or p-8.
+- Stats cards: same card style, rounded-xl, border-gray-100; label text-xs/text-sm text-gray-500, value text-xl or 2xl font-bold text-gray-900.
+- Tables: rounded-lg overflow-hidden, thead bg-gray-50, th/td px-4 py-3, font-semibold for headers, text-gray-600 for cells.
+- Primary action (Approve, Activate): green – e.g. bg-green-600 hover:bg-green-700, rounded-lg px-3 py-1.5 text-sm. Danger (Reject): bg-red-600 hover:bg-red-700. Secondary (Suspend): amber – bg-amber-600 hover:bg-amber-700.
+- Toggle for "Listed": show as two-state button – "Evet" (green when true), "Hayır" (gray when false). Same rounded-lg, small.
+
+---
+
+Page 1 – Admin main (dashboard/admin).
+
+1. Top: Back link "← Dashboard" to /dashboard (arrow icon). Headline "Admin paneli". Link "Otel görünürlük" to /dashboard/admin/visibility (same blue link style).
+
+2. Stats row: 4 cards in a grid (e.g. grid-cols-2 sm:grid-cols-4). Each card: white, rounded-xl, shadow-lg, border-gray-100, padding. Label (e.g. "Bekleyen", "Aktif otel", "Aktif rehber", "Askıda") – small gray text. Value – large bold number. We will pass real counts.
+
+3. Section "Bekleyen kayıtlar": One white card containing table. Columns: Email, Rol, Detay (hotel name or guide name), Tarih, İşlem. For İşlem: two buttons "Onayla" (green) and "Reddet" (red) – we will wire to PATCH. Empty state: "Bekleyen kayıt yok."
+
+4. Section "Tüm kullanıcılar": Heading. Filters: two selects (Rol: Tüm roller / Admin / Otel / Rehber; Durum: Tüm durumlar / Bekleyen / Aktif / Askıda / Reddedilen) and button "Listele". Table in same card style: Email, Rol, Durum, Detay, İşlem. For active users İşlem = "Askıya al" (amber); for suspended = "Aktifleştir" (green). We will wire to GET /api/admin/users and PATCH. Empty state after load: "Kayıt bulunamadı."
+
+---
+
+Page 2 – Otel görünürlük (dashboard/admin/visibility).
+
+1. Back link "← Admin" to /dashboard/admin. Headline "Otel görünürlük".
+
+2. Short description: "Katalogda listelensin: Evet ise otel rehberlere katalogda görünür. Hayır ise listede çıkmaz." (text-gray-600, mb-4).
+
+3. One white card with table. Columns: Otel, Email, Katalogda listele. Last column: toggle control showing "Evet" (green) or "Hayır" (gray) – we will wire to PATCH. Empty state: "Henüz otel yok."
+
+---
+
+Next.js App Router, React, Tailwind. Use Link from next/link. Admin pages are server components that fetch data; action buttons and toggles are client components. We will keep existing API calls (PATCH /api/admin/users/[id], PATCH /api/admin/hotels/[id], GET /api/admin/users).
+```
+
+#### Adım 8 – Nasıl test edilir?
+
+1. Admin rolü ile giriş → Dashboard → Admin paneli. Geri link (ok + Dashboard), "Otel görünürlük" linki, 4 istatistik kartı, Bekleyen kayıtlar tablosu, Tüm kullanıcılar (filtre + Listele + tablo).
+2. Bekleyen satırda Onayla/Reddet → PATCH çalışmalı, sayfa yenilenmeli.
+3. Tüm kullanıcılar: Rol/Durum seç, Listele → GET /api/admin/users; Aktif kullanıcıda "Askıya al", Askıda kullanıcıda "Aktifleştir" → PATCH.
+4. Otel görünürlük: Geri "Admin", açıklama, otel tablosu. Evet/Hayır tıklayınca PATCH ile listed güncellenmeli.
+
+#### Sonuç (isteğe bağlı)
+
+- **Projeye uygulandı:** —
+- **Not:** —
 
 ---
 

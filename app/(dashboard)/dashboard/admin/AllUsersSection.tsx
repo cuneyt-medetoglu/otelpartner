@@ -41,13 +41,13 @@ export function AllUsersSection() {
   }
 
   return (
-    <div className="mt-8">
-      <h2 className="mb-3 text-lg font-semibold text-gray-900">Tüm kullanıcılar</h2>
-      <div className="mb-3 flex flex-wrap items-center gap-2">
+    <div className="rounded-xl border border-gray-100 bg-white p-8 shadow-lg">
+      <h2 className="mb-4 text-lg font-bold text-gray-900">Tüm kullanıcılar</h2>
+      <div className="mb-4 flex flex-wrap items-center gap-3">
         <select
           value={role}
           onChange={(e) => setRole(e.target.value)}
-          className="rounded border border-gray-300 px-2 py-1 text-sm"
+          className="rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
         >
           <option value="">Tüm roller</option>
           <option value="admin">Admin</option>
@@ -57,7 +57,7 @@ export function AllUsersSection() {
         <select
           value={status}
           onChange={(e) => setStatus(e.target.value)}
-          className="rounded border border-gray-300 px-2 py-1 text-sm"
+          className="rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
         >
           <option value="">Tüm durumlar</option>
           <option value="pending">Bekleyen</option>
@@ -69,7 +69,7 @@ export function AllUsersSection() {
           type="button"
           onClick={load}
           disabled={loading}
-          className="rounded bg-gray-700 px-3 py-1 text-sm text-white hover:bg-gray-800 disabled:opacity-50"
+          className="rounded-lg bg-gradient-to-r from-blue-600 to-cyan-600 px-4 py-2 text-sm font-semibold text-white shadow-md transition-all hover:from-blue-700 hover:to-cyan-700 disabled:opacity-50"
         >
           {loading ? "Yükleniyor..." : "Listele"}
         </button>
@@ -77,37 +77,39 @@ export function AllUsersSection() {
       {!loaded ? (
         <p className="text-sm text-gray-500">Filtre seçip &quot;Listele&quot; ile kullanıcıları getirin.</p>
       ) : (
-        <div className="overflow-hidden rounded-lg border border-gray-200 bg-white">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-4 py-2 text-left text-xs font-medium text-gray-500">Email</th>
-                <th className="px-4 py-2 text-left text-xs font-medium text-gray-500">Rol</th>
-                <th className="px-4 py-2 text-left text-xs font-medium text-gray-500">Durum</th>
-                <th className="px-4 py-2 text-left text-xs font-medium text-gray-500">Detay</th>
-                <th className="px-4 py-2 text-right text-xs font-medium text-gray-500">İşlem</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200 bg-white">
-              {users.map((u) => (
-                <tr key={u.id}>
-                  <td className="whitespace-nowrap px-4 py-3 text-sm text-gray-900">{u.email}</td>
-                  <td className="whitespace-nowrap px-4 py-3 text-sm text-gray-600">{u.role}</td>
-                  <td className="whitespace-nowrap px-4 py-3 text-sm text-gray-600">{u.status}</td>
-                  <td className="px-4 py-3 text-sm text-gray-600">
-                    {u.hotel ? u.hotel.name : u.guide ? `${u.guide.firstName} ${u.guide.lastName}` : "—"}
-                  </td>
-                  <td className="whitespace-nowrap px-4 py-3 text-right">
-                    <UserRowActions userId={u.id} userStatus={u.status} onDone={() => load()} />
-                  </td>
+        <>
+          <div className="overflow-hidden rounded-lg">
+            <table className="min-w-full text-sm">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-4 py-3 text-left font-semibold text-gray-700">Email</th>
+                  <th className="px-4 py-3 text-left font-semibold text-gray-700">Rol</th>
+                  <th className="px-4 py-3 text-left font-semibold text-gray-700">Durum</th>
+                  <th className="px-4 py-3 text-left font-semibold text-gray-700">Detay</th>
+                  <th className="px-4 py-3 text-right font-semibold text-gray-700">İşlem</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {users.map((u) => (
+                  <tr key={u.id} className="border-t border-gray-100">
+                    <td className="whitespace-nowrap px-4 py-3 text-gray-900">{u.email}</td>
+                    <td className="whitespace-nowrap px-4 py-3 text-gray-600">{u.role}</td>
+                    <td className="whitespace-nowrap px-4 py-3 text-gray-600">{u.status}</td>
+                    <td className="px-4 py-3 text-gray-600">
+                      {u.hotel ? u.hotel.name : u.guide ? `${u.guide.firstName} ${u.guide.lastName}` : "—"}
+                    </td>
+                    <td className="whitespace-nowrap px-4 py-3 text-right">
+                      <UserRowActions userId={u.id} userStatus={u.status} onDone={() => load()} />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
           {users.length === 0 && (
-            <p className="px-4 py-6 text-center text-sm text-gray-500">Kayıt bulunamadı.</p>
+            <p className="py-6 text-center text-gray-500">Kayıt bulunamadı.</p>
           )}
-        </div>
+        </>
       )}
     </div>
   );
@@ -150,7 +152,7 @@ function UserRowActions({
         type="button"
         onClick={() => setStatus("suspended")}
         disabled={loading}
-        className="rounded bg-amber-600 px-2 py-1 text-xs font-medium text-white hover:bg-amber-700 disabled:opacity-50"
+        className="rounded-lg bg-amber-600 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-amber-700 disabled:opacity-50"
       >
         {loading ? "..." : "Askıya al"}
       </button>
@@ -162,7 +164,7 @@ function UserRowActions({
         type="button"
         onClick={() => setStatus("active")}
         disabled={loading}
-        className="rounded bg-green-600 px-2 py-1 text-xs font-medium text-white hover:bg-green-700 disabled:opacity-50"
+        className="rounded-lg bg-green-600 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-green-700 disabled:opacity-50"
       >
         {loading ? "..." : "Aktifleştir"}
       </button>
