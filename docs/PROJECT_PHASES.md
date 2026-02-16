@@ -6,6 +6,8 @@
 - **Başlama:** Faz 6 ortası veya Faz 6 bittikten hemen sonra (rezervasyon akışı çalışır durumda olduktan sonra).
 - Tüm sayfalar **birbiri ile uyumlu** olacak şekilde tasarlanacak; v0 çıktıları tek bir tasarım dilinde (renk, tipografi, bileşenler) tutulmalı.
 
+**Durum (2025-02-15):** v0.app ile Adım 1–8 tamamlandı (Login, Register, Dashboard, Katalog, Otel detay, Rezervasyonlar, Otel paneli, Admin). Detay: `docs/design/V0_ADIM_ADIM_PLAN.md`.
+
 ### v0.app + GitHub
 - Proje GitHub’a bağlanacak; v0.app repo’yu görebilecek ve tasarımlar mevcut kodla uyumlu ilerleyecek.
 
@@ -76,7 +78,7 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 - [x] Kullanıcı yetkilendirme configürasyonu (middleware, role check)
 
 ### Frontend
-- [ ] Tasarım: Admin dashboard (v0.app / wireframe – opsiyonel)
+- [x] Tasarım: Admin dashboard (v0.app – Adım 8 ile tamamlandı)
 - [x] Admin dashboard
 - [x] Bekleyen kayıtlar listesi
 - [x] Kullanıcı onay/red işlemi
@@ -150,7 +152,7 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 - [x] Müsaitlik kontrol API (tarih bazlı, katalog detayda)
 
 ### Frontend
-- [ ] Tasarım: Otel katalog sayfası (v0.app / wireframe – opsiyonel)
+- [x] Tasarım: Otel katalog sayfası (v0.app – Adım 4–5 ile tamamlandı)
 - [x] Otel katalog sayfası (rehber)
 - [x] Filtreleme (bölge, şehir, yıldız)
 - [ ] Sıralama
@@ -178,7 +180,7 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 - [ ] QR kod oluşturma
 
 ### Frontend
-- [ ] Tasarım: Rezervasyon akışı (v0.app / wireframe – opsiyonel)
+- [x] Tasarım: Rezervasyon akışı (v0.app – Adım 6 ile tamamlandı)
 - [x] Rezervasyon oluşturma formu (katalog otel detayda)
 - [x] Rezervasyon onay ekranı (otel – listede Onayla/Reddet)
 - [x] Rezervasyon listesi (rehber + otel)

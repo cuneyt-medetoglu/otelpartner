@@ -75,7 +75,7 @@ Tüm dokümanlar (PRD dahil) **Project Manager** agentı (`.cursor/rules/project
 
 ## 🎯 Proje Durumu
 
-**Güncel durum**: `docs/dev/STATE.md` ve `docs/dev/ROADMAP.md` tek kaynaktır. Faz 1–5 tamamlandı; Faz 6 (Rezervasyon) başlatıldı – rezervasyon oluşturma ve listeleme (rehber/otel) yapıldı.
+**Güncel durum**: `docs/dev/STATE.md` ve `docs/dev/ROADMAP.md` tek kaynaktır. Faz 1–6 çekirdek tamamlandı (rezervasyon oluşturma, listeleme, onay/red). v0.app ile UI tasarımı Adım 1–8 tamamlandı (Login, Register, Dashboard, Katalog, Otel detay, Rezervasyonlar, Otel paneli, Admin). Sıradaki: Faz 6 kalan maddeler (detay sayfası, iptal) veya Faz 7 (Bildirim).
 
 ---
 
