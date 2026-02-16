@@ -1,21 +1,21 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import { DashboardSidebar } from "./DashboardSidebar";
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
+
+  const role = (session.user as { role?: string }).role ?? "guide";
+  const email = session.user?.email ?? null;
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="border-b bg-white px-4 py-3">
-        <div className="flex items-center justify-between">
-          <span className="font-medium text-gray-900">OtelPartner</span>
-          <span className="text-sm text-gray-600">
-            {session.user.email} ({session.user.role})
-          </span>
-        </div>
-      </header>
-      <main className="p-4">{children}</main>
+    <div className="flex min-h-screen bg-gradient-to-br from-blue-50 via-slate-50 to-blue-100">
+      {/* Spacer: sidebar fixed olduğu için akışta yer kaplasın diye; içerik drawer altına girmez */}
+      <div className="hidden w-64 flex-shrink-0 md:block" aria-hidden />
+      <DashboardSidebar role={role} email={email} />
+      <main className="min-w-0 flex-1 min-h-screen pt-14 p-4 sm:p-6 md:pt-0 md:p-8">{children}</main>
     </div>
   );
 }

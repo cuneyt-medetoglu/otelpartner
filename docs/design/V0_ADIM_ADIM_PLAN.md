@@ -4,6 +4,18 @@ Sırayla her adımı yapıyoruz. **Tüm prompt’larda aşağıdaki “Sistem ö
 
 ---
 
+## Geldiğimiz nokta (Özet)
+
+| Adım | Durum | Not |
+|------|--------|-----|
+| **Adım 1 – Login** | Tamamlandı | Modern tasarım (gradient arka plan, kart, ikon). Auth layout: header + footer (OtelPartner ©, Gizlilik, İletişim). NextAuth bağlı. |
+| **Adım 2 – Register** | Tamamlandı | Aynı tasarım dili; Hesap türü (Otel/Rehber), koşullu alanlar. POST /api/auth/register bağlı. |
+| **Adım 3 – Dashboard** | Tamamlandı | Layout: spacer + fixed sidebar, gradient arka plan. Sidebar: logo, rol bazlı menü, email, Çıkış yap. Ana sayfa: hoş geldin kartı, rol bazlı hızlı erişim kartları. Responsive: mobilde hamburger + overlay drawer; içerik drawer altına girmiyor. Ana sayfadaki çıkış kartı kaldırıldı (çıkış sadece sidebar’da). |
+
+**Dosyalar:** `app/(auth)/layout.tsx`, `app/(auth)/login/page.tsx`, `app/(auth)/register/page.tsx`, `app/(dashboard)/layout.tsx`, `app/(dashboard)/DashboardSidebar.tsx`, `app/(dashboard)/dashboard/page.tsx`.
+
+---
+
 ## Sistem özeti (PRD – v0’ın anlaması için)
 
 **OtelPartner** = Oteller ve tur rehberleri için B2B yönlendirme platformu. Son kullanıcı yok; sadece kayıtlı otel ve rehberler kullanır.
@@ -31,7 +43,7 @@ Bu blok, **sonraki her sayfa prompt’unda** “Design direction” veya “Visu
 
 ---
 
-## Adım 1 – Login sayfası (yeniden – modern versiyon)
+## Adım 1 – Login sayfası (Tamamlandı)
 
 ### Ne yapacaksın (3 adım)
 
@@ -84,7 +96,7 @@ Login page for OtelPartner. Public, standalone (no dashboard sidebar).
 
 ---
 
-## Adım 2 – Register sayfası
+## Adım 2 – Register sayfası (Tamamlandı)
 
 ### Ne yapacaksın (3 adım)
 
@@ -141,11 +153,120 @@ Register page – centered card content only (no header/footer in this component
 
 ---
 
-## Sonraki adımlar (uyumlu prompt için notlar)
+## Adım 3 – Dashboard (layout + ana sayfa) (Tamamlandı)
 
-- **Adım 3 – Dashboard:** "Same system and modern design. Dashboard layout: sidebar + main area; role-based; same color, shadows, typography. This is the shell for Catalog, Reservations, etc."
-- **Sonraki sayfalar:** Her seferinde "OtelPartner B2B platform, same modern design as Login (gradients, depth, strong typography, Turkish)" ile başla; sayfa özel içeriği ekle.
+### Ne yapacaksın (özet)
+
+1. **Kopyala** → Aşağıdaki **"Adım 3 – Kopyalanacak metin"** kutusundaki metnin **tamamını** kopyala.
+2. **v0’a yapıştır** → [v0.dev](https://v0.dev) (yeni sohbet), metni yapıştır, Enter.
+3. **Kodu projeye al** → v0 büyük ihtimalle **iki parça** verecek: (a) Dashboard layout (sidebar + main alan), (b) Dashboard ana sayfa içeriği. Bunları sırayla projeye uygulayacağız:
+   - **Layout** → `app/(dashboard)/layout.tsx` (mevcut session kontrolü ve `redirect` korunacak; v0’ın verdiği sidebar + main yapısı ve stiller kullanılacak).
+   - **Ana sayfa** → `app/(dashboard)/dashboard/page.tsx` (hoş geldin, rol bazlı linkler, çıkış – session bilgisi korunacak).
+4. v0 tek blok verirse: kodu paylaş, ben layout ile page’i ayırıp doğru dosyalara yazarım.
+
+### Adım 3 – Kopyalanacak metin
+
+**Bu kutunun tamamını v0 sohbet kutusuna yapıştır.**
+
+```
+IMPORTANT: New v0 thread. No visual reference – apply the design specs below exactly so Dashboard matches Login and Register (same product, same design language).
+
+OtelPartner: B2B platform for hotels and tour guides (reservations, catalog, admin). Roles: admin, hotel, guide. All text in Turkish. This is the Dashboard: after login, user sees a sidebar + main content area. Design must match our Login/Register: gradient accents, rounded-xl cards, shadow-lg, blue-600 to cyan-600 buttons/links, white surfaces, gray-700 labels.
+
+Design language (same as Login/Register):
+- Background: subtle gradient (e.g. bg-gradient-to-br from-blue-50/100 via-slate-50 to-blue-100) or clean gray-50.
+- Cards/surfaces: white, rounded-xl, shadow-lg, border-gray-100.
+- Primary actions: bg-gradient-to-r from-blue-600 to-cyan-600, hover darker, shadow-md.
+- Links: text-blue-600 hover:text-cyan-600 font-semibold.
+- Typography: bold headlines (text-2xl or 3xl), body text-gray-600, labels font-semibold text-gray-700.
 
 ---
 
-*PRD: `docs/PRD.md`. Tasarım notları bu dosyada güncellenir.*
+Part 1 – Dashboard layout (sidebar + main area).
+
+- Left: fixed sidebar. White or very light bg, border-r border-gray-200, shadow-sm. Width ~64 or 72 (w-64 / w-72).
+- Sidebar top: "OtelPartner" logo/brand (text-xl font-bold text-blue-600), optionally small icon.
+- Sidebar nav: vertical list of links. Links change by user role (we will pass role from server). For now include all and we hide by role:
+  - Admin: "Admin", "Otel görünürlük" (href /dashboard/admin, /dashboard/admin/visibility).
+  - Hotel: "Otel profilim", "Oda tipleri", "Doluluk", "Rezervasyonlar" (href /dashboard/otel/profile, /dashboard/otel/rooms, /dashboard/otel/availability, /dashboard/reservations).
+  - Guide: "Otel kataloğu", "Rezervasyonlarım" (href /dashboard/catalog, /dashboard/reservations).
+- Sidebar bottom: user email (text-sm text-gray-600) and "Çıkış yap" link (href /api/auth/signout).
+- Main area: right side, flex-1, padding p-6 or p-8, min-h-screen. This is where {children} render (page content).
+- Layout is a wrapper: it receives children. Use Next.js App Router. Sidebar nav can be a client component that receives role as prop and shows the right links, or we can render different nav in server layout – your choice. Use Link from next/link.
+
+---
+
+Part 2 – Dashboard home page (content inside main area).
+
+- Welcome section: headline "Hoş geldiniz" or "Dashboard", subtext with user email and role (e.g. "…@email.com – Rehber").
+- Role-based quick links: same links as sidebar but as cards or prominent buttons (e.g. "Otel kataloğu", "Rezervasyonlarım" for guide). Each in a small card or button, same gradient button style or card with shadow-lg.
+- Sign out: "Çıkış yap" link (href /api/auth/signout) at bottom or in card.
+- This page receives session (user.email, user.role) – we will pass it from getServerSession in the real app; for v0 output use placeholder props or mock "user" so the layout is clear.
+- Next.js, React, Tailwind. Server component for page is fine (we need session); if you need client interactivity keep it minimal.
+```
+
+### Adım 3 – Nasıl test edilir?
+
+1. Giriş yap (örn. admin veya rehber) → `/dashboard`.
+2. Sol tarafta sidebar: OtelPartner logosu, rolüne göre menü linkleri (Admin ise Admin / Otel görünürlük; Otel ise Otel profilim, Oda tipleri, Doluluk, Rezervasyonlar; Rehber ise Otel kataloğu, Rezervasyonlarım), altta email ve Çıkış yap.
+3. Sağda ana alan: Hoş geldiniz metni, rol bazlı hızlı linkler (kart veya buton), çıkış linki.
+4. Linklere tıklayınca ilgili sayfaya gitmeli (mevcut sayfalar henüz eski tasarımda olabilir; Dashboard shell ve ana sayfa modern olsun).
+
+### Sonuç (isteğe bağlı)
+
+- **Layout güncellendi:** —
+- **Ana sayfa güncellendi:** —
+- **Not:** —
+
+---
+
+## Sonraki yapılacaklar (sırayla; prompt her adımda eklenecek)
+
+Aşağıdaki adımlar aynı yöntemle ilerleyecek: v0’a sistem özeti + tasarım dili + sayfa tarifi verilecek; çıkan kod ilgili dosyalara uygulanacak. **Prompt metni her adıma geçildiğinde bu dosyaya eklenecek.**
+
+---
+
+### Adım 4 – Katalog (otel listesi)
+
+- **Hedef:** Rehber için otel listesi sayfası. Filtreler (bölge, şehir, yıldız vb.), liste/grid, modern kartlar.
+- **Dosya(lar):** `app/(dashboard)/dashboard/catalog/page.tsx`; gerekirse `CatalogFilters.tsx` stilleri.
+- **Not:** Dashboard layout zaten var; sadece bu sayfanın içeriği v0 ile yenilenecek. Mevcut API (GET /api/catalog/hotels) ve filtre mantığı korunacak.
+- **Prompt:** Bu adım sırasında eklenecek.
+
+---
+
+### Adım 5 – Otel detay (katalog)
+
+- **Hedef:** Tek otel sayfası: bilgiler, oda tipleri, müsaitlik sorgula, rezervasyon formu.
+- **Dosya(lar):** `app/(dashboard)/dashboard/catalog/[id]/page.tsx`, `BookForm.tsx`, `AvailabilityCheck.tsx` (stil uyumu).
+- **Not:** Rehber bu sayfadan rezervasyon isteği oluşturur. Mevcut API’ler korunacak.
+- **Prompt:** Bu adım sırasında eklenecek.
+
+---
+
+### Adım 6 – Rezervasyonlar
+
+- **Hedef:** Rezervasyon listesi (rehber: kendi rezervasyonları; otel: gelen rezervasyonlar). Onay/red butonları (otel), durum gösterimi.
+- **Dosya(lar):** `app/(dashboard)/dashboard/reservations/page.tsx`, `ReservationActions.tsx`.
+- **Not:** Rol bazlı farklı sütunlar/aksiyonlar. Mevcut API’ler korunacak.
+- **Prompt:** Bu adım sırasında eklenecek.
+
+---
+
+### Adım 7 – Otel paneli (profil, oda tipleri, doluluk)
+
+- **Hedef:** Otel rolü sayfaları: Otel profilim, Oda tipleri, Doluluk. Formlar ve listeler aynı modern dilde.
+- **Dosya(lar):** `app/(dashboard)/dashboard/otel/profile/page.tsx`, `otel/rooms/page.tsx`, `otel/availability/page.tsx`; ilgili form bileşenleri.
+- **Prompt:** İstersen tek prompt’ta üç sayfa, ya da sayfa sayfa (önce profil, sonra oda, sonra doluluk). Bu adım sırasında eklenecek.
+
+---
+
+### Adım 8 – Admin (kullanıcılar, görünürlük)
+
+- **Hedef:** Admin paneli: kullanıcı listesi (onay/askıya al), otel görünürlük (Evet/Hayır). İstatistik kartları.
+- **Dosya(lar):** `app/(dashboard)/dashboard/admin/page.tsx`, `admin/visibility/page.tsx`; `AllUsersSection`, `PendingUserActions`, `HotelListedToggle` stilleri.
+- **Prompt:** Bu adım sırasında eklenecek.
+
+---
+
+*PRD: `docs/PRD.md`. Tasarım notları ve prompt’lar bu dosyada güncellenir. Bir sonraki adıma geçildiğinde ilgili adımın "Kopyalanacak metin" kutusu eklenecek.*
