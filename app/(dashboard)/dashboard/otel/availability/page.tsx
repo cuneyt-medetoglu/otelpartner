@@ -32,12 +32,18 @@ export default async function AvailabilityPage() {
   }));
 
   return (
-    <div>
-      <div className="mb-4 flex items-center gap-4">
-        <Link href="/dashboard/otel/rooms" className="text-sm text-blue-600 hover:underline">
-          ← Oda tipleri
+    <div className="max-w-7xl space-y-6">
+      <div className="flex flex-col gap-2">
+        <Link
+          href="/dashboard/otel/rooms"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 transition-colors hover:text-cyan-600"
+        >
+          <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          Oda tipleri
         </Link>
-        <h1 className="text-xl font-semibold text-gray-900">Doluluk / Müsaitlik</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Doluluk</h1>
       </div>
       <AvailabilityForm rooms={rooms} initialList={availability} />
     </div>

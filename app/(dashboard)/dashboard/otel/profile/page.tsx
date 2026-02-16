@@ -40,12 +40,18 @@ export default async function OtelProfilePage() {
   };
 
   return (
-    <div>
-      <div className="mb-4 flex items-center gap-4">
-        <Link href="/dashboard" className="text-sm text-blue-600 hover:underline">
-          ← Dashboard
+    <div className="max-w-7xl space-y-6">
+      <div className="flex flex-col gap-2">
+        <Link
+          href="/dashboard"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 transition-colors hover:text-cyan-600"
+        >
+          <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          Dashboard
         </Link>
-        <h1 className="text-xl font-semibold text-gray-900">Otel profilim</h1>
+        <h1 className="text-3xl font-bold text-gray-900">Otel profilim</h1>
       </div>
       <HotelProfileForm initial={initial} />
     </div>

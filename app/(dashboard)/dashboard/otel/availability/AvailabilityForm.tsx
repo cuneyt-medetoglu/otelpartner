@@ -50,57 +50,85 @@ export function AvailabilityForm({ rooms, initialList }: { rooms: Room[]; initia
   }
 
   return (
-    <div className="space-y-4">
-      <form onSubmit={submit} className="flex flex-wrap items-end gap-2 rounded border bg-white p-3">
-        <select
-          value={roomId}
-          onChange={(e) => setRoomId(e.target.value)}
-          className="rounded border px-2 py-1.5 text-sm"
-        >
-          {rooms.map((r) => (
-            <option key={r.id} value={r.id}>{r.roomType} (max {r.totalCount})</option>
-          ))}
-        </select>
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-          className="rounded border px-2 py-1.5 text-sm"
-          required
-        />
-        <input
-          type="number"
-          min={0}
-          placeholder="Müsait adet"
-          value={availableCount}
-          onChange={(e) => setAvailableCount(e.target.value)}
-          className="w-24 rounded border px-2 py-1.5 text-sm"
-        />
-        <button type="submit" disabled={loading} className="rounded bg-blue-600 px-3 py-1.5 text-sm text-white disabled:opacity-50">
-          Kaydet
-        </button>
-      </form>
-      {error && <p className="text-sm text-red-600">{error}</p>}
-      <div className="rounded border bg-white overflow-x-auto">
-        <table className="min-w-full text-sm">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-3 py-2 text-left font-medium text-gray-500">Oda</th>
-              <th className="px-3 py-2 text-left font-medium text-gray-500">Tarih</th>
-              <th className="px-3 py-2 text-left font-medium text-gray-500">Müsait</th>
-            </tr>
-          </thead>
-          <tbody>
-            {list.map((r) => (
-              <tr key={r.id} className="border-t">
-                <td className="px-3 py-2">{r.roomType}</td>
-                <td className="px-3 py-2">{r.date}</td>
-                <td className="px-3 py-2">{r.availableCount}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        {list.length === 0 && <p className="p-4 text-gray-500">Henüz kayıt yok. Oda, tarih ve müsait adet girip Kaydet.</p>}
+    <div className="space-y-6">
+      <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-lg">
+        <h2 className="mb-4 text-lg font-bold text-gray-900">Doluluk ayarla</h2>
+        <form onSubmit={submit} className="space-y-4">
+          <div className="grid gap-4 sm:grid-cols-3">
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Oda tipi</label>
+              <select
+                value={roomId}
+                onChange={(e) => setRoomId(e.target.value)}
+                className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+              >
+                {rooms.map((r) => (
+                  <option key={r.id} value={r.id}>{r.roomType}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Tarih</label>
+              <input
+                type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Müsait adet</label>
+              <input
+                type="number"
+                min={0}
+                placeholder="0"
+                value={availableCount}
+                onChange={(e) => setAvailableCount(e.target.value)}
+                className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+              />
+            </div>
+          </div>
+          {error && (
+            <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+              {error}
+            </div>
+          )}
+          <button
+            type="submit"
+            disabled={loading}
+            className="rounded-lg bg-gradient-to-r from-blue-600 to-cyan-600 px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:from-blue-700 hover:to-cyan-700 disabled:opacity-50"
+          >
+            {loading ? "Kaydediliyor..." : "Kaydet"}
+          </button>
+        </form>
+      </div>
+
+      <div className="rounded-xl border border-gray-100 bg-white p-8 shadow-lg">
+        {list.length === 0 ? (
+          <p className="text-center text-gray-500">Henüz kayıt yok.</p>
+        ) : (
+          <div className="overflow-hidden rounded-lg">
+            <table className="min-w-full text-sm">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-4 py-3 text-left font-semibold text-gray-700">Oda tipi</th>
+                  <th className="px-4 py-3 text-left font-semibold text-gray-700">Tarih</th>
+                  <th className="px-4 py-3 text-left font-semibold text-gray-700">Müsait adet</th>
+                </tr>
+              </thead>
+              <tbody>
+                {list.map((r) => (
+                  <tr key={r.id} className="border-t border-gray-100">
+                    <td className="px-4 py-3 text-gray-600">{r.roomType}</td>
+                    <td className="px-4 py-3 text-gray-600">{r.date}</td>
+                    <td className="px-4 py-3 text-gray-600">{r.availableCount}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );

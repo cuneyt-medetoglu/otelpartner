@@ -426,9 +426,74 @@ Next.js App Router, React, Tailwind. Page can be server component that receives 
 
 ### Adım 7 – Otel paneli (profil, oda tipleri, doluluk)
 
-- **Hedef:** Otel rolü sayfaları: Otel profilim, Oda tipleri, Doluluk. Formlar ve listeler aynı modern dilde.
-- **Dosya(lar):** `app/(dashboard)/dashboard/otel/profile/page.tsx`, `otel/rooms/page.tsx`, `otel/availability/page.tsx`; ilgili form bileşenleri.
-- **Prompt:** İstersen tek prompt’ta üç sayfa, ya da sayfa sayfa (önce profil, sonra oda, sonra doluluk). Bu adım sırasında eklenecek.
+- **Hedef:** Otel rolü için üç sayfa: Otel profilim (form), Oda tipleri (ekle formu + liste), Doluluk (form + liste). Aynı modern tasarım dili.
+- **Dosya(lar):** `app/(dashboard)/dashboard/otel/profile/page.tsx` + `HotelProfileForm.tsx`; `otel/rooms/page.tsx` + `RoomList.tsx`; `otel/availability/page.tsx` + `AvailabilityForm.tsx`.
+- **Not:** Veri ve API’ler (PATCH /api/hotel/profile, POST /api/hotel/rooms, POST /api/hotel/availability) mevcut; v0 çıktısı ile layout ve form stilleri güncellenecek.
+
+#### Ne yapacaksın (3 adım)
+
+1. **Kopyala** → Aşağıdaki **"Adım 7 – Kopyalanacak metin"** kutusundaki metnin **tamamını** kopyala.
+2. **v0’a yapıştır** → [v0.dev](https://v0.dev) (yeni sohbet), metni yapıştır, Enter.
+3. **Kodu projeye al** → v0 büyük ihtimalle birden fazla parça verecek (profil sayfası+form, oda sayfası+liste, doluluk sayfası+form). Kodu paylaş; ben ilgili `page.tsx` ve form bileşenlerine entegre edip API mantığını korurum. İstersen sayfa sayfa da yapabilirsin (önce profil, sonra oda, sonra doluluk).
+
+#### Adım 7 – Kopyalanacak metin
+
+**Bu kutunun tamamını v0 sohbet kutusuna yapıştır.**
+
+```
+IMPORTANT: New v0 thread. Apply the design specs below exactly so these pages match Dashboard/Catalog/Reservations (same product, same design language).
+
+OtelPartner: B2B platform. These are the Hotel panel pages (role: hotel only): (1) Otel profilim – edit hotel info, (2) Oda tipleri – list rooms + add new, (3) Doluluk – set availability per room/date. All inside dashboard; only main content. All text in Turkish.
+
+Design language (same as rest of app):
+- Back link: arrow icon + text (e.g. "← Dashboard"), font-semibold text-blue-600 hover:text-cyan-600.
+- Headline: text-3xl font-bold text-gray-900.
+- White cards: rounded-xl, shadow-lg, border border-gray-100, p-6 or p-8.
+- Labels: text-sm font-semibold text-gray-700. Inputs: rounded-lg border border-gray-300 px-4 py-2, focus:ring-2 focus:ring-blue-500/20.
+- Primary button: rounded-lg bg-gradient-to-r from-blue-600 to-cyan-600, hover darker, shadow-md. Error: rounded-lg bg-red-50 border border-red-200 p-3 text-red-700.
+- Tables: rounded-lg overflow-hidden, thead bg-gray-50, th/td px-4 py-3.
+
+---
+
+Page 1 – Otel profilim (profile edit).
+
+- Back link "← Dashboard" to /dashboard. Headline "Otel profilim".
+- One form card. Fields (Turkish labels): Otel adı * (text), Açıklama (textarea), Adres (text), Şehir (text), Bölge (text), Ülke (text), Yıldız (number 1–5 or select), Telefon (text), Web sitesi (text), Olanaklar (text, placeholder "virgülle ayırın"), Enlem (number), Boylam (number). Submit button "Kaydet" (gradient). Error message area. We will wire to PATCH /api/hotel/profile; for v0 use local state and mock submit.
+
+---
+
+Page 2 – Oda tipleri (rooms list + add).
+
+- Back link "← Otel profilim" or "← Profil" to /dashboard/otel/profile. Headline "Oda tipleri".
+- Section A – Add form (in same card or small card): Oda tipi (text placeholder "örn. Çift kişilik"), Adet (number min 1), Fiyat – ops. (number), button "Ekle" (gradient). We will wire to POST /api/hotel/rooms.
+- Section B – Table of rooms: columns Tip, Adet, Fiyat (₺). Rounded table, gray-50 header. Empty state: "Henüz oda tipi yok." or similar.
+- Use 1–2 mock rows for layout. We will pass real data from server.
+
+---
+
+Page 3 – Doluluk / Müsaitlik (availability).
+
+- Back link "← Oda tipleri" to /dashboard/otel/rooms. Headline "Doluluk" or "Doluluk / Müsaitlik".
+- Section A – Form: Oda tipi (select, options from rooms), Tarih (date), Müsait adet (number), button "Kaydet" (gradient). Error area (e.g. "0–X arası girin"). We will wire to POST /api/hotel/availability.
+- Section B – Table of saved availability: columns Oda tipi, Tarih, Müsait adet. Empty state if no rows. We will pass real list from server.
+- Use mock rooms (e.g. "Çift kişilik", "Suite") and 1–2 mock availability rows for layout.
+
+---
+
+Output: Provide the three page components and their form/table sub-components so we can drop them into app/(dashboard)/dashboard/otel/profile/page.tsx, otel/rooms/page.tsx, otel/availability/page.tsx and the corresponding HotelProfileForm, RoomList, AvailabilityForm files. Next.js App Router, React, Tailwind. Use Link from next/link.
+```
+
+#### Adım 7 – Nasıl test edilir?
+
+1. Otel rolü ile giriş → Dashboard → Otel profilim / Oda tipleri / Doluluk.
+2. **Profil:** Geri "Dashboard", başlık "Otel profilim", form kartı, alanlar, Kaydet. Kaydedince PATCH çalışmalı.
+3. **Oda tipleri:** Geri "Otel profilim", başlık "Oda tipleri", ekle formu, tablo. Ekle → POST, liste güncellenmeli.
+4. **Doluluk:** Geri "Oda tipleri", başlık "Doluluk", oda seç + tarih + müsait adet, Kaydet. Tablo güncellenmeli.
+
+#### Sonuç (isteğe bağlı)
+
+- **Projeye uygulandı:** —
+- **Not:** —
 
 ---
 

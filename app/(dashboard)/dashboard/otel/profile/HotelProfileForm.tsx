@@ -63,12 +63,16 @@ export function HotelProfileForm({ initial }: { initial: Initial }) {
   }
 
   const inputClass =
-    "mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500";
-  const labelClass = "block text-sm font-medium text-gray-700";
+    "mt-1 block w-full rounded-lg border border-gray-300 px-4 py-2 text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20";
+  const labelClass = "block text-sm font-semibold text-gray-700";
 
   return (
-    <form onSubmit={onSubmit} className="max-w-xl space-y-4 rounded-lg border border-gray-200 bg-white p-6 shadow-sm">
-      {error && <p className="text-sm text-red-600">{error}</p>}
+    <form onSubmit={onSubmit} className="max-w-3xl space-y-6 rounded-xl border border-gray-100 bg-white p-8 shadow-lg">
+      {error && (
+        <div className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+          {error}
+        </div>
+      )}
       <div>
         <label htmlFor="name" className={labelClass}>Otel adı *</label>
         <input
@@ -206,7 +210,7 @@ export function HotelProfileForm({ initial }: { initial: Initial }) {
         <button
           type="submit"
           disabled={loading}
-          className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
+          className="rounded-lg bg-gradient-to-r from-blue-600 to-cyan-600 px-6 py-2.5 text-sm font-semibold text-white shadow-md transition-all hover:from-blue-700 hover:to-cyan-700 disabled:opacity-50"
         >
           {loading ? "Kaydediliyor..." : "Kaydet"}
         </button>
