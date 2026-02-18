@@ -4,6 +4,16 @@ En güncel en altta.
 
 ---
 
+## 2025-02-15 (Faz 6 – QR kod)
+
+- **QR kod**
+  - Paket: `qrcode` + `@types/qrcode`.
+  - **GET /api/reservations/[id]/qr:** Rezervasyon kodunu QR olarak PNG döndürür. Yetki: rehber kendi, otel kendi oteli.
+  - Rezervasyon detay sayfasında **ReservationQRCard:** QR görseli, "Müşteriye verin – check-in'de otel tarayacak" metni, "PNG indir" butonu.
+- **Dokümantasyon:** PROJECT_PHASES (QR backend + frontend [x]), STATE, LOG güncellendi. Faz 6 tamamlandı; Faz 7’ye geçilebilir.
+
+---
+
 ## 2025-02-15 (Faz 6 kalan)
 
 - **Rezervasyon detay sayfası**

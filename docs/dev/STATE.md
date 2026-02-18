@@ -9,9 +9,9 @@
 | Alan | Değer |
 |------|--------|
 | **Faz** | Faz 6 tamamlandı; Faz 7 veya Faz 10 sırada |
-| **Şu anki odak** | Faz 6 kalan: detay sayfası + iptal tamamlandı |
-| **Tamamlanan** | Faz 1–6 (rezervasyon: oluşturma, listeleme, onay/red, detay sayfası, iptal). v0 tasarım Adım 1–8. |
-| **Sıradaki** | Faz 6: QR kod (opsiyonel). Ardından Faz 7 (Bildirim) veya Faz 10 (Test). |
+| **Şu anki odak** | Faz 6 tamamlandı (QR dahil); Faz 7’ye geçilebilir |
+| **Tamamlanan** | Faz 1–6 (rezervasyon: oluşturma, listeleme, onay/red, detay sayfası, iptal, QR kod). v0 tasarım Adım 1–8. |
+| **Sıradaki** | Faz 7 (Bildirim) veya Faz 10 (Test). |
 
 ---
 

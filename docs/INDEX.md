@@ -75,7 +75,7 @@ Tüm dokümanlar (PRD dahil) **Project Manager** agentı (`.cursor/rules/project
 
 ## 🎯 Proje Durumu
 
-**Güncel durum**: `docs/dev/STATE.md` ve `docs/dev/ROADMAP.md` tek kaynaktır. Faz 1–6 tamamlandı (rezervasyon: oluşturma, listeleme, onay/red, detay sayfası, iptal). v0 UI Adım 1–8 tamamlandı. Sıradaki: Faz 6 QR (opsiyonel), Faz 7 (Bildirim) veya Faz 10 (Test).
+**Güncel durum**: `docs/dev/STATE.md` ve `docs/dev/ROADMAP.md` tek kaynaktır. Faz 1–6 tamamlandı (rezervasyon: oluşturma, listeleme, onay/red, detay sayfası, iptal, QR kod). v0 UI Adım 1–8 tamamlandı. Sıradaki: Faz 7 (Bildirim) veya Faz 10 (Test).
 
 ---
 

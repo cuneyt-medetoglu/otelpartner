@@ -177,7 +177,7 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 - [x] Rezervasyon onay/red API (otel)
 - [x] Rezervasyon durum güncelleme
 - [x] Rezervasyon kodu oluşturma (OP-xxx)
-- [ ] QR kod oluşturma
+- [x] QR kod oluşturma (GET /api/reservations/[id]/qr)
 
 ### Frontend
 - [x] Tasarım: Rezervasyon akışı (v0.app – Adım 6 ile tamamlandı)
@@ -185,7 +185,7 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 - [x] Rezervasyon onay ekranı (otel – listede Onayla/Reddet)
 - [x] Rezervasyon listesi (rehber + otel)
 - [x] Rezervasyon detay sayfası
-- [ ] QR kod görüntüleme
+- [x] QR kod görüntüleme
 - [x] Rezervasyon iptal
 
 ### Özellikler
@@ -196,7 +196,7 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 - [x] Rezervasyon statü yönetimi (onay/red)
 - [x] İptal işlemi
 
-**Yapılmayan maddeler notu (Faz 6):** QR kod: opsiyonel; ileride eklenebilir. Hedef otele bildirim: Faz 7 (bildirim sistemi) ile yapılacak.
+**Yapılmayan maddeler notu (Faz 6):** Hedef otele bildirim: Faz 7 (bildirim sistemi) ile yapılacak.
 
 ---
 

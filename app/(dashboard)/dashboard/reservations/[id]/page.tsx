@@ -4,6 +4,7 @@ import { redirect, notFound } from "next/navigation";
 import { prisma } from "@/lib/db";
 import Link from "next/link";
 import { ReservationDetailActions } from "./ReservationDetailActions";
+import { ReservationQRCard } from "./ReservationQRCard";
 
 const statusLabels: Record<string, string> = {
   pending: "Bekliyor",
@@ -134,6 +135,8 @@ export default async function ReservationDetailPage({
           )}
         </dl>
       </div>
+
+      <ReservationQRCard reservationId={res.id} reservationCode={res.reservationCode} />
     </div>
   );
 }
