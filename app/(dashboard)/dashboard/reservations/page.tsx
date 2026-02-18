@@ -58,6 +58,7 @@ export default async function ReservationsPage() {
       pending: { bg: "bg-amber-100", text: "text-amber-800", label: "Bekliyor" },
       approved: { bg: "bg-green-100", text: "text-green-800", label: "Onaylandı" },
       rejected: { bg: "bg-red-100", text: "text-red-800", label: "Reddedildi" },
+      cancelled: { bg: "bg-gray-100", text: "text-gray-800", label: "İptal edildi" },
     };
     const info = statusMap[status] ?? { bg: "bg-gray-100", text: "text-gray-800", label: status };
     return (
@@ -111,7 +112,11 @@ export default async function ReservationsPage() {
               <tbody>
                 {reservations.map((r) => (
                   <tr key={r.id} className="border-t border-gray-100">
-                    <td className="px-4 py-3 font-mono text-xs text-gray-600">{r.reservationCode}</td>
+                    <td className="px-4 py-3">
+                      <Link href={`/dashboard/reservations/${r.id}`} className="font-mono text-xs text-blue-600 hover:text-cyan-600 hover:underline">
+                        {r.reservationCode}
+                      </Link>
+                    </td>
                     <td className="px-4 py-3 text-gray-600">{r.hotelName ?? r.guideName ?? "—"}</td>
                     <td className="px-4 py-3 text-gray-600">{r.roomType}</td>
                     <td className="px-4 py-3 text-gray-600">{r.checkInDate}</td>

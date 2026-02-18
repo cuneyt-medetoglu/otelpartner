@@ -10,9 +10,9 @@
 | Alan | Değer |
 |------|--------|
 | Faz | Faz 6 – Rezervasyon (MVP çekirdeği tamamlandı) |
-| Şu anki görev | v0 tasarım Adım 1–8 tamamlandı |
-| Tamamlanan | Faz 1–5, Faz 6 (rezervasyon oluşturma, listeleme, onay/red). v0: Login, Register, Dashboard, Katalog, Otel detay, Rezervasyonlar, Otel paneli, Admin. |
-| Sıradaki | Faz 6 kalan (rezervasyon detay sayfası, iptal, QR ops.); veya Faz 7 (Bildirim) / Faz 10 (Test) |
+| Şu anki görev | Faz 6 detay + iptal tamamlandı |
+| Tamamlanan | Faz 1–6 (rezervasyon: oluşturma, listeleme, onay/red, detay sayfası, iptal). v0 Adım 1–8. |
+| Sıradaki | Faz 6: QR (opsiyonel). Faz 7 (Bildirim) veya Faz 10 (Test). |
 
 ---
 
@@ -26,7 +26,7 @@
 | 3 | Otel Profili ve Oda Yönetimi | Tamamlandı |
 | 4 | Görünürlük ve Yetkilendirme | Tamamlandı (otel listed) |
 | 5 | Otel Katalog ve Detay Sayfası | Tamamlandı |
-| 6 | Rezervasyon Sistemi | **Tamamlandı (çekirdek)** – oluştur + liste + onay/red ✓; v0 tasarım ✓. Detay sayfası, iptal, QR bekliyor. |
+| 6 | Rezervasyon Sistemi | **Tamamlandı** – oluştur, liste, onay/red, detay sayfası, iptal ✓. QR opsiyonel. |
 | 7 | Bildirim Sistemi | Bekliyor |
 | 8 | Raporlama ve Komisyon | Bekliyor |
 | 9 | Gelişmiş Admin Dashboard | Bekliyor |

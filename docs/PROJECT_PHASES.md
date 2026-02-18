@@ -184,9 +184,9 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 - [x] Rezervasyon oluşturma formu (katalog otel detayda)
 - [x] Rezervasyon onay ekranı (otel – listede Onayla/Reddet)
 - [x] Rezervasyon listesi (rehber + otel)
-- [ ] Rezervasyon detay sayfası
+- [x] Rezervasyon detay sayfası
 - [ ] QR kod görüntüleme
-- [ ] Rezervasyon iptal
+- [x] Rezervasyon iptal
 
 ### Özellikler
 - [x] Rezervasyon oluşturma
@@ -194,9 +194,9 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 - [x] Rezervasyon onaylama
 - [x] Rezervasyon kodu üretme
 - [x] Rezervasyon statü yönetimi (onay/red)
-- [ ] İptal işlemi
+- [x] İptal işlemi
 
-**Yapılmayan maddeler notu (Faz 6):** Tasarım (rezervasyon akışı): v0 tasarım diliminde 1. sırada. Rezervasyon detay sayfası ve iptal: sıradaki geliştirme adımları. QR kod: opsiyonel; detay sayfası sonrası. Hedef otele bildirim: Faz 7 (bildirim sistemi) ile yapılacak.
+**Yapılmayan maddeler notu (Faz 6):** QR kod: opsiyonel; ileride eklenebilir. Hedef otele bildirim: Faz 7 (bildirim sistemi) ile yapılacak.
 
 ---
 

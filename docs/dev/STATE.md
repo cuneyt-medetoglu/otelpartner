@@ -8,10 +8,10 @@
 
 | Alan | Değer |
 |------|--------|
-| **Faz** | Faz 6 – Rezervasyon Sistemi (MVP çekirdeği tamamlandı) |
-| **Şu anki odak** | v0.app ile UI tasarımı tamamlandı (Adım 1–8) |
-| **Tamamlanan** | Faz 1–5, Faz 6 (rezervasyon oluşturma, listeleme, onay/red). v0 tasarım: Login, Register, Dashboard, Katalog, Otel detay, Rezervasyonlar, Otel paneli (profil/oda/doluluk), Admin (ana sayfa + görünürlük). |
-| **Sıradaki** | Faz 6 kalan maddeler (rezervasyon detay sayfası, iptal, QR ops.); ardından Faz 7 (Bildirim) veya Faz 10 (Test). |
+| **Faz** | Faz 6 tamamlandı; Faz 7 veya Faz 10 sırada |
+| **Şu anki odak** | Faz 6 kalan: detay sayfası + iptal tamamlandı |
+| **Tamamlanan** | Faz 1–6 (rezervasyon: oluşturma, listeleme, onay/red, detay sayfası, iptal). v0 tasarım Adım 1–8. |
+| **Sıradaki** | Faz 6: QR kod (opsiyonel). Ardından Faz 7 (Bildirim) veya Faz 10 (Test). |
 
 ---
 
@@ -34,7 +34,7 @@
 
 ## Devam eden / bloke
 
-- **Devam eden:** Yok (v0 Adım 8 tamamlandı; sıradaki görev seçilecek).
+- **Devam eden:** Yok.
 - **Bloke:** Yok.
 
 ---
