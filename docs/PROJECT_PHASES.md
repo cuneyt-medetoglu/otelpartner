@@ -190,7 +190,7 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 
 ### Özellikler
 - [x] Rezervasyon oluşturma
-- [ ] Hedef otele bildirim
+- [x] Hedef otele bildirim (Faz 7’de e-posta + uygulama içi)
 - [x] Rezervasyon onaylama
 - [x] Rezervasyon kodu üretme
 - [x] Rezervasyon statü yönetimi (onay/red)
@@ -203,21 +203,21 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 ## 🔔 Faz 7: Bildirim Sistemi
 
 ### Backend
-- [ ] Email servis entegrasyonu (Resend)
+- [ ] Email servis entegrasyonu (sonraya bırakıldı – AWS SES)
 - [ ] SMS servis entegrasyonu (Netgsm)
-- [ ] Bildirim template sistemi
-- [ ] Bildirim kuyruğu (Bull/BullMQ)
+- [x] Bildirim template sistemi (e-posta + uygulama içi metin)
+- [ ] Bildirim kuyruğu (Bull/BullMQ) – MVP’de senkron gönderim
 
 ### Frontend
-- [ ] Bildirim tercihleri sayfası
-- [ ] Uygulama içi bildirim merkezi
-- [ ] Bildirim ayarları
+- [x] Bildirim tercihleri sayfası (/dashboard/settings/notifications)
+- [x] Uygulama içi bildirim merkezi (/dashboard/notifications)
+- [x] Bildirim ayarları (e-posta aç/kapa per tip)
 
 ### Özellikler
-- [ ] Yeni rezervasyon bildirimi
-- [ ] Onay bildirimi
-- [ ] İptal bildirimi
-- [ ] Kullanıcı tercih seçimi
+- [x] Yeni rezervasyon bildirimi (otel kullanıcısına e-posta + uygulama içi)
+- [x] Onay bildirimi (rehber kullanıcısına)
+- [x] İptal bildirimi (ilgili tarafa)
+- [x] Kullanıcı tercih seçimi (e-posta: yeni rezervasyon, onay/red, iptal)
 - [ ] Admin zorunlu bildirim
 
 ---
@@ -225,23 +225,23 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 ## 📊 Faz 8: Raporlama ve Komisyon
 
 ### Backend
-- [ ] Rezervasyon raporlama API
-- [ ] Komisyon hesaplama
-- [ ] İstatistik API'leri
+- [x] Rezervasyon raporlama API (GET /api/reports/reservations – tarih/durum filtresi, rehber/otel)
+- [x] Komisyon hesaplama (on-the-fly: onaylı + çıkış tarihi geçmiş = tamamlanan; oran env COMMISSION_RATE_PERCENT, varsayılan %10)
+- [x] İstatistik API'leri (özet: adet, toplam tutar, tamamlanan adet, komisyon toplamı)
 - [ ] PDF rapor oluşturma
 
 ### Frontend
-- [ ] Raporlar sayfası
+- [x] Raporlar sayfası (/dashboard/reports)
 - [ ] Grafik gösterimi (Recharts)
-- [ ] Komisyon raporu
-- [ ] Aylık özet
+- [x] Komisyon raporu (özet kartları: toplam rezervasyon, toplam tutar, tamamlanan, komisyon)
+- [x] Aylık özet (tarih filtresi ile)
 - [ ] PDF export
 
 ### Özellikler
-- [ ] Gönderilen/Alınan rezervasyon raporları
-- [ ] Tamamlanan konaklamalar
-- [ ] Komisyon tutarı hesaplama
-- [ ] Aylık komisyon raporu
+- [x] Gönderilen/Alınan rezervasyon raporları (tablo + filtre)
+- [x] Tamamlanan konaklamalar (onaylı + çıkış geçmiş)
+- [x] Komisyon tutarı hesaplama (tahmini)
+- [x] Aylık özet (tarih aralığı ile)
 - [ ] Ödeme durumu takibi
 
 ---

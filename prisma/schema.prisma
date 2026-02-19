@@ -33,8 +33,10 @@ model User {
   createdAt     DateTime   @default(now()) @map("created_at")
   updatedAt     DateTime   @updatedAt @map("updated_at")
 
-  hotel  Hotel?
-  guide  Guide?
+  hotel                  Hotel?
+  guide                  Guide?
+  notifications          Notification[]
+  notificationPreference NotificationPreference?
 }
 
 model Hotel {
@@ -134,4 +136,44 @@ enum ReservationStatus {
   approved
   rejected
   cancelled
+}
+
+// Faz 7: Bildirimler
+enum NotificationType {
+  reservation_received   // Otel: yeni rezervasyon
+  reservation_approved   // Rehber: onaylandı
+  reservation_rejected   // Rehber: reddedildi
+  reservation_cancelled  // İlgili taraf: iptal
+}
+
+model Notification {
+  id                 String           @id @default(cuid())
+  userId             String           @map("user_id")
+  type               NotificationType
+  title              String
+  message            String           @db.Text
+  relatedEntityType  String?          @map("related_entity_type") // "reservation"
+  relatedEntityId   String?          @map("related_entity_id")
+  isRead             Boolean          @default(false) @map("is_read")
+  readAt             DateTime?       @map("read_at")
+  createdAt          DateTime         @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, isRead])
+  @@map("notifications")
+}
+
+model NotificationPreference {
+  id                    String   @id @default(cuid())
+  userId                String   @unique @map("user_id")
+  emailNewReservation   Boolean  @default(true) @map("email_new_reservation")
+  emailApproval         Boolean  @default(true) @map("email_approval")
+  emailCancellation     Boolean  @default(true) @map("email_cancellation")
+  createdAt             DateTime @default(now()) @map("created_at")
+  updatedAt             DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notification_preferences")
 }

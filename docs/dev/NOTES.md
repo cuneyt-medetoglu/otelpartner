@@ -45,7 +45,7 @@ Aşağıdaki adımlar sizin ortamınızda yapılacak (API anahtarı, hesap, loka
    Proje ilk çalıştırmadan önce `.env` oluşturulacak (`.env.example`’dan kopyalanacak). İçinde en azından:
    - `DATABASE_URL` (PostgreSQL connection string)
    - NextAuth için `NEXTAUTH_SECRET`, `NEXTAUTH_URL` (localhost:3010)
-   - (İleride) Cloudinary, Resend vb. için gerekli anahtarlar  
+   - (İleride) Cloudinary, e-posta (AWS SES vb.) için gerekli anahtarlar  
    Bu dosyayı **siz** oluşturup doldurmalısınız; repo’ya commit edilmez (`.gitignore`’da).
 
 4. **İlk migration**  

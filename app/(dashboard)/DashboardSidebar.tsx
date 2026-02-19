@@ -19,11 +19,18 @@ const hotelNav: NavItem[] = [
   { href: "/dashboard/otel/rooms", label: "Oda tipleri" },
   { href: "/dashboard/otel/availability", label: "Doluluk" },
   { href: "/dashboard/reservations", label: "Rezervasyonlar" },
+  { href: "/dashboard/reports", label: "Raporlar" },
 ];
 
 const guideNav: NavItem[] = [
   { href: "/dashboard/catalog", label: "Otel kataloğu" },
   { href: "/dashboard/reservations", label: "Rezervasyonlarım" },
+  { href: "/dashboard/reports", label: "Raporlar" },
+];
+
+const commonNav: NavItem[] = [
+  { href: "/dashboard/notifications", label: "Bildirimler" },
+  { href: "/dashboard/settings/notifications", label: "Bildirim tercihleri" },
 ];
 
 export function DashboardSidebar({
@@ -69,7 +76,7 @@ export function DashboardSidebar({
 
       {/* Nav */}
       <nav className="flex-1 space-y-1 overflow-y-auto p-4">
-        {navItems.map((item) => {
+        {[...navItems, ...commonNav].map((item) => {
           const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
           return (
             <Link

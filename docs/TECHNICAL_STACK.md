@@ -106,9 +106,8 @@ Proje başlangıcında tek bir uygulama olarak başlayıp, ileride ihtiyaç olur
 ## 🔔 Bildirim Servisleri
 
 ### Email
-- **Resend** (modern, developer-friendly)
-- **SendGrid** (enterprise)
-- **Amazon SES** (ucuz, güvenilir)
+- **Amazon SES** (AWS hesabı ile; domain doğrulama, ucuz, güvenilir)
+- **SendGrid** (enterprise alternatif)
 
 ### SMS
 - **Twilio** (global)
@@ -239,7 +238,7 @@ Backend:   Next.js API Routes / NestJS
 Database:  PostgreSQL + Prisma
 Auth:      NextAuth.js
 Storage:   Cloudinary
-Email:     Resend
+Email:     AWS SES (veya ileride)
 SMS:       Netgsm
 Deploy:    AWS EC2 (production); Vercel alternatif.
 ```

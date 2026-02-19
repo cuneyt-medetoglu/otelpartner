@@ -3,6 +3,11 @@ import { authOptions } from "@/lib/auth";
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { z } from "zod";
+import {
+  notifyReservationApproved,
+  notifyReservationCancelled,
+  notifyReservationRejected,
+} from "@/lib/notifications";
 
 const bodySchema = z.object({
   status: z.enum(["approved", "rejected", "cancelled"]),
@@ -60,6 +65,47 @@ export async function PATCH(
       where: { id },
       data: { status: "cancelled" },
     });
+
+    // İptal bildirimi: diğer tarafa
+    try {
+      const full = await prisma.reservation.findUnique({
+        where: { id },
+        include: {
+          guide: true,
+          hotel: { include: { user: { select: { id: true, email: true } } } },
+        },
+      });
+      if (full?.guide && full.hotel?.user) {
+        const guideUser = await prisma.user.findUnique({
+          where: { id: full.guide.userId },
+          select: { id: true, email: true },
+        });
+        if (session.user.role === "guide" && guideUser) {
+          await notifyReservationCancelled({
+            targetUserId: full.hotel.user.id,
+            targetUserEmail: full.hotel.user.email,
+            reservationCode: full.reservationCode,
+            cancelledBy: "guide",
+            otherPartyName: `${full.guide.firstName} ${full.guide.lastName}`,
+            reservationId: id,
+          });
+        } else if (session.user.role === "hotel") {
+          if (guideUser) {
+            await notifyReservationCancelled({
+              targetUserId: guideUser.id,
+              targetUserEmail: guideUser.email,
+              reservationCode: full.reservationCode,
+              cancelledBy: "hotel",
+              otherPartyName: full.hotel.name,
+              reservationId: id,
+            });
+          }
+        }
+      }
+    } catch (e) {
+      console.error("notifyReservationCancelled error:", e);
+    }
+
     return NextResponse.json({ ok: true, status: "cancelled" });
   }
 
@@ -82,6 +128,45 @@ export async function PATCH(
       ...(parsed.data.status === "rejected" && parsed.data.rejectionReason != null && { rejectionReason: parsed.data.rejectionReason }),
     },
   });
+
+  // Onay/red bildirimi: rehber kullanıcısına
+  try {
+    const full = await prisma.reservation.findUnique({
+      where: { id },
+      include: {
+        guide: true,
+        hotel: { select: { name: true } },
+      },
+    });
+    if (full?.guide) {
+      const guideUser = await prisma.user.findUnique({
+        where: { id: full.guide.userId },
+        select: { id: true, email: true },
+      });
+      if (guideUser) {
+        if (parsed.data.status === "approved") {
+          await notifyReservationApproved({
+            guideUserId: guideUser.id,
+            guideUserEmail: guideUser.email,
+            reservationCode: full.reservationCode,
+            hotelName: full.hotel.name,
+            reservationId: id,
+          });
+        } else {
+          await notifyReservationRejected({
+            guideUserId: guideUser.id,
+            guideUserEmail: guideUser.email,
+            reservationCode: full.reservationCode,
+            hotelName: full.hotel.name,
+            rejectionReason: full.rejectionReason,
+            reservationId: id,
+          });
+        }
+      }
+    }
+  } catch (e) {
+    console.error("notifyReservationApproved/Rejected error:", e);
+  }
 
   return NextResponse.json({ ok: true, status: parsed.data.status });
 }

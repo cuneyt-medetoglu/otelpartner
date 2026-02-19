@@ -4,6 +4,24 @@ En güncel en altta.
 
 ---
 
+## 2025-02-19 (Faz 8 – Raporlama)
+
+- **API:** GET /api/reports/reservations – rehber/otel için rezervasyon listesi (startDate, endDate, status filtresi), özet: count, totalPriceSum, completedCount, commissionSum. Tamamlanan = onaylı + çıkış tarihi geçmiş; komisyon = toplam tutar × oran (COMMISSION_RATE_PERCENT, varsayılan %10).
+- **Frontend:** /dashboard/reports – filtreler (başlangıç, bitiş, durum), 4 özet kartı, rezervasyon tablosu (koda tıklanınca detay). Sidebar’a Raporlar linki (rehber + otel).
+- **.env:** COMMISSION_RATE_PERCENT (opsiyonel) notu eklendi.
+- **Dokümantasyon:** PROJECT_PHASES (Faz 8 checkbox’ları), STATE güncellendi.
+
+---
+
+## 2025-02-19 (Faz 7 – Bildirim)
+
+- **Backend:** Prisma Notification + NotificationPreference; lib/notifications.ts ile yeni rezervasyon / onay / red / iptal bildirimleri (uygulama içi kayıt; e-posta şu an devre dışı). Rezervasyon oluşturma ve PATCH route’larına tetikleyiciler eklendi.
+- **API:** GET /api/notifications, PATCH /api/notifications/[id], GET/PATCH /api/notifications/preferences.
+- **Frontend:** /dashboard/notifications (liste, okundu işaretle, rezervasyona link), /dashboard/settings/notifications (e-posta tercihleri). Sidebar’a Bildirimler ve Bildirim tercihleri linkleri eklendi.
+- **Dokümantasyon:** PROJECT_PHASES (Faz 7 checkbox’ları), STATE, ROADMAP, LOG güncellendi.
+
+---
+
 ## 2025-02-15 (Faz 6 – QR kod)
 
 - **QR kod**

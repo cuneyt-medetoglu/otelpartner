@@ -123,6 +123,29 @@ export async function POST(req: Request) {
     },
   });
 
+  // Bildirim: otel kullanıcısına yeni rezervasyon (e-posta + uygulama içi)
+  try {
+    const hotelWithUser = await prisma.hotel.findUnique({
+      where: { id: hotelId },
+      include: { user: { select: { id: true, email: true } } },
+    });
+    if (hotelWithUser?.user) {
+      const { notifyNewReservation } = await import("@/lib/notifications");
+      await notifyNewReservation({
+        hotelUserId: hotelWithUser.user.id,
+        hotelUserEmail: hotelWithUser.user.email,
+        reservationCode: res.reservationCode,
+        guideName: `${guide.firstName} ${guide.lastName}`,
+        roomType: room.roomType,
+        checkIn: checkInDate,
+        checkOut: checkOutDate,
+        reservationId: res.id,
+      });
+    }
+  } catch (e) {
+    console.error("notifyNewReservation error:", e);
+  }
+
   return NextResponse.json({
     id: res.id,
     reservationCode: res.reservationCode,
