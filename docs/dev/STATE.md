@@ -8,10 +8,10 @@
 
 | Alan | Değer |
 |------|--------|
-| **Faz** | Faz 8 başlatıldı; raporlama sayfası ve API tamamlandı |
-| **Şu anki odak** | Faz 8 Raporlama (rapor API + sayfa ✓) |
-| **Tamamlanan** | Faz 1–8 (raporlar: filtre, tablo, özet, komisyon tahmini). v0 tasarım Adım 1–8. |
-| **Sıradaki** | Faz 8 kalan (grafik, PDF). Sonra Faz 10 (Test) veya Faz 9. |
+| **Faz** | Faz 9 Gelişmiş Admin Dashboard tamamlandı |
+| **Şu anki odak** | Faz 10 (Test) veya ek iyileştirmeler |
+| **Tamamlanan** | Faz 1–9 (admin: istatistik API, ek kartlar, trend grafiği, son rezervasyonlar). v0 tasarım Adım 1–8. |
+| **Sıradaki** | Faz 10 (Test) veya sistem log / log viewer (opsiyonel). |
 
 ---
 

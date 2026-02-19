@@ -4,6 +4,16 @@ En güncel en altta.
 
 ---
 
+## 2025-02-15 (Faz 9 – Gelişmiş Admin Dashboard)
+
+- **API:** GET /api/admin/stats – admin için istatistikler: kullanıcı sayıları (bekleyen, aktif otel/rehber, askıda), toplam/bu ay rezervasyon, otel/listede otel sayısı, duruma göre rezervasyon, son 6 ay aylık rezervasyon sayıları, son 15 rezervasyon listesi.
+- **Frontend:** Admin paneli genişletildi: ikinci kart satırı (toplam rezervasyon, bu ay, otel sayısı, listede otel), Recharts ile “Rezervasyon trendi (son 6 ay)” bar grafiği, “Son rezervasyonlar” tablosu (kod, otel, rehber, oda, durum, tarih, detay linki).
+- **Rezervasyon detay:** Admin rolü tüm rezervasyonları görüntüleyebilir (/dashboard/reservations/[id]).
+- **Bağımlılık:** recharts eklendi.
+- **Dokümantasyon:** PROJECT_PHASES (Faz 9 checkbox’ları), STATE, LOG güncellendi. Sistem log API / log viewer sonraya bırakıldı.
+
+---
+
 ## 2025-02-19 (Faz 8 – Raporlama)
 
 - **API:** GET /api/reports/reservations – rehber/otel için rezervasyon listesi (startDate, endDate, status filtresi), özet: count, totalPriceSum, completedCount, commissionSum. Tamamlanan = onaylı + çıkış tarihi geçmiş; komisyon = toplam tutar × oran (COMMISSION_RATE_PERCENT, varsayılan %10).

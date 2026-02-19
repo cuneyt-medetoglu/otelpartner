@@ -27,7 +27,8 @@ export default async function ReservationDetailPage({
 }) {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
-  if (session.user.role !== "guide" && session.user.role !== "hotel") redirect("/dashboard");
+  if (session.user.role !== "guide" && session.user.role !== "hotel" && session.user.role !== "admin")
+    redirect("/dashboard");
 
   const { id } = await params;
   const res = await prisma.reservation.findUnique({
@@ -41,7 +42,9 @@ export default async function ReservationDetailPage({
 
   if (!res) notFound();
 
-  if (session.user.role === "guide") {
+  if (session.user.role === "admin") {
+    // Admin tüm rezervasyonları görebilir
+  } else if (session.user.role === "guide") {
     const guide = await prisma.guide.findUnique({ where: { userId: session.user.id } });
     if (!guide || res.guideId !== guide.id) notFound();
   } else {

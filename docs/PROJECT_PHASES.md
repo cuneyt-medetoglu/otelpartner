@@ -249,23 +249,20 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 ## 🎛️ Faz 9: Gelişmiş Admin Dashboard
 
 ### Backend
-- [ ] Dashboard istatistik API'leri
-- [ ] Sistem log API
-- [ ] Aktivite takibi
+- [x] Dashboard istatistik API'leri (`GET /api/admin/stats`)
+- [ ] Sistem log API (sonraya bırakıldı)
+- [ ] Aktivite takibi (son rezervasyonlar ile karşılandı)
 
 ### Frontend
-- [ ] Detaylı dashboard
-- [ ] Kullanıcı aktiviteleri
-- [ ] Sistem sağlığı
-- [ ] Grafikler ve metrikler
-- [ ] Log viewer
+- [x] Detaylı dashboard (ek kartlar, son rezervasyonlar, trend grafiği)
+- [x] Grafikler ve metrikler (Recharts, son 6 ay rezervasyon trendi)
+- [ ] Kullanıcı aktiviteleri / Sistem sağlığı / Log viewer (sonraya bırakıldı)
 
 ### Özellikler
-- [ ] Toplam istatistikler
-- [ ] Trend grafikleri
-- [ ] Kullanıcı aktivite geçmişi
-- [ ] Sistem logları
-- [ ] Hata raporları
+- [x] Toplam istatistikler (kullanıcı, otel, rezervasyon, bu ay)
+- [x] Trend grafikleri (son 6 ay rezervasyon sayısı)
+- [x] Son rezervasyonlar tablosu (admin paneli)
+- [ ] Sistem logları / Hata raporları (sonraya bırakıldı)
 
 ---
 
