@@ -29,7 +29,7 @@ export function ReservationsChart({ data }: { data: Point[] }) {
           <XAxis dataKey="label" tick={{ fontSize: 12 }} />
           <YAxis allowDecimals={false} tick={{ fontSize: 12 }} />
           <Tooltip
-            formatter={(value: number) => [value, "Rezervasyon"]}
+            formatter={(value: number | undefined) => [value ?? 0, "Rezervasyon"]}
             labelFormatter={(_, payload) => payload[0]?.payload?.label ?? ""}
           />
           <Bar dataKey="count" radius={[4, 4, 0, 0]}>
