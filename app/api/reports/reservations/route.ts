@@ -64,7 +64,7 @@ export async function GET(req: Request) {
 
   const rows = await prisma.reservation.findMany({
     where: { hotelId: hotel.id, ...dateFilter, ...statusFilter },
-    include: { guide: true, room: { select: { roomType: true } } },
+    include: { guide: true, senderHotel: { select: { name: true } }, room: { select: { roomType: true } } },
     orderBy: { checkInDate: "desc" },
     take: 500,
   });
@@ -72,7 +72,7 @@ export async function GET(req: Request) {
   const list = rows.map((r) => ({
     id: r.id,
     reservationCode: r.reservationCode,
-    guideName: `${r.guide.firstName} ${r.guide.lastName}`,
+    guideName: r.guide ? `${r.guide.firstName} ${r.guide.lastName}` : r.senderHotel?.name ?? "—",
     roomType: r.room.roomType,
     checkInDate: r.checkInDate.toISOString().slice(0, 10),
     checkOutDate: r.checkOutDate.toISOString().slice(0, 10),

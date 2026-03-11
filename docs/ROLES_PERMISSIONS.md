@@ -72,6 +72,7 @@ Sistemde 3 ana rol bulunmaktadır:
 - ✅ Manuel oda bloke/açma
 
 ### Otel Görüntüleme
+- ✅ **Otel Kataloğu**: Hem Otel hem Rehber rolü katalogu görüntüleyebilir (menü ve hızlı erişim). Yetki kurallarına göre diğer otellere rezervasyon gönderebilir.
 - ✅ İzin verilen otelleri görüntüleme (admin config'e göre)
 - ✅ Otel detaylarını görme
 - ✅ Müsaitlik durumunu görme

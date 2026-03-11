@@ -15,7 +15,8 @@ export default async function CatalogPage({
 }) {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
-  if (session.user.role !== "guide" && session.user.role !== "admin") redirect("/dashboard");
+  const canAccessCatalog = ["guide", "admin", "hotel"].includes(session.user.role ?? "");
+  if (!canAccessCatalog) redirect("/dashboard");
 
   const params = await searchParams;
   const region = params.region ?? undefined;

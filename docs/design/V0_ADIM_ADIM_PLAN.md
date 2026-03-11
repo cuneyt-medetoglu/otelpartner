@@ -213,7 +213,7 @@ Part 2 – Dashboard home page (content inside main area).
 ### Adım 3 – Nasıl test edilir?
 
 1. Giriş yap (örn. admin veya rehber) → `/dashboard`.
-2. Sol tarafta sidebar: OtelPartner logosu, rolüne göre menü linkleri (Admin ise Admin / Otel görünürlük; Otel ise Otel profilim, Oda tipleri, Doluluk, Rezervasyonlar; Rehber ise Otel kataloğu, Rezervasyonlarım), altta email ve Çıkış yap.
+2. Sol tarafta sidebar: OtelPartner logosu, rolüne göre menü linkleri (Admin ise Admin / Otel görünürlük; Otel ise Otel profilim, Oda tipleri, Doluluk, **Otel kataloğu**, Rezervasyonlar; Rehber ise Otel kataloğu, Rezervasyonlarım), altta email ve Çıkış yap.
 3. Sağda ana alan: Hoş geldiniz metni, rol bazlı hızlı linkler (kart veya buton), çıkış linki.
 4. Linklere tıklayınca ilgili sayfaya gitmeli (mevcut sayfalar henüz eski tasarımda olabilir; Dashboard shell ve ana sayfa modern olsun).
 

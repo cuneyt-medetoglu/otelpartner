@@ -10,24 +10,26 @@ export async function GET(
 ) {
   const session = await getServerSession(authOptions);
   if (!session?.user?.id) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  if (session.user.role !== "guide" && session.user.role !== "hotel") {
+  if (session.user.role !== "guide" && session.user.role !== "hotel" && session.user.role !== "admin") {
     return NextResponse.json({ error: "Yetkisiz" }, { status: 403 });
   }
 
   const { id } = await params;
   const res = await prisma.reservation.findUnique({
     where: { id },
-    select: { id: true, reservationCode: true, guideId: true, hotelId: true },
+    select: { id: true, reservationCode: true, guideId: true, hotelId: true, senderHotelId: true },
   });
 
   if (!res) return NextResponse.json({ error: "Rezervasyon bulunamadı" }, { status: 404 });
 
-  if (session.user.role === "guide") {
+  if (session.user.role === "admin") {
+    // Admin tüm rezervasyonların QR kodunu görebilir
+  } else if (session.user.role === "guide") {
     const guide = await prisma.guide.findUnique({ where: { userId: session.user.id } });
     if (!guide || res.guideId !== guide.id) return NextResponse.json({ error: "Yetkisiz" }, { status: 403 });
   } else {
     const hotel = await prisma.hotel.findUnique({ where: { userId: session.user.id } });
-    if (!hotel || res.hotelId !== hotel.id) return NextResponse.json({ error: "Yetkisiz" }, { status: 403 });
+    if (!hotel || (res.hotelId !== hotel.id && res.senderHotelId !== hotel.id)) return NextResponse.json({ error: "Yetkisiz" }, { status: 403 });
   }
 
   try {

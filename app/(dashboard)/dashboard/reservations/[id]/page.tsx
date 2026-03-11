@@ -36,6 +36,7 @@ export default async function ReservationDetailPage({
     include: {
       hotel: { select: { name: true, city: true, region: true } },
       guide: true,
+      senderHotel: { select: { name: true } },
       room: { select: { roomType: true } },
     },
   });
@@ -49,7 +50,7 @@ export default async function ReservationDetailPage({
     if (!guide || res.guideId !== guide.id) notFound();
   } else {
     const hotel = await prisma.hotel.findUnique({ where: { userId: session.user.id } });
-    if (!hotel || res.hotelId !== hotel.id) notFound();
+    if (!hotel || (res.hotelId !== hotel.id && res.senderHotelId !== hotel.id)) notFound();
   }
 
   const checkIn = res.checkInDate.toISOString().slice(0, 10);
@@ -61,6 +62,12 @@ export default async function ReservationDetailPage({
     hour: "2-digit",
     minute: "2-digit",
   });
+
+  let isIncomingForHotelVal = false;
+  if (session.user.role === "hotel") {
+    const hotel = await prisma.hotel.findUnique({ where: { userId: session.user.id! } });
+    isIncomingForHotelVal = !!hotel && res.hotelId === hotel.id;
+  }
 
   return (
     <div className="max-w-7xl space-y-6">
@@ -85,7 +92,7 @@ export default async function ReservationDetailPage({
               {statusLabels[res.status] ?? res.status}
             </span>
           </div>
-          <ReservationDetailActions reservationId={res.id} status={res.status} role={session.user.role!} />
+          <ReservationDetailActions reservationId={res.id} status={res.status} role={session.user.role!} isIncomingForHotel={isIncomingForHotelVal} />
         </div>
 
         <dl className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -98,8 +105,10 @@ export default async function ReservationDetailPage({
           </div>
           {session.user.role === "hotel" && (
             <div>
-              <dt className="text-sm font-semibold text-gray-500">Rehber</dt>
-              <dd className="mt-0.5 text-gray-900">{res.guide.firstName} {res.guide.lastName}</dd>
+              <dt className="text-sm font-semibold text-gray-500">Gönderen</dt>
+              <dd className="mt-0.5 text-gray-900">
+                {res.guide ? `${res.guide.firstName} ${res.guide.lastName}` : res.senderHotel?.name ?? "—"}
+              </dd>
             </div>
           )}
           <div>

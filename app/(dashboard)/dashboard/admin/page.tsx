@@ -55,6 +55,7 @@ export default async function AdminPage() {
       include: {
         hotel: { select: { name: true } },
         guide: true,
+        senderHotel: { select: { name: true } },
         room: { select: { roomType: true } },
       },
     }),
@@ -153,7 +154,7 @@ export default async function AdminPage() {
                 <tr>
                   <th className="px-4 py-3 text-left font-semibold text-gray-700">Kod</th>
                   <th className="px-4 py-3 text-left font-semibold text-gray-700">Otel</th>
-                  <th className="px-4 py-3 text-left font-semibold text-gray-700">Rehber</th>
+                  <th className="px-4 py-3 text-left font-semibold text-gray-700">Gönderen</th>
                   <th className="px-4 py-3 text-left font-semibold text-gray-700">Oda</th>
                   <th className="px-4 py-3 text-left font-semibold text-gray-700">Durum</th>
                   <th className="px-4 py-3 text-left font-semibold text-gray-700">Tarih</th>
@@ -168,7 +169,7 @@ export default async function AdminPage() {
                     </td>
                     <td className="px-4 py-3 text-gray-600">{r.hotel.name}</td>
                     <td className="whitespace-nowrap px-4 py-3 text-gray-600">
-                      {r.guide.firstName} {r.guide.lastName}
+                      {r.guide ? `${r.guide.firstName} ${r.guide.lastName}` : r.senderHotel?.name ?? "—"}
                     </td>
                     <td className="px-4 py-3 text-gray-600">{r.room.roomType}</td>
                     <td className="whitespace-nowrap px-4 py-3">

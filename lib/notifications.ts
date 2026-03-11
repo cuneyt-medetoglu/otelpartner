@@ -39,12 +39,12 @@ export async function createNotification(params: {
   });
 }
 
-/** Otel kullanıcısına: Yeni rezervasyon bildirimi */
+/** Otel kullanıcısına: Yeni rezervasyon bildirimi. senderLabel: "Rehber Ad Soyad" veya "Otel X" (gönderen otel adı). */
 export async function notifyNewReservation(params: {
   hotelUserId: string;
   hotelUserEmail: string;
   reservationCode: string;
-  guideName: string;
+  senderLabel: string;  // "Rehber X" veya "Otel X"
   roomType: string;
   checkIn: string;
   checkOut: string;
@@ -52,7 +52,7 @@ export async function notifyNewReservation(params: {
 }) {
   const prefs = await getOrCreatePreference(params.hotelUserId);
   const title = "Yeni rezervasyon";
-  const message = `${params.guideName} tarafından ${params.roomType} için ${params.checkIn}–${params.checkOut} tarihlerinde rezervasyon (${params.reservationCode}) oluşturuldu.`;
+  const message = `${params.senderLabel} tarafından ${params.roomType} için ${params.checkIn}–${params.checkOut} tarihlerinde rezervasyon (${params.reservationCode}) oluşturuldu.`;
 
   await createNotification({
     userId: params.hotelUserId,

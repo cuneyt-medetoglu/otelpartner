@@ -169,6 +169,7 @@
 - [ ] Bildirim merkezi
 
 ### Otel Katalog ve Yönlendirme Listesi
+- [ ] **Katalog erişimi**: Hem **Otel** hem **Rehber** rolü otel kataloğunu görüntüleyebilir ve (yetki kurallarına göre) diğer otellere rezervasyon gönderebilir.
 - [ ] Otel kartları (fotoğraf, isim, fiyat)
 - [ ] **Varsayılan sıralama**: Yakın oteller önce (mesafe / coğrafi yakınlık). Bu bir default config’tir; otel veya rehber listeyi farklı kriterlere göre de sıralayabilir.
 - [ ] **Sıralama seçenekleri** (kullanıcı tarafından seçilebilir): Mesafe (varsayılan), fiyat (artan/azalan), yıldız, tesis özellikleri, müsait oda sayısı vb. Sektörde yaygın kullanılan tüm kriterler listeye eklenebilir.

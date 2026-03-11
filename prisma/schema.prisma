@@ -60,7 +60,8 @@ model Hotel {
 
   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   rooms        Room[]
-  reservations Reservation[]
+  reservations Reservation[]  // Hedef otel olarak gelen rezervasyonlar
+  sentReservations Reservation[] @relation("SentReservations")  // Bu otelin gönderdiği rezervasyonlar
 }
 
 model Room {
@@ -111,8 +112,9 @@ model Guide {
 model Reservation {
   id             String           @id @default(cuid())
   reservationCode String         @unique @map("reservation_code")
-  guideId        String           @map("guide_id")
-  hotelId        String           @map("hotel_id")
+  guideId        String?          @map("guide_id")   // Rehber gönderdiyse dolu
+  senderHotelId  String?         @map("sender_hotel_id")  // Otel gönderdiyse dolu (XOR guideId)
+  hotelId        String           @map("hotel_id")   // Hedef otel
   roomId         String           @map("room_id")
   checkInDate    DateTime         @map("check_in_date") @db.Date
   checkOutDate   DateTime         @map("check_out_date") @db.Date
@@ -124,9 +126,10 @@ model Reservation {
   createdAt      DateTime         @default(now()) @map("created_at")
   updatedAt      DateTime         @updatedAt @map("updated_at")
 
-  guide Guide @relation("GuideReservations", fields: [guideId], references: [id], onDelete: Cascade)
-  hotel Hotel @relation(fields: [hotelId], references: [id], onDelete: Cascade)
-  room  Room  @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  guide      Guide? @relation("GuideReservations", fields: [guideId], references: [id], onDelete: Cascade)
+  senderHotel Hotel? @relation("SentReservations", fields: [senderHotelId], references: [id], onDelete: Cascade)
+  hotel      Hotel  @relation(fields: [hotelId], references: [id], onDelete: Cascade)
+  room       Room   @relation(fields: [roomId], references: [id], onDelete: Cascade)
 
   @@map("reservations")
 }

@@ -13,7 +13,8 @@ export default async function CatalogHotelPage({
 }) {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/login");
-  if (session.user.role !== "guide" && session.user.role !== "admin") redirect("/dashboard");
+  const canAccessCatalog = ["guide", "admin", "hotel"].includes(session.user.role ?? "");
+  if (!canAccessCatalog) redirect("/dashboard");
 
   const { id } = await params;
   const hotel = await prisma.hotel.findFirst({
@@ -100,7 +101,7 @@ export default async function CatalogHotelPage({
         </div>
 
         <AvailabilityCheck hotelId={hotel.id} />
-        {session.user.role === "guide" && (
+        {(session.user.role === "guide" || session.user.role === "hotel") && (
           <BookForm hotelId={hotel.id} rooms={hotel.rooms.map((r) => ({ id: r.id, roomType: r.roomType, totalCount: r.totalCount }))} />
         )}
       </div>

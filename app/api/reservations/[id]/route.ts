@@ -44,7 +44,6 @@ export async function PATCH(
   const status = parsed.data.status;
 
   if (status === "cancelled") {
-    // Rehber: sadece kendi rezervasyonunu, pending veya approved iken iptal edebilir. Otel: kendi otelindeki rezervasyonu iptal edebilir.
     const canCancel =
       res.status === "pending" || res.status === "approved";
     if (!canCancel) {
@@ -57,7 +56,7 @@ export async function PATCH(
       }
     } else {
       const hotel = await prisma.hotel.findUnique({ where: { userId: session.user.id } });
-      if (!hotel || res.hotelId !== hotel.id) {
+      if (!hotel || (res.hotelId !== hotel.id && res.senderHotelId !== hotel.id)) {
         return NextResponse.json({ error: "Bu rezervasyona erişim yok" }, { status: 403 });
       }
     }
@@ -66,40 +65,63 @@ export async function PATCH(
       data: { status: "cancelled" },
     });
 
-    // İptal bildirimi: diğer tarafa
+    // İptal bildirimi: diğer tarafa (rehber veya hedef/gönderen otel)
     try {
       const full = await prisma.reservation.findUnique({
         where: { id },
         include: {
           guide: true,
+          senderHotel: { include: { user: { select: { id: true, email: true } } } },
           hotel: { include: { user: { select: { id: true, email: true } } } },
         },
       });
-      if (full?.guide && full.hotel?.user) {
-        const guideUser = await prisma.user.findUnique({
-          where: { id: full.guide.userId },
-          select: { id: true, email: true },
+      if (!full) return NextResponse.json({ ok: true, status: "cancelled" });
+      if (session.user.role === "guide" && full.hotel?.user) {
+        await notifyReservationCancelled({
+          targetUserId: full.hotel.user.id,
+          targetUserEmail: full.hotel.user.email,
+          reservationCode: full.reservationCode,
+          cancelledBy: "guide",
+          otherPartyName: `${full.guide?.firstName ?? ""} ${full.guide?.lastName ?? ""}`.trim() || "Rehber",
+          reservationId: id,
         });
-        if (session.user.role === "guide" && guideUser) {
-          await notifyReservationCancelled({
-            targetUserId: full.hotel.user.id,
-            targetUserEmail: full.hotel.user.email,
-            reservationCode: full.reservationCode,
-            cancelledBy: "guide",
-            otherPartyName: `${full.guide.firstName} ${full.guide.lastName}`,
-            reservationId: id,
+      } else if (session.user.role === "hotel") {
+        const myHotel = await prisma.hotel.findUnique({ where: { userId: session.user.id } });
+        if (!myHotel) return NextResponse.json({ ok: true, status: "cancelled" });
+        const iAmTarget = full.hotelId === myHotel.id;
+        if (iAmTarget && full.guide) {
+          const guideUser = await prisma.user.findUnique({
+            where: { id: full.guide.userId },
+            select: { id: true, email: true },
           });
-        } else if (session.user.role === "hotel") {
           if (guideUser) {
             await notifyReservationCancelled({
               targetUserId: guideUser.id,
               targetUserEmail: guideUser.email,
               reservationCode: full.reservationCode,
               cancelledBy: "hotel",
-              otherPartyName: full.hotel.name,
+              otherPartyName: full.hotel?.name ?? "Otel",
               reservationId: id,
             });
           }
+        } else if (iAmTarget && full.senderHotel?.user) {
+          await notifyReservationCancelled({
+            targetUserId: full.senderHotel.user.id,
+            targetUserEmail: full.senderHotel.user.email,
+            reservationCode: full.reservationCode,
+            cancelledBy: "hotel",
+            otherPartyName: full.hotel?.name ?? "Otel",
+            reservationId: id,
+          });
+        } else if (full.senderHotelId === myHotel.id && full.hotel?.user) {
+          await notifyReservationCancelled({
+            targetUserId: full.hotel.user.id,
+            targetUserEmail: full.hotel.user.email,
+            reservationCode: full.reservationCode,
+            cancelledBy: "hotel",
+            otherPartyName: full.senderHotel?.name ?? "Otel",
+            reservationId: id,
+          });
         }
       }
     } catch (e) {
@@ -109,7 +131,7 @@ export async function PATCH(
     return NextResponse.json({ ok: true, status: "cancelled" });
   }
 
-  // Onay / Red: sadece otel, sadece pending
+  // Onay / Red: sadece otel (hedef otel), sadece pending
   if (session.user.role !== "hotel") {
     return NextResponse.json({ error: "Onay/red sadece otel tarafından yapılabilir" }, { status: 403 });
   }
@@ -129,12 +151,13 @@ export async function PATCH(
     },
   });
 
-  // Onay/red bildirimi: rehber kullanıcısına
+  // Onay/red bildirimi: gönderene (rehber veya gönderen otel kullanıcısı)
   try {
     const full = await prisma.reservation.findUnique({
       where: { id },
       include: {
         guide: true,
+        senderHotel: { include: { user: { select: { id: true, email: true } } } },
         hotel: { select: { name: true } },
       },
     });
@@ -160,6 +183,45 @@ export async function PATCH(
             hotelName: full.hotel.name,
             rejectionReason: full.rejectionReason,
             reservationId: id,
+          });
+        }
+      }
+    } else if (full?.senderHotel?.user) {
+      const targetUserId = full.senderHotel.user.id;
+      const targetUserEmail = full.senderHotel.user.email;
+      const { getOrCreatePreference, createNotification } = await import("@/lib/notifications");
+      const { sendEmail } = await import("@/lib/email");
+      const prefsRes = await getOrCreatePreference(targetUserId);
+      if (parsed.data.status === "approved") {
+        await createNotification({
+          userId: targetUserId,
+          type: "reservation_approved",
+          title: "Rezervasyon onaylandı",
+          message: `${full.hotel.name} oteli ${full.reservationCode} numaralı rezervasyonu onayladı.`,
+          relatedEntityType: "reservation",
+          relatedEntityId: id,
+        });
+        if (prefsRes.emailApproval) {
+          await sendEmail({
+            to: targetUserEmail,
+            subject: `[OtelPartner] Rezervasyon onaylandı – ${full.reservationCode}`,
+            html: `<p>Merhaba,</p><p>${full.hotel.name} oteli ${full.reservationCode} numaralı rezervasyonu onayladı.</p><p>— OtelPartner</p>`,
+          });
+        }
+      } else {
+        await createNotification({
+          userId: targetUserId,
+          type: "reservation_rejected",
+          title: "Rezervasyon reddedildi",
+          message: `${full.hotel.name} oteli ${full.reservationCode} numaralı rezervasyonu reddetti.${full.rejectionReason ? ` Gerekçe: ${full.rejectionReason}` : ""}`,
+          relatedEntityType: "reservation",
+          relatedEntityId: id,
+        });
+        if (prefsRes.emailApproval) {
+          await sendEmail({
+            to: targetUserEmail,
+            subject: `[OtelPartner] Rezervasyon reddedildi – ${full.reservationCode}`,
+            html: `<p>Merhaba,</p><p>${full.hotel.name} oteli ${full.reservationCode} numaralı rezervasyonu reddetti.</p><p>— OtelPartner</p>`,
           });
         }
       }

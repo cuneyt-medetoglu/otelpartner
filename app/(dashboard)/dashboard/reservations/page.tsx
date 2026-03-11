@@ -10,7 +10,20 @@ export default async function ReservationsPage() {
   if (!session) redirect("/login");
   if (session.user.role !== "guide" && session.user.role !== "hotel") redirect("/dashboard");
 
-  let list: { id: string; reservationCode: string; hotelName?: string; guideName?: string; roomType: string; checkInDate: string; checkOutDate: string; roomCount: number; status: string }[];
+  let list: {
+    id: string;
+    reservationCode: string;
+    hotelName?: string;
+    guideName?: string;
+    senderLabel?: string;
+    targetHotelName?: string;
+    direction?: "incoming" | "sent";
+    roomType: string;
+    checkInDate: string;
+    checkOutDate: string;
+    roomCount: number;
+    status: string;
+  }[];
 
   if (session.user.role === "guide") {
     const guide = await prisma.guide.findUnique({ where: { userId: session.user.id } });
@@ -35,21 +48,34 @@ export default async function ReservationsPage() {
     const hotel = await prisma.hotel.findUnique({ where: { userId: session.user.id } });
     const rows = hotel
       ? await prisma.reservation.findMany({
-          where: { hotelId: hotel.id },
-          include: { guide: true, room: { select: { roomType: true } } },
+          where: { OR: [{ hotelId: hotel.id }, { senderHotelId: hotel.id }] },
+          include: {
+            guide: true,
+            senderHotel: { select: { name: true } },
+            hotel: { select: { name: true } },
+            room: { select: { roomType: true } },
+          },
           orderBy: { checkInDate: "desc" },
         })
       : [];
-    list = rows.map((r) => ({
-      id: r.id,
-      reservationCode: r.reservationCode,
-      guideName: `${r.guide.firstName} ${r.guide.lastName}`,
-      roomType: r.room.roomType,
-      checkInDate: r.checkInDate.toISOString().slice(0, 10),
-      checkOutDate: r.checkOutDate.toISOString().slice(0, 10),
-      roomCount: r.roomCount,
-      status: r.status,
-    }));
+    list = rows.map((r) => {
+      const isIncoming = r.hotelId === hotel!.id;
+      const senderLabel = r.guide
+        ? `${r.guide.firstName} ${r.guide.lastName}`
+        : r.senderHotel?.name ?? "—";
+      return {
+        id: r.id,
+        reservationCode: r.reservationCode,
+        senderLabel,
+        targetHotelName: r.hotel.name,
+        direction: isIncoming ? ("incoming" as const) : ("sent" as const),
+        roomType: r.room.roomType,
+        checkInDate: r.checkInDate.toISOString().slice(0, 10),
+        checkOutDate: r.checkOutDate.toISOString().slice(0, 10),
+        roomCount: r.roomCount,
+        status: r.status,
+      };
+    });
   }
   const reservations = list;
 
@@ -97,7 +123,7 @@ export default async function ReservationsPage() {
                   {session.user.role === "guide" ? (
                     <th className="px-4 py-3 text-left font-semibold text-gray-700">Otel</th>
                   ) : (
-                    <th className="px-4 py-3 text-left font-semibold text-gray-700">Rehber</th>
+                    <th className="px-4 py-3 text-left font-semibold text-gray-700">Gönderen / Hedef</th>
                   )}
                   <th className="px-4 py-3 text-left font-semibold text-gray-700">Oda</th>
                   <th className="px-4 py-3 text-left font-semibold text-gray-700">Giriş</th>
@@ -117,7 +143,13 @@ export default async function ReservationsPage() {
                         {r.reservationCode}
                       </Link>
                     </td>
-                    <td className="px-4 py-3 text-gray-600">{r.hotelName ?? r.guideName ?? "—"}</td>
+                    <td className="px-4 py-3 text-gray-600">
+                      {session.user.role === "guide"
+                        ? (r.hotelName ?? "—")
+                        : r.direction === "incoming"
+                          ? (r.senderLabel ?? "—")
+                          : (r.targetHotelName ?? "—")}
+                    </td>
                     <td className="px-4 py-3 text-gray-600">{r.roomType}</td>
                     <td className="px-4 py-3 text-gray-600">{r.checkInDate}</td>
                     <td className="px-4 py-3 text-gray-600">{r.checkOutDate}</td>
@@ -125,7 +157,11 @@ export default async function ReservationsPage() {
                     <td className="px-4 py-3">{getStatusBadge(r.status)}</td>
                     {session.user.role === "hotel" && (
                       <td className="px-4 py-3 text-right">
-                        <ReservationActions reservationId={r.id} status={r.status} />
+                        {r.direction === "incoming" ? (
+                          <ReservationActions reservationId={r.id} status={r.status} />
+                        ) : (
+                          <ReservationActions reservationId={r.id} status={r.status} showApproveReject={false} />
+                        )}
                       </td>
                     )}
                   </tr>

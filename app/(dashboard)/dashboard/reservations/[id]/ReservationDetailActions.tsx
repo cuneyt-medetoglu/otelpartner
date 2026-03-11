@@ -7,16 +7,18 @@ export function ReservationDetailActions({
   reservationId,
   status,
   role,
+  isIncomingForHotel = true,
 }: {
   reservationId: string;
   status: string;
   role: "guide" | "hotel";
+  isIncomingForHotel?: boolean;
 }) {
   const router = useRouter();
   const [loading, setLoading] = useState<"approve" | "reject" | "cancel" | null>(null);
 
   const canCancel = status === "pending" || status === "approved";
-  const canApproveReject = role === "hotel" && status === "pending";
+  const canApproveReject = role === "hotel" && isIncomingForHotel && status === "pending";
 
   async function update(newStatus: "approved" | "rejected" | "cancelled") {
     const key = newStatus === "approved" ? "approve" : newStatus === "rejected" ? "reject" : "cancel";

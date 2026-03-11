@@ -137,9 +137,9 @@ Rezervasyon kayıtları.
 reservations {
   id: UUID (PK)
   reservation_code: String (Unique, Generated)
-  sender_type: Enum ['hotel', 'guide']
-  sender_id: UUID // hotel.id veya guide.id
-  target_hotel_id: UUID (FK -> hotels.id)
+  guide_id: UUID (Nullable, FK -> guides.id)  // Rehber gönderdiyse dolu
+  sender_hotel_id: UUID (Nullable, FK -> hotels.id)  // Otel gönderdiyse dolu (XOR guide_id)
+  hotel_id: UUID (FK -> hotels.id)  // Hedef otel
   room_id: UUID (FK -> rooms.id)
   
   check_in_date: Date

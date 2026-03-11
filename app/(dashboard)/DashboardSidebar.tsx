@@ -18,6 +18,7 @@ const hotelNav: NavItem[] = [
   { href: "/dashboard/otel/profile", label: "Otel profilim" },
   { href: "/dashboard/otel/rooms", label: "Oda tipleri" },
   { href: "/dashboard/otel/availability", label: "Doluluk" },
+  { href: "/dashboard/catalog", label: "Otel kataloğu" },
   { href: "/dashboard/reservations", label: "Rezervasyonlar" },
   { href: "/dashboard/reports", label: "Raporlar" },
 ];

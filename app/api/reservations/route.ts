@@ -45,20 +45,35 @@ export async function GET() {
     const hotel = await prisma.hotel.findUnique({ where: { userId: session.user.id } });
     if (!hotel) return NextResponse.json({ reservations: [] });
     const list = await prisma.reservation.findMany({
-      where: { hotelId: hotel.id },
-      include: { guide: true, room: { select: { roomType: true } } },
+      where: { OR: [{ hotelId: hotel.id }, { senderHotelId: hotel.id }] },
+      include: {
+        guide: true,
+        senderHotel: { select: { name: true } },
+        hotel: { select: { name: true } },
+        room: { select: { roomType: true } },
+      },
       orderBy: { checkInDate: "desc" },
     });
-    return NextResponse.json(list.map((r) => ({
-      id: r.id,
-      reservationCode: r.reservationCode,
-      guideName: `${r.guide.firstName} ${r.guide.lastName}`,
-      roomType: r.room.roomType,
-      checkInDate: r.checkInDate.toISOString().slice(0, 10),
-      checkOutDate: r.checkOutDate.toISOString().slice(0, 10),
-      roomCount: r.roomCount,
-      status: r.status,
-    })));
+    return NextResponse.json(
+      list.map((r) => {
+        const isIncoming = r.hotelId === hotel.id;
+        const senderLabel = r.guide
+          ? `${r.guide.firstName} ${r.guide.lastName}`
+          : r.senderHotel?.name ?? "—";
+        return {
+          id: r.id,
+          reservationCode: r.reservationCode,
+          senderLabel,
+          targetHotelName: r.hotel.name,
+          roomType: r.room.roomType,
+          checkInDate: r.checkInDate.toISOString().slice(0, 10),
+          checkOutDate: r.checkOutDate.toISOString().slice(0, 10),
+          roomCount: r.roomCount,
+          status: r.status,
+          direction: isIncoming ? ("incoming" as const) : ("sent" as const),
+        };
+      })
+    );
   }
 
   return NextResponse.json({ error: "Forbidden" }, { status: 403 });
@@ -66,12 +81,23 @@ export async function GET() {
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
-  if (!session?.user?.id || session.user.role !== "guide") {
-    return NextResponse.json({ error: "Sadece rehber rezervasyon oluşturabilir" }, { status: 403 });
+  if (!session?.user?.id) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  if (session.user.role !== "guide" && session.user.role !== "hotel") {
+    return NextResponse.json({ error: "Sadece rehber veya otel rezervasyon oluşturabilir" }, { status: 403 });
   }
 
-  const guide = await prisma.guide.findUnique({ where: { userId: session.user.id } });
-  if (!guide) return NextResponse.json({ error: "Rehber bulunamadı" }, { status: 404 });
+  let guide: { id: string; firstName: string; lastName: string } | null = null;
+  let senderHotel: { id: string; name: string } | null = null;
+
+  if (session.user.role === "guide") {
+    const g = await prisma.guide.findUnique({ where: { userId: session.user.id } });
+    if (!g) return NextResponse.json({ error: "Rehber bulunamadı" }, { status: 404 });
+    guide = g;
+  } else {
+    const h = await prisma.hotel.findUnique({ where: { userId: session.user.id } });
+    if (!h) return NextResponse.json({ error: "Otel bulunamadı" }, { status: 404 });
+    senderHotel = h;
+  }
 
   let body: unknown;
   try {
@@ -102,28 +128,40 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Oda sayısı yetersiz" }, { status: 400 });
   }
 
+  // Otel kendi oteline rezervasyon gönderemez
+  if (senderHotel && hotelId === senderHotel.id) {
+    return NextResponse.json({ error: "Kendi otelinize rezervasyon gönderemezsiniz" }, { status: 400 });
+  }
+
   const totalPrice = room.basePrice != null ? Number(room.basePrice) * roomCount * (Math.ceil((checkOut.getTime() - checkIn.getTime()) / (24 * 60 * 60 * 1000))) : null;
   let code = generateCode();
   while (await prisma.reservation.findUnique({ where: { reservationCode: code } })) {
     code = generateCode();
   }
 
+  const createData: Parameters<typeof prisma.reservation.create>[0]["data"] = {
+    reservationCode: code,
+    hotelId,
+    roomId,
+    checkInDate: checkIn,
+    checkOutDate: checkOut,
+    roomCount,
+    guestCount: guestCount ?? null,
+    totalPrice: totalPrice ?? undefined,
+    status: "pending",
+  };
+  if (guide) {
+    createData.guideId = guide.id;
+  } else if (senderHotel) {
+    createData.senderHotelId = senderHotel.id;
+  }
+
   const res = await prisma.reservation.create({
-    data: {
-      reservationCode: code,
-      guideId: guide.id,
-      hotelId,
-      roomId,
-      checkInDate: checkIn,
-      checkOutDate: checkOut,
-      roomCount,
-      guestCount: guestCount ?? null,
-      totalPrice: totalPrice ?? undefined,
-      status: "pending",
-    },
+    data: createData,
   });
 
-  // Bildirim: otel kullanıcısına yeni rezervasyon (e-posta + uygulama içi)
+  const senderLabel = guide ? `${guide.firstName} ${guide.lastName}` : (senderHotel?.name ?? "Otel");
+
   try {
     const hotelWithUser = await prisma.hotel.findUnique({
       where: { id: hotelId },
@@ -135,7 +173,7 @@ export async function POST(req: Request) {
         hotelUserId: hotelWithUser.user.id,
         hotelUserEmail: hotelWithUser.user.email,
         reservationCode: res.reservationCode,
-        guideName: `${guide.firstName} ${guide.lastName}`,
+        senderLabel,
         roomType: room.roomType,
         checkIn: checkInDate,
         checkOut: checkOutDate,
