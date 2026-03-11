@@ -11,7 +11,7 @@ export function ReservationDetailActions({
 }: {
   reservationId: string;
   status: string;
-  role: "guide" | "hotel";
+  role: "admin" | "guide" | "hotel";
   isIncomingForHotel?: boolean;
 }) {
   const router = useRouter();
