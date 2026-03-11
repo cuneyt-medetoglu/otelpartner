@@ -7,7 +7,7 @@ import { prisma } from "@/lib/db";
 import { sendEmail } from "@/lib/email";
 import type { NotificationType } from "@prisma/client";
 
-async function getOrCreatePreference(userId: string) {
+export async function getOrCreatePreference(userId: string) {
   let prefs = await prisma.notificationPreference.findUnique({
     where: { userId },
   });
