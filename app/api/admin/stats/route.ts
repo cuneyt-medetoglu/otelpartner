@@ -73,7 +73,7 @@ export async function GET() {
     id: r.id,
     reservationCode: r.reservationCode,
     hotelName: r.hotel.name,
-    guideName: `${r.guide.firstName} ${r.guide.lastName}`,
+    guideName: r.guide ? `${r.guide.firstName} ${r.guide.lastName}` : "—",
     roomType: r.room.roomType,
     status: r.status,
     createdAt: r.createdAt.toISOString(),
