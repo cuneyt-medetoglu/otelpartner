@@ -124,15 +124,14 @@ Proje başlangıcında tek bir uygulama olarak başlayıp, ileride ihtiyaç olur
 
 **Otel Fotoğrafları İçin**:
 
-**Önerilen**: Cloudinary
-- Ücretsiz plan
-- Otomatik resize/optimizasyon
-- CDN
+**Önerilen**: AWS S3 + CloudFront
+- Zaten AWS (EC2) kullanıldığı için tek fatura, IAM ile güvenlik
+- S3’te depolama, CloudFront ile CDN; resize için sunucuda Sharp veya Lambda
+- Uzun vadede maliyet ve kontrol açısından uygun
 
 **Alternatif**:
-- AWS S3 + CloudFront
-- Vercel Blob Storage
-- UploadThing
+- Cloudinary (hazır resize/CDN, ayrı sağlayıcı)
+- Vercel Blob Storage, UploadThing
 
 ---
 
@@ -237,7 +236,7 @@ Frontend:  Next.js 14 + TypeScript + Tailwind + shadcn/ui
 Backend:   Next.js API Routes / NestJS
 Database:  PostgreSQL + Prisma
 Auth:      NextAuth.js
-Storage:   Cloudinary
+Storage:   AWS S3 (+ CloudFront)
 Email:     AWS SES (veya ileride)
 SMS:       Netgsm
 Deploy:    AWS EC2 (production); Vercel alternatif.

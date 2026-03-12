@@ -1,6 +1,6 @@
 # Geliştirme Durumu (Tek Kaynak)
 
-**Son güncelleme:** 2025-02-15
+**Son güncelleme:** 2026-03-15
 
 ---
 
@@ -8,10 +8,12 @@
 
 | Alan | Değer |
 |------|--------|
-| **Faz** | Faz 9 Gelişmiş Admin Dashboard tamamlandı |
+| **Faz** | Faz 9 tamamlandı; canlı ortam açıldı (https://otelpartner.xyz) |
 | **Şu anki odak** | Faz 10 (Test) veya ek iyileştirmeler |
-| **Tamamlanan** | Faz 1–9 (admin: istatistik API, ek kartlar, trend grafiği, son rezervasyonlar). v0 tasarım Adım 1–8. |
+| **Tamamlanan** | Faz 1–9, canlıya geçiş (Route 53, Certbot SSL, DB aynı makinede). v0 tasarım Adım 1–8. |
 | **Sıradaki** | Faz 10 (Test) veya sistem log / log viewer (opsiyonel). |
+
+**Canlı ortam özeti:** docs/CANLI.md
 
 ---
 

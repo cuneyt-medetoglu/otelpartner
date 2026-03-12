@@ -47,13 +47,16 @@ Veritabanı şeması ve veri modeli:
 - İlişkiler ve indeksler
 
 ### 7. [dev/](./dev/) – Geliştirme takip
-- **[dev/README.md](./dev/README.md)**: Hangi sırayla başlanır, hangi dokümandan takip edilir, çoklu thread kullanımı.
-- **[dev/STATE.md](./dev/STATE.md)**: Tek kaynak; şu anki faz, şu anki görev, sıradaki.
+- **[dev/README.md](./dev/README.md)**: Hangi sırayla başlanır, hangi dokümandan takip edilir.
+- **[dev/STATE.md](./dev/STATE.md)**: Şu anki faz, şu anki görev, sıradaki.
 - **[dev/ROADMAP.md](./dev/ROADMAP.md)**: Özet roadmap.
 - **[dev/LOG.md](./dev/LOG.md)**: Kronolojik geliştirme logu.
-- **[dev/NOTES.md](./dev/NOTES.md)**: Sizin yapacaklarınız (Node, DB, .env, migration), deployment (AWS EC2 / localhost).
+- **[dev/NOTES.md](./dev/NOTES.md)**: Deployment notları (AWS EC2, .env).
 
-### 8. [FLOW_DIAGRAM.md](./FLOW_DIAGRAM.md)
+### 8. Canlı ortam
+- **[CANLI.md](./CANLI.md)**: Canlı özet, altyapı, adım adım komutlar, SSL (Let's Encrypt), subdomain, sonraya bırakılanlar.
+
+### 9. [FLOW_DIAGRAM.md](./FLOW_DIAGRAM.md)
 9 farklı iş akışı diyagramı (Mermaid):
 - Genel sistem akışı
 - Kullanıcı kayıt ve onay
@@ -75,7 +78,7 @@ Tüm dokümanlar (PRD dahil) **Project Manager** agentı (`.cursor/rules/project
 
 ## 🎯 Proje Durumu
 
-**Güncel durum**: `docs/dev/STATE.md` ve `docs/dev/ROADMAP.md` tek kaynaktır. Faz 1–8 raporlama (rapor sayfası, komisyon özeti) tamamlandı. v0 UI Adım 1–8 tamamlandı. Sıradaki: Faz 8 (Raporlama) veya Faz 10 (Test).
+**Güncel durum:** `docs/dev/STATE.md` ve `docs/dev/ROADMAP.md`. Canlı: **https://otelpartner.xyz** – özet **docs/CANLI.md**.
 
 ---
 
@@ -107,8 +110,6 @@ Tüm dokümanlar (PRD dahil) **Project Manager** agentı (`.cursor/rules/project
 **Proje Adı**: OtelPartner  
 **Tarih**: 15 Şubat 2026  
 **Versiyon**: 1.0 (Planlama)
-
----
 
 ## 📝 Notlar
 

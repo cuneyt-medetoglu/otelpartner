@@ -195,8 +195,8 @@ Otel fotoğrafları.
 hotel_photos {
   id: UUID (PK)
   hotel_id: UUID (FK -> hotels.id)
-  url: String // Cloudinary URL
-  public_id: String // Cloudinary public_id
+  url: String // S3/CloudFront URL
+  public_id: String // S3 object key (silme/güncelleme için)
   caption: String (Nullable)
   is_primary: Boolean (Default: false)
   order: Integer (Default: 0)

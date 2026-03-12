@@ -101,7 +101,7 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 - [x] Otel profil API (GET/PATCH)
 - [x] Oda tanımlama API (liste + ekleme)
 - [x] Doluluk yönetimi API (günlük müsait adet)
-- [ ] Fotoğraf upload (Cloudinary)
+- [ ] Fotoğraf upload (S3)
 
 ### Frontend
 - [x] Otel profil sayfası
@@ -117,7 +117,7 @@ Sadece planlama aşamasında yapılanlar. Tasarım ve hazırlık maddeleri ilgil
 - [x] Günlük doluluk girişi
 - [ ] Manuel oda bloke/açma (opsiyonel; müsait 0 = bloke)
 
-**Yapılmayan maddeler notu (Faz 3):** Fotoğraf upload (Cloudinary) ve fotoğraf galerisi: altyapı/entegrasyon gerektirdiği için ertelendi; v0 tasarımında galeri placeholder ile planlanabilir. Fiyat girişi: Room.basePrice mevcut; ayrı “fiyat yönetimi” ekranı ileride. Manuel bloke/açma: müsait adet 0 ile zaten bloke sayılıyor; ayrı toggle opsiyonel.
+**Yapılmayan maddeler notu (Faz 3):** Fotoğraf upload (S3 + CloudFront) ve fotoğraf galerisi: altyapı/entegrasyon gerektirdiği için ertelendi; v0 tasarımında galeri placeholder ile planlanabilir. Fiyat girişi: Room.basePrice mevcut; ayrı “fiyat yönetimi” ekranı ileride. Manuel bloke/açma: müsait adet 0 ile zaten bloke sayılıyor; ayrı toggle opsiyonel.
 
 ---
 
